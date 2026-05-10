@@ -7,7 +7,7 @@ defmodule PgRest.Telemetry do
 
   ## Events
 
-  ### `[:pg_rest, :query, :start]`
+  ### `[:pgrest, :query, :start]`
 
   Emitted when a query pipeline operation begins.
 
@@ -20,7 +20,7 @@ defmodule PgRest.Telemetry do
       `:bulk_create`, `:bulk_update`, `:bulk_delete`, `:upsert`
     * `:repo` - the Ecto repo module
 
-  ### `[:pg_rest, :query, :stop]`
+  ### `[:pgrest, :query, :stop]`
 
   Emitted when a query pipeline operation completes successfully.
 
@@ -28,7 +28,7 @@ defmodule PgRest.Telemetry do
 
   **Metadata:** same as start event.
 
-  ### `[:pg_rest, :query, :exception]`
+  ### `[:pgrest, :query, :exception]`
 
   Emitted when a query pipeline operation raises an exception.
 

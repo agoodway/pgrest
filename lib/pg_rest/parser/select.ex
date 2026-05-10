@@ -16,6 +16,8 @@ defmodule PgRest.Parser.Select do
 
   """
 
+  alias PgRest.Parser.Splitter
+
   @doc """
   Parses a select parameter string into a list of field and embed AST nodes.
   """
@@ -84,20 +86,5 @@ defmodule PgRest.Parser.Select do
   end
 
   # Splits a string on top-level commas, respecting nested parentheses.
-  defp split_top_level(str), do: do_split(str, 0, "", [])
-
-  defp do_split("", _depth, current, acc),
-    do: Enum.reverse([current | acc])
-
-  defp do_split("(" <> rest, depth, current, acc),
-    do: do_split(rest, depth + 1, current <> "(", acc)
-
-  defp do_split(")" <> rest, depth, current, acc) when depth > 0,
-    do: do_split(rest, depth - 1, current <> ")", acc)
-
-  defp do_split("," <> rest, 0, current, acc),
-    do: do_split(rest, 0, "", [current | acc])
-
-  defp do_split(<<char::binary-size(1), rest::binary>>, depth, current, acc),
-    do: do_split(rest, depth, current <> char, acc)
+  defp split_top_level(str), do: Splitter.split_top_level(str)
 end

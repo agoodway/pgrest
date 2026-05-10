@@ -1,9 +1,9 @@
 import Config
 
 # Integration test repo — only started when running `mix test.integration`
-config :pg_rest, ecto_repos: [PgRest.Integration.Repo]
+config :pgrest, ecto_repos: [PgRest.Integration.Repo]
 
-config :pg_rest, PgRest.Integration.Repo,
+config :pgrest, PgRest.Integration.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",

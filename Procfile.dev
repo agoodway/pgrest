@@ -1,0 +1,1 @@
+server: cd demo && PORT=4042 elixir --sname pgrest_demo --cookie pgrest_demo_dev -S mix phx.server

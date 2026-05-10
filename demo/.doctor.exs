@@ -1,0 +1,30 @@
+%Doctor.Config{
+  ignore_modules: [
+    Demo.Projects.Project,
+    Demo.Release,
+    Demo.Repo,
+    Demo.Tasks.Task,
+    DemoWeb,
+    DemoWeb.Endpoint,
+    DemoWeb.ErrorHTML,
+    DemoWeb.ErrorJSON,
+    DemoWeb.HealthController,
+    DemoWeb.HomeLive,
+    DemoWeb.Plugs.ReadOnlyApi,
+    DemoWeb.Plugs.ServerTiming,
+    DemoWeb.Plugs.SqlDebug,
+    DemoWeb.Router,
+    DemoWeb.Telemetry
+  ],
+  ignore_paths: [~r"^test/"],
+  min_module_doc_coverage: 40,
+  min_module_spec_coverage: 0,
+  min_overall_doc_coverage: 50,
+  min_overall_moduledoc_coverage: 100,
+  min_overall_spec_coverage: 0,
+  exception_moduledoc_required: true,
+  raise: false,
+  reporter: Doctor.Reporters.Full,
+  struct_type_spec_required: true,
+  umbrella: false
+}

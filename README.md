@@ -1,6 +1,10 @@
 # PgRest
 
-PostgREST/Supabase-compatible data query and REST API layer for Elixir, built on Plug and Ecto
+[![Hex.pm](https://img.shields.io/hexpm/v/pgrest.svg)](https://hex.pm/packages/pgrest)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-blue.svg)](https://hexdocs.pm/pgrest)
+[![License](https://img.shields.io/hexpm/l/pgrest.svg)](https://github.com/agoodway/pgrest/blob/main/LICENSE)
+
+> A PostgREST and Supabase-compatible REST API powered by Elixir and Ecto.
 
 Define Ecto schemas, get a full REST API that works with existing PostgREST clients like `@supabase/postgrest-js`. Queries are parsed into Ecto expressions — no raw SQL, no runtime code generation.
 
@@ -17,9 +21,20 @@ Define Ecto schemas, get a full REST API that works with existing PostgREST clie
 
 See [`demo/`](demo/) for an interactive query explorer built with Phoenix LiveView. It runs 18 example queries live against a seeded project/task database using `@supabase/postgrest-js`, showing the client code, generated SQL, JSON response, and timing for each.
 
+The repo ships a Hivemind wrapper that serves the demo at
+[`localhost:4042`](http://localhost:4042):
+
+```bash
+bin/pgrest start
+bin/pgrest stop
+bin/pgrest console
+```
+
+Requires a local Postgres reachable at `localhost:5432` (`mix ecto.setup`
+from `demo/` creates the database). Or run the demo directly:
+
 ```bash
 cd demo && mix setup && mix phx.server
-# Visit http://localhost:4000
 ```
 
 ## Prerequisites
@@ -30,12 +45,12 @@ cd demo && mix setup && mix phx.server
 
 ## Installation
 
-Add `pg_rest` to your dependencies in `mix.exs`:
+Add `pgrest` to your dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:pg_rest, "~> 0.1.0"}
+    {:pgrest, "~> 0.1.0"}
   ]
 end
 ```

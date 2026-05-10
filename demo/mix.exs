@@ -26,9 +26,7 @@ defmodule Demo.MixProject do
   end
 
   def cli do
-    [
-      preferred_envs: [precommit: :test]
-    ]
+    [preferred_envs: [precommit: :test, quality: :test]]
   end
 
   # Specifies which paths to compile per environment.
@@ -64,14 +62,18 @@ defmodule Demo.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
       {:bandit, "~> 1.5"},
-      {:pg_rest, github: "agoodway/pgrest"},
+      {:pgrest, "~> 0.1.0"},
+      # {:pgrest, path: ".."},
       {:tidewave, "~> 0.2", only: :dev},
 
-      # Dev/Test
+      # Dev/Test + code quality
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ex_slop, "~> 0.3", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:doctor, "~> 0.22.0", only: :dev, runtime: false}
+      {:sobelow, "~> 0.14", only: [:dev, :test], runtime: false},
+      {:doctor, "~> 0.22", only: [:dev, :test], runtime: false},
+      {:ex_dna, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -99,7 +101,16 @@ defmodule Demo.MixProject do
         "esbuild demo --minify",
         "phx.digest"
       ],
-      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
+      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"],
+      quality: [
+        "compile --warnings-as-errors",
+        "deps.unlock --unused",
+        "format --check-formatted",
+        "sobelow --config",
+        "ex_dna",
+        "doctor",
+        "credo --strict"
+      ]
     ]
   end
 end

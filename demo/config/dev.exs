@@ -5,7 +5,7 @@ config :demo, Demo.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "demo_dev",
+  database: "pgrest_demo_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

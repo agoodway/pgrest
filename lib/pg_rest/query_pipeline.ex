@@ -20,7 +20,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :read, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       config = resource_module.__pgrest_config__()
       max_limit = Keyword.get(pipeline_opts, :max_limit)
       prefer = Keyword.get(pipeline_opts, :prefer, %{})
@@ -62,7 +62,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :create, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       struct = struct(resource_module)
       changeset = resource_module.changeset(struct, attrs, context)
 
@@ -88,7 +88,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :update, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       result = do_update(resource_module, id, attrs, context, repo)
       {result, meta}
     end)
@@ -129,7 +129,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :delete, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       result = do_delete(resource_module, id, context, repo)
       {result, meta}
     end)
@@ -167,7 +167,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :bulk_create, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       result = do_bulk_create(resource_module, attrs_list, context, repo)
       {result, meta}
     end)
@@ -206,7 +206,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :bulk_update, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       config = resource_module.__pgrest_config__()
       return_records? = Keyword.get(opts, :return, false)
 
@@ -254,7 +254,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :bulk_delete, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       config = resource_module.__pgrest_config__()
       return_records? = Keyword.get(opts, :return, false)
 
@@ -301,7 +301,7 @@ defmodule PgRest.QueryPipeline do
     repo = Map.fetch!(context, :repo)
     meta = %{resource: resource_module, operation: :upsert, repo: repo}
 
-    :telemetry.span([:pg_rest, :query], meta, fn ->
+    :telemetry.span([:pgrest, :query], meta, fn ->
       config = resource_module.__pgrest_config__()
       return_records? = Keyword.get(opts, :return, false)
       resolution = Keyword.get(opts, :resolution, :merge_duplicates)

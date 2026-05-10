@@ -6,7 +6,7 @@ defmodule PgRest.Parser do
   custom params, on_conflict, and columns.
   """
 
-  alias PgRest.Parser.{Order, Select}
+  alias PgRest.Parser.{Order, Select, Splitter}
 
   @standard_params ~w(select order limit offset on_conflict columns)
 
@@ -429,22 +429,7 @@ defmodule PgRest.Parser do
   end
 
   # Splits on commas, respecting nested parentheses for `in.(...)`.
-  defp split_logical_conditions(str), do: do_split(str, 0, "", [])
-
-  defp do_split("", _depth, current, acc),
-    do: Enum.reverse([current | acc])
-
-  defp do_split("(" <> rest, depth, current, acc),
-    do: do_split(rest, depth + 1, current <> "(", acc)
-
-  defp do_split(")" <> rest, depth, current, acc) when depth > 0,
-    do: do_split(rest, depth - 1, current <> ")", acc)
-
-  defp do_split("," <> rest, 0, current, acc),
-    do: do_split(rest, 0, "", [current | acc])
-
-  defp do_split(<<char::binary-size(1), rest::binary>>, depth, current, acc),
-    do: do_split(rest, depth, current <> char, acc)
+  defp split_logical_conditions(str), do: Splitter.split_top_level(str)
 
   defp parse_condition_string(condition) do
     case String.split(condition, ".", parts: 2) do
