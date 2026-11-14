@@ -377,13 +377,11 @@ defmodule DemoWeb.HomeLive do
                           phx-click="close_panel"
                         >
                           <div class="absolute top-[0.65rem] left-4 flex gap-1.5 z-20 items-center">
-                            <span class="inline-block w-3 h-3 rounded-full bg-neutral-content/20">
-                            </span>
+                            <span class="inline-block w-3 h-3 rounded-full bg-neutral-content/20"></span>
                             <span class="inline-flex items-center justify-center w-3 h-3 rounded-full bg-neutral-content/20 group-hover/terminal:bg-[#febc2e] transition-colors text-[10px] leading-none font-bold text-transparent group-hover/terminal:text-black/60 -translate-x-px">
                               &ndash;
                             </span>
-                            <span class="inline-block w-3 h-3 rounded-full bg-neutral-content/20">
-                            </span>
+                            <span class="inline-block w-3 h-3 rounded-full bg-neutral-content/20"></span>
                           </div>
                         </div>
                         <div class="pt-4 pb-2">

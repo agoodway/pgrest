@@ -35,8 +35,12 @@ if config_env() == :prod do
   config :demo, Demo.Repo,
     url: database_url,
     ssl: [
-      verify: :verify_none,
-      server_name_indication: to_charlist(database_host)
+      verify: :verify_peer,
+      cacerts: :public_key.cacerts_get(),
+      server_name_indication: to_charlist(database_host),
+      customize_hostname_check: [
+        match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+      ]
     ],
     pool_size: String.to_integer(System.get_env("POOL_SIZE") || "8"),
     timeout: 60_000,

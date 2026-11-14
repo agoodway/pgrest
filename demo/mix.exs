@@ -38,17 +38,17 @@ defmodule Demo.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.8.3"},
+      {:phoenix, "~> 1.8.16"},
       {:phoenix_ecto, "~> 4.5"},
-      {:ecto_sql, "~> 3.13"},
-      {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 4.1"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.1.0"},
-      {:lazy_html, ">= 0.1.0", only: :test},
-      {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
+      {:ecto_sql, "~> 3.14"},
+      {:postgrex, "~> 0.22"},
+      {:phoenix_html, "~> 4.4"},
+      {:phoenix_live_reload, "~> 1.7", only: :dev},
+      {:phoenix_live_view, "~> 1.2.0"},
+      {:lazy_html, "~> 0.1.14", only: :test},
+      {:phoenix_live_dashboard, "~> 0.9.1"},
+      {:esbuild, "~> 0.10.1", runtime: Mix.env() == :dev},
+      {:tailwind, "~> 0.5", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.2.0",
@@ -56,24 +56,24 @@ defmodule Demo.MixProject do
        app: false,
        compile: false,
        depth: 1},
-      {:telemetry_metrics, "~> 1.0"},
-      {:telemetry_poller, "~> 1.0"},
+      {:telemetry_metrics, "~> 1.2"},
+      {:telemetry_poller, "~> 1.3"},
       {:gettext, "~> 1.0"},
-      {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"},
+      {:jason, "~> 1.4"},
+      {:dns_cluster, "~> 0.3.1"},
+      {:bandit, "~> 1.14"},
       {:pgrest, "~> 0.1.0"},
       # {:pgrest, path: ".."},
-      {:tidewave, "~> 0.2", only: :dev},
+      {:tidewave, "~> 0.9", only: :dev},
 
       # Dev/Test + code quality
-      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:ex_slop, "~> 0.3", only: [:dev, :test], runtime: false},
+      {:ex_slop, "~> 0.4", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.14", only: [:dev, :test], runtime: false},
-      {:doctor, "~> 0.22", only: [:dev, :test], runtime: false},
-      {:ex_dna, "~> 1.2", only: [:dev, :test], runtime: false}
+      {:sobelow, "~> 0.19", only: [:dev, :test], runtime: false},
+      {:doctor, "~> 0.23", only: [:dev, :test], runtime: false},
+      {:ex_dna, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 

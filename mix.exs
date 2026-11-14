@@ -53,26 +53,26 @@ defmodule PgRest.MixProject do
 
   defp deps do
     [
-      {:plug, "~> 1.15"},
-      {:telemetry, "~> 1.0"},
-      {:ecto, "~> 3.12"},
-      {:ecto_sql, "~> 3.12"},
-      {:postgrex, "~> 0.19"},
+      {:plug, "~> 1.20"},
+      {:telemetry, "~> 1.4"},
+      {:ecto, "~> 3.14"},
+      {:ecto_sql, "~> 3.14"},
+      {:postgrex, "~> 0.22"},
       {:jason, "~> 1.4"},
 
       # Dev/Test
-      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:doctor, "~> 0.22", only: [:dev, :test], runtime: false},
-      {:ex_slop, "~> 0.3", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.14", only: [:dev, :test], runtime: false},
-      {:ex_dna, "~> 1.2", only: [:dev, :test], runtime: false},
+      {:doctor, "~> 0.23", only: [:dev, :test], runtime: false},
+      {:ex_slop, "~> 0.4", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.19", only: [:dev, :test], runtime: false},
+      {:ex_dna, "~> 1.5", only: [:dev, :test], runtime: false},
 
       # Integration test deps
-      {:supabase_potion, "~> 0.7.2", only: :test},
-      {:supabase_postgrest, "~> 1.2", only: :test},
-      {:bandit, "~> 1.0", only: :test}
+      {:supabase_potion, "~> 1.0", only: :test},
+      {:supabase_postgrest, "~> 1.3", only: :test},
+      {:bandit, "~> 1.14", only: :test}
     ]
   end
 
