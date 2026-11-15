@@ -1,0 +1,348 @@
+{
+  "order_syntax/bad-direction": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"c\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (id.ac)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/desc-nullslast": {
+    "body": [
+      {
+        "id": 15
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id.desc.nullslast",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "order_syntax/direction-typo": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected 'c' expecting delimiter (.), \",\" or end of input",
+      "hint": null,
+      "message": "\"failed to parse order (id.descc)\" (line 1, column 8)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/double-direction": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"d\" expecting \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (id.asc.desc)\" (line 1, column 8)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/empty-term": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \",\" expecting field name (* or [a..z0..9_$])",
+      "hint": null,
+      "message": "\"failed to parse order (id,,id)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/multiple": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      },
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=client_id.desc%2Cid.asc",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "order_syntax/nulls-trailing": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected 't' expecting \",\" or end of input",
+      "hint": null,
+      "message": "\"failed to parse order (id.nullslasttt)\" (line 1, column 13)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/nulls-typo": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"n\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (id.nulsfist)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/nullsfirst-only": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id.nullsfirst",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "order_syntax/relation-term": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column projects_clients_1.name does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/relation-term-selected": {
+    "body": [
+      {
+        "clients": null,
+        "id": 5
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=clients%28name%29.desc.nullsfirst%2Cid&select=id%2Cclients%28name%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "order_syntax/relation-two-fields": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected '(' expecting letter, digit, \"-\", \"->>\", \"->\", delimiter (.), \",\" or end of input",
+      "hint": null,
+      "message": "\"failed to parse order (clients(name,id))\" (line 1, column 8)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "order_syntax/spaces": {
+    "body": [
+      {
+        "id": 15
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=%20id%20.desc",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "order_syntax/trailing-comma": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting field name (* or [a..z0..9_$])",
+      "hint": null,
+      "message": "\"failed to parse order (id,)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

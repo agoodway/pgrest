@@ -1,0 +1,376 @@
+{
+  "options/content-profile-ignored": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PUT,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/invalid-path": {
+    "body": {
+      "code": "PGRST125",
+      "details": null,
+      "hint": null,
+      "message": "Invalid path specified in request URL"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "options/partitioned-table": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PUT,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/query-string-ignored": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PUT,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/root": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD"
+    },
+    "status": 200
+  },
+  "options/root-bad-filter": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"1\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (1)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/root-select-ignored": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD"
+    },
+    "status": 200
+  },
+  "options/root-unknown-profile": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: test",
+      "message": "Invalid schema: nope"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "options/rpc-bad-filter": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"1\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (1)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/rpc-bad-order": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"f\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (x.foo)\" (line 1, column 3)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/rpc-delete-accept-profile-ignored": {
+    "body": {
+      "code": "PGRST101",
+      "details": null,
+      "hint": null,
+      "message": "Cannot use the DELETE method on RPC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "options/rpc-delete-unknown-profile": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: test",
+      "message": "Invalid schema: nope"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "options/rpc-embed-filter": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'a' is included in the 'select' query parameter.",
+      "message": "'a' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/rpc-embed-or": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'a' is included in the 'select' query parameter.",
+      "message": "'a' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/rpc-embed-order": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'a' is included in the 'select' query parameter.",
+      "message": "'a' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/rpc-immutable": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST"
+    },
+    "status": 200
+  },
+  "options/rpc-patch-unknown-profile": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: test",
+      "message": "Invalid schema: nope"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "options/rpc-prefix-is-a-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.rpc' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "options/rpc-select-embed-filter": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,POST"
+    },
+    "status": 200
+  },
+  "options/rpc-stable": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST"
+    },
+    "status": 200
+  },
+  "options/rpc-unknown": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.nonexistent without parameters, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.nonexistent without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "options/rpc-unknown-embed-filter": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.nonexistent without parameters, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.nonexistent without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "options/rpc-volatile": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,POST"
+    },
+    "status": 200
+  },
+  "options/rpc-volatile-with-filter": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,POST"
+    },
+    "status": 200
+  },
+  "options/rpc-with-argument": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhello without parameters, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.sayhello without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "options/table": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PUT,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/table-bad-filter": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"1\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (1)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/table-bad-order": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"f\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (x.foo)\" (line 1, column 3)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/table-compound-pk": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PUT,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/table-embed-filter": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PUT,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/table-no-pk": {
+    "body": null,
+    "headers": {
+      "allow": "OPTIONS,GET,HEAD,POST,PATCH,DELETE"
+    },
+    "status": 200
+  },
+  "options/unknown-profile": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: test",
+      "message": "Invalid schema: nope"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "options/unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.unknown' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "options/unknown-table-bad-filter": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"1\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (1)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "options/write-method-on-root-delete": {
+    "body": {
+      "code": "PGRST117",
+      "details": null,
+      "hint": null,
+      "message": "Unsupported HTTP method: DELETE"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "options/write-method-on-root-post": {
+    "body": {
+      "code": "PGRST117",
+      "details": null,
+      "hint": null,
+      "message": "Unsupported HTTP method: POST"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "options/write-method-on-root-unknown-profile": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: test",
+      "message": "Invalid schema: nope"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "response_gucs/bad-headers-1-get": {
+    "body": {
+      "code": "PGRST111",
+      "details": null,
+      "hint": null,
+      "message": "response.headers guc must be a JSON array composed of objects with a single key and a string value"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/bad-headers-1-post": {
+    "body": {
+      "code": "PGRST111",
+      "details": null,
+      "hint": null,
+      "message": "response.headers guc must be a JSON array composed of objects with a single key and a string value"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/bad-headers-2-get": {
+    "body": {
+      "code": "PGRST111",
+      "details": null,
+      "hint": null,
+      "message": "response.headers guc must be a JSON array composed of objects with a single key and a string value"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/bad-headers-3-get": {
+    "body": {
+      "code": "PGRST111",
+      "details": null,
+      "hint": null,
+      "message": "response.headers guc must be a JSON array composed of objects with a single key and a string value"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/bad-status": {
+    "body": {
+      "code": "PGRST112",
+      "details": null,
+      "hint": null,
+      "message": "response.status guc must be a valid status code"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/blank-headers-delete": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "response_gucs/blank-headers-get": {
+    "body": [],
+    "headers": {
+      "content-location": "/loc_test",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "response_gucs/blank-headers-patch": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "response_gucs/blank-headers-post": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "response_gucs/both-bad-get": {
+    "body": {
+      "code": "PGRST112",
+      "details": null,
+      "hint": null,
+      "message": "response.status guc must be a valid status code"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/insert-after-trigger-location-not-visible": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/pgrest_after_loc?id=eq.2",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "response_gucs/insert-location-override": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/stuff?id=eq.2&overriden=true",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "response_gucs/insert-location-override-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/stuff?id=eq.2&overriden=true",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "response_gucs/insert-location-override-representation": {
+    "body": [
+      {
+        "id": 2,
+        "name": "stuff 2"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "location": "/stuff?id=eq.2&overriden=true",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "response_gucs/int-get": {
+    "body": 1,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "x-test": "key1=val1; someValue; key2=val2",
+      "x-test-2": "key1=val1"
+    },
+    "status": 200
+  },
+  "response_gucs/int-post": {
+    "body": 1,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback",
+      "x-test": "key1=val1; someValue; key2=val2",
+      "x-test-2": "key1=val1"
+    },
+    "status": 200
+  },
+  "response_gucs/pre-request-headers": {
+    "body": [
+      {
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?limit=1&select=username",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "x-pre-request": "ran"
+    },
+    "status": 200
+  },
+  "response_gucs/projects-get": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "x-test": "key1=val1; someValue; key2=val2",
+      "x-test-2": "key1=val1"
+    },
+    "status": 200
+  },
+  "response_gucs/projects-head": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "x-test": "key1=val1; someValue; key2=val2",
+      "x-test-2": "key1=val1"
+    },
+    "status": 200
+  },
+  "response_gucs/projects-object-media": {
+    "body": {
+      "id": 2
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "x-test": "key1=val1; someValue; key2=val2",
+      "x-test-2": "key1=val1"
+    },
+    "status": 200
+  },
+  "response_gucs/set-cookie-twice": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback",
+      "set-cookie": [
+        "sessionid=38afes7a8; HttpOnly; Path=/",
+        "id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly"
+      ]
+    },
+    "status": 204
+  },
+  "response_gucs/set-cookie-twice-get": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "set-cookie": [
+        "sessionid=38afes7a8; HttpOnly; Path=/",
+        "id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly"
+      ]
+    },
+    "status": 204
+  },
+  "response_gucs/status-403-get": {
+    "body": {
+      "message": "invalid user or password"
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 403
+  },
+  "response_gucs/status-403-head": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 403
+  },
+  "response_gucs/status-403-post": {
+    "body": {
+      "message": "invalid user or password"
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 403
+  },
+  "response_gucs/status-form-200": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "response_gucs/status-form-403abc": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 403
+  },
+  "response_gucs/status-form-418": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 418
+  },
+  "response_gucs/status-form-999": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 999
+  },
+  "response_gucs/status-form-empty": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "response_gucs/status-form-leading-space": {
+    "body": {
+      "code": "PGRST112",
+      "details": null,
+      "hint": null,
+      "message": "response.status guc must be a valid status code"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/status-form-leading-zero": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 403
+  },
+  "response_gucs/status-form-negative": {
+    "body": {
+      "code": "PGRST112",
+      "details": null,
+      "hint": null,
+      "message": "response.status guc must be a valid status code"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/status-form-plus": {
+    "body": {
+      "code": "PGRST112",
+      "details": null,
+      "hint": null,
+      "message": "response.status guc must be a valid status code"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "response_gucs/status-form-trailing-space": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 403
+  },
+  "response_gucs/status-then-raise": {
+    "body": {
+      "code": "P0001",
+      "details": null,
+      "hint": null,
+      "message": "boom"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "response_gucs/status-trigger-205": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 205
+  },
+  "response_gucs/status-trigger-205-representation": {
+    "body": [
+      {
+        "id": 1,
+        "name": "updated stuff 1"
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 205
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "filter_syntax/is-value-not-nul": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting isVal: (null, not_null, true, false, unknown)",
+      "hint": null,
+      "message": "\"failed to parse filter (is.not_nul)\" (line 1, column 11)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filter_syntax/is-value-nox": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"x\" expecting isVal: (null, not_null, true, false, unknown)",
+      "hint": null,
+      "message": "\"failed to parse filter (is.nox)\" (line 1, column 6)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filter_syntax/is-value-upper-partial": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting isVal: (null, not_null, true, false, unknown)",
+      "hint": null,
+      "message": "\"failed to parse filter (is.NOT_NU)\" (line 1, column 10)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filter_syntax/operator-missing-value": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (eq)\" (line 1, column 3)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filter_syntax/unclosed-or": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting \",\" or \")\"",
+      "hint": null,
+      "message": "\"failed to parse logic tree ((id.eq.1)\" (line 1, column 11)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filter_syntax/unknown-operator": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"f\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (foo.1)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

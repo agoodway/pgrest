@@ -1,0 +1,3055 @@
+{
+  "filters/array-range/cd": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?arr_data=cd.%7B1%2C2%2C4%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/cd-jsonb": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings=cd.%7B%22foo%22%3A%7B%22int%22%3A1%2C%22bar%22%3A%22baz%22%2C%22x%22%3A1%7D%7D",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/cs": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?arr_data=cs.%7B2%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/cs-jsonb": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings=cs.%7B%22foo%22%3A%7B%22int%22%3A1%7D%7D",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/cs-malformed-array": {
+    "body": {
+      "code": "22P02",
+      "details": "Array value must start with \"{\" or dimension information.",
+      "hint": null,
+      "message": "malformed array literal: \"1,2\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/array-range/cs-multiple": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?arr_data=cs.%7B1%2C2%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/cs-text-array": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&tags=cs.%7Ba%2Cb%7D",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/eq-array": {
+    "body": [
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?arr=eq.%7B1%2C2%2C3%7D&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/neq-array": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?arr=neq.%7B1%2C2%2C3%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/ov": {
+    "body": [
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?arr_data=ov.%7B3%2C9%7D&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-adj": {
+    "body": [],
+    "headers": {
+      "content-location": "/ranges?order=id&range=adj.%281%2C10%29&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-adj-touching": {
+    "body": [
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=adj.%5B13%2C14%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-cs": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=cs.%5B2%2C2%5D&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-eq": {
+    "body": [
+      {
+        "id": 1,
+        "range": "[1,4)"
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?range=eq.%5B1%2C3%5D",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-gt": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=gt.%5B1%2C2%5D&select=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-lt": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=lt.%5B1%2C10%5D&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-neq": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=neq.%5B1%2C3%5D&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-nxl": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=nxl.%5B4%2C4%5D&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-nxr": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=nxr.%5B5%2C5%5D&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-ov": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=ov.%5B3%2C3%5D&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-sl": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=sl.%5B10%2C20%5D&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/array-range/range-sr": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/ranges?order=id&range=sr.%5B0%2C0%5D&select=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/duplicate-keys-gt-lt": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=gt.1,lt.5&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/duplicate-keys-three": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=gte.2,lte.9,neq.4&order=id",
+      "content-range": "0-6/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/eq": {
+    "body": [
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=eq.5",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/eq-empty-value-int": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/basic/eq-not-a-number": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"abc\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/basic/gte-lte": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=gte.3,lte.5&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=in.%281%2C3%2C5%29&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/in-blank": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?id=in.%28%20%29",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/in-blank-element-is-22P02": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/basic/in-empty": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?id=in.%28%29",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/in-not-a-number": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"abc\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/basic/neq": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=neq.5&order=id",
+      "content-range": "0-13/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/not-eq": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=not.eq.5&order=id",
+      "content-range": "0-13/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/not-gt": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=not.gt.2&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/not-in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=not.in.%282%2C4%2C6%2C7%2C8%2C9%2C10%2C11%2C12%2C13%2C14%2C15%29&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/not-in-empty": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=not.in.%28%29&order=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/not-lt": {
+    "body": [
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=not.lt.14&order=id.asc",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/two-columns-anded": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?client_id=eq.1&name=like.Windows%2A&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/basic/unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column items.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/fts/fts-and": {
+    "body": [
+      {
+        "text_search_vector": "'also':2 'fun':3 'possibl':8"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=fts%28english%29.fun%26possible",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-default-config": {
+    "body": [
+      {
+        "text_search_vector": "'fun':5 'imposs':9 'kind':3"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=fts.impossible",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-english": {
+    "body": [
+      {
+        "text_search_vector": "'fun':5 'imposs':9 'kind':3"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=fts%28english%29.impossible",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-german": {
+    "body": [
+      {
+        "text_search_vector": "'art':4 'spass':5 'unmog':7"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=plfts%28german%29.Art%20Spass",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-malformed-query": {
+    "body": {
+      "code": "42601",
+      "details": null,
+      "hint": null,
+      "message": "syntax error in tsquery: \"&&\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/fts/fts-on-json-column": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings=fts%28english%29.baz",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-on-text-column": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?name=fts%28english%29.entity&order=id&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-on-text-column-no-config": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?name=fts.entity&order=id&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-on-text-column-not": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?name=not.plfts%28english%29.one&order=id&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-or": {
+    "body": [
+      {
+        "text_search_vector": "'fun':5 'imposs':9 'kind':3"
+      },
+      {
+        "text_search_vector": "'also':2 'fun':3 'possibl':8"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=fts%28english%29.impossible%7Cpossible",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/fts-unknown-config": {
+    "body": {
+      "code": "42704",
+      "details": null,
+      "hint": null,
+      "message": "text search configuration \"nonexistent\" does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/fts/not-phfts": {
+    "body": [
+      {
+        "text_search_vector": "'fun':5 'imposs':9 'kind':3"
+      },
+      {
+        "text_search_vector": "'also':2 'fun':3 'possibl':8"
+      },
+      {
+        "text_search_vector": "'amus':5 'fair':7 'impossibl':9 'peu':4"
+      },
+      {
+        "text_search_vector": "'art':4 'spass':5 'unmog':7"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=not.phfts%28english%29.The%20Fat%20Cats",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/phfts": {
+    "body": [
+      {
+        "text_search_vector": "'ate':3 'cat':2 'fat':1 'rat':4"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=phfts%28english%29.The%20Fat%20Cats",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/plfts-french": {
+    "body": [
+      {
+        "text_search_vector": "'amus':5 'fair':7 'impossibl':9 'peu':4"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=plfts%28french%29.amusant",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/plfts-two-words": {
+    "body": [],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=plfts%28english%29.impossible%20possible",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/fts/wfts": {
+    "body": [
+      {
+        "text_search_vector": "'fun':5 'imposs':9 'kind':3"
+      },
+      {
+        "text_search_vector": "'also':2 'fun':3 'possibl':8"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?text_search_vector=wfts%28english%29.impossible%20or%20possible",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-any-escaped-char": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22c%5Co%5Cm%5Cm%5Ca%2C%20i%5Cnside%22%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-escaped-backslash": {
+    "body": [],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22%5C%5C%22%29&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-escaped-quote": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22quote%20%5C%22inside%5C%22%22%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-mixed-quoted-unquoted": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28plain%2C%22comma%2C%20inside%22%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-parens-unquoted": {
+    "body": [],
+    "headers": {
+      "content-location": "/grandchild_entities?name=in.%28%28grandchild%2Centity%2C4%29%29&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-quoted-comma": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22comma%2C%20inside%22%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-quoted-empty-int": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?id=in.%28%22%22%29",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-quoted-empty-text": {
+    "body": [],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22%22%29&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-quoted-number": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=in.%28%221%22%2C%222%22%29&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-quoted-parens": {
+    "body": [
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?name=in.%28%22%28grandchild%2Centity%2C4%29%22%2C%22%28grandchild%2Centity%2C5%29%22%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-stray-quote-unquoted": {
+    "body": [],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22%29&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/in-whitespace": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=in.%28%201%20%2C%202%20%29&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/not-in-quoted": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?name=not.in.%28%22%28grandchild%2Centity%2C4%29%22%2Cgrandchild%20entity%201%29&order=id&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/not-in-quoted-empty-int": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=not.in.%28%22%22%29&order=id&select=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/in-quoting/not-in-quoted-empty-text": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=not.in.%28%22%22%29&order=id&select=id",
+      "content-range": "0-6/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/arrow-arrow-text": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3Efoo-%3E%3Ebar=eq.baz",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/double-arrow-then-arrow": {
+    "body": {
+      "code": "42883",
+      "details": null,
+      "hint": "No operator matches the given name and argument types. You might need to add explicit type casts.",
+      "message": "operator does not exist: text ->> unknown"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "filters/json/huge-index": {
+    "body": {
+      "code": "22003",
+      "details": null,
+      "hint": null,
+      "message": "value \"+99999999999999999999\" is out of range for type integer"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/json/index-on-array-column": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?arr_data-%3E%3E0=eq.1&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/index-on-object": {
+    "body": [],
+    "headers": {
+      "content-location": "/complex_items?select=id&settings-%3E%3E0=eq.1",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/int-as-text": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3Efoo-%3E%3Eint=eq.1",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/int-gt-text-compare": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3Efoo-%3E%3Eint=gt.0",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/jsonb-arrow-eq": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3Efoo-%3Ebar=eq.%22baz%22",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/jsonb-object-eq": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3Efoo=eq.%7B%22int%22%3A1%2C%22bar%22%3A%22baz%22%7D",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/key-with-apostrophe": {
+    "body": [],
+    "headers": {
+      "content-location": "/complex_items?select=id&settings-%3E%3Eit%27s=eq.x",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/key-with-apostrophe-is-null": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3E%3Eit%27s=is.null",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/key-with-double-quote": {
+    "body": [],
+    "headers": {
+      "content-location": "/complex_items?select=id&settings-%3E%3Ehe%22llo=eq.x",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/key-with-double-quote-is-null": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=id&select=id&settings-%3E%3Ehe%22llo=is.null",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/nested-jsonb-col": {
+    "body": [
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?jsonb_col-%3Ea-%3E%3Eb=eq.foo&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/no-match": {
+    "body": [],
+    "headers": {
+      "content-location": "/complex_items?select=id&settings-%3Efoo-%3E%3Ebar=eq.fake",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/not-eq": {
+    "body": [],
+    "headers": {
+      "content-location": "/complex_items?select=id&settings-%3Efoo-%3E%3Ebar=not.eq.baz",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/json/quoted-key": {
+    "body": [],
+    "headers": {
+      "content-location": "/complex_items?select=id&settings-%3E%3E%22foo%22=is.null",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/and-and-or": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28id.eq.1%2Cname.eq.entity%201%29&or=%28id.eq.1%2Cid.eq.2%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/and-single": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28id.eq.1%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/column-named-or-prefix": {
+    "body": [],
+    "headers": {
+      "content-location": "/grandchild_entities?or=%28and_starting_col.eq.smth%2Cor_starting_col.eq.smth%29&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/cs-cd": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28arr.cs.%7B1%2C2%2C3%7D%2Carr.cd.%7B1%7D%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/empty-is-400": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \")\" expecting field name (* or [a..z0..9_$]), negation operator (not) or logic operator (and, or)",
+      "hint": null,
+      "message": "\"failed to parse logic tree (())\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/logic/fts-in-or": {
+    "body": [
+      {
+        "text_search_vector": "'fun':5 'imposs':9 'kind':3"
+      },
+      {
+        "text_search_vector": "'art':4 'spass':5 'unmog':7"
+      }
+    ],
+    "headers": {
+      "content-location": "/tsearch?or=%28text_search_vector.plfts%28german%29.Art%20Spass%2Ctext_search_vector.fts%28english%29.impossible%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/in-in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28id.in.%281%2C2%29%2Cid.in.%283%2C4%29%29&order=id&select=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/is-null": {
+    "body": [
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28name.is.null%2Carr.is.null%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/isdistinct": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28arr.isdistinct.%7B1%7D%2Cid.eq.4%29&order=id&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/json-in-or": {
+    "body": [
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?or=%28jsonb_col-%3Ea-%3E%3Eb.eq.foo%2Cjsonb_col-%3E%3Eb.eq.bar%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/like-ilike": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28name.like.%2A1%2Cname.ilike.%2AENTITY%202%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/negated-nested": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28not.and%28name.eq.entity%202%2Cid.eq.2%29%2Cnot.and%28name.eq.entity%201%2Cid.eq.1%29%29&order=id&select=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/nested": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28and%28name.eq.entity%202%2Cid.eq.2%29%2Cand%28name.eq.entity%201%2Cid.eq.1%29%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/not-fts-in-or": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28text_search_vector.not.fts.foo%2Cid.lte.2%29&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/not-in-not-is": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28id.not.in.%281%2C3%29%2Cname.not.is.null%29&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/not-or": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?not.or=%28id.eq.1%2Cid.eq.2%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/not-prefixed-ops": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28arr.not.cs.%7B1%2C2%2C3%7D%2Cand%28id.not.eq.2%2Cname.not.like.%2A3%29%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/operators": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28id.lt.2%2Cid.gt.3%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/or-and-nested": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 6
+      }
+    ],
+    "headers": {
+      "content-location": "/items?or=%28id.eq.1%2Cand%28id.gt.5%2Cid.lt.7%29%29&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/or-plus-plain": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?name=eq.entity%201&or=%28id.eq.1%2Cid.eq.2%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/quoted-comma-parens": {
+    "body": [
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?or=%28name.eq.%22%28grandchild%2Centity%2C4%29%22%2Cname.eq.%22%28grandchild%2Centity%2C5%29%22%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/quoted-like": {
+    "body": [
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?or=%28name.like.%22%2Aity%2C4%2A%22%2Cname.ilike.%22%2AITY%2C5%29%22%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/single": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28id.eq.1%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/logic/whitespace": {
+    "body": [
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?and=%28%20and%20%28%20id.in.%28%201%2C%202%2C%203%20%29%20%2C%20id.eq.3%20%29%20%2C%20or%20%28%20id.eq.2%20%2C%20id.eq.3%20%29%20%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/eq-any": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq%28any%29.%7B3%2C4%2C5%7D&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/eq-any-not-a-number": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type integer: \"x\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/modifier/eq-any-quoted": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=eq%28any%29.%7B%22comma%2C%20inside%22%2C%22quote%20%5C%22inside%5C%22%22%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/gt-all": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=gt%28all%29.%7B4%2C3%7D&order=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/gte-all": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=gte%28all%29.%7B4%2C3%7D&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/ilike-all": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=ilike%28all%29.%7B%2AWINDOWS%2A%2C%2A10%7D&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/imatch-any": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=imatch%28any%29.%7B%5Eios%2C%5Eorph%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/like-any": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=like%28any%29.%7BWindows%2A%2C%2AOS%7D&order=id&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/lt-all": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=lt%28all%29.%7B4%2C3%7D&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/lte-all": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      },
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=lte%28all%29.%7B4%2C3%7D&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/match-any": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=match%28any%29.%7BIOS%2COrphan%7D&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/modifier/modifier-not-allowed": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"(\" expecting operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (neq(any).{1})\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/null/is-nil-is-400": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"i\" expecting isVal: (null, not_null, true, false, unknown)",
+      "hint": null,
+      "message": "\"failed to parse filter (is.nil)\" (line 1, column 5)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/null/is-not-null": {
+    "body": [
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": "2",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=is.not_null",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/is-not-null-mixed-case": {
+    "body": [
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": "2",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=is.NoT_NuLl",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/is-null": {
+    "body": [
+      {
+        "a": null,
+        "b": null
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=is.null",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/is-null-integer-column": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?client_id=is.null",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/is-null-uppercase": {
+    "body": [
+      {
+        "a": null,
+        "b": null
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=is.NULL",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/is-ok-is-400": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"o\" expecting isVal: (null, not_null, true, false, unknown)",
+      "hint": null,
+      "message": "\"failed to parse filter (is.ok)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/null/is-true-on-text-column": {
+    "body": {
+      "code": "42804",
+      "details": null,
+      "hint": null,
+      "message": "argument of IS TRUE must be type boolean, not type character varying"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/null/isdistinct": {
+    "body": [
+      {
+        "a": null
+      },
+      {
+        "a": "1"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=isdistinct.2&select=a",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/isdistinct-null-column-int": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?order=id&qty=isdistinct.10&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/not-is-not-null": {
+    "body": [
+      {
+        "a": null,
+        "b": null
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=not.is.not_null",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/not-is-null": {
+    "body": [
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": "2",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=not.is.null",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/null/not-isdistinct": {
+    "body": [
+      {
+        "a": "2"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?a=not.isdistinct.2&select=a",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/citext-ilike-any": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?email=ilike%28any%29.%7BALICE%2A%2Cnobody%7D&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/citext-like": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?email=like.alice%2A&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/citext-match": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?email=match.%5EBOB&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/ilike": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=ilike.WINDOWS%2A&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/ilike-infix": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=ilike.%2ASX&order=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/imatch": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=imatch.%5Ewin&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/like-any-on-integer-column": {
+    "body": {
+      "code": "42883",
+      "details": null,
+      "hint": "No operator matches the given name and argument types. You might need to add explicit type casts.",
+      "message": "operator does not exist: integer ~~ unknown"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "filters/pattern/like-both-ends": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=like.%2Aindow%2A&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/like-case-sensitive": {
+    "body": [],
+    "headers": {
+      "content-location": "/projects?name=like.%2Awindows%2A",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/like-literal-percent": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=like.%25ows%25",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/like-on-integer-column": {
+    "body": {
+      "code": "42883",
+      "details": null,
+      "hint": "No operator matches the given name and argument types. You might need to add explicit type casts.",
+      "message": "operator does not exist: integer ~~ unknown"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "filters/pattern/like-prefix": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=like.Windows%2A&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/like-suffix": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=like.%2A7",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/match": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=match.7%24",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/match-anchor": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=match.%5EWin&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/not-ilike": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=not.ilike.windows%2A&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/not-imatch": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=not.imatch.%5Ewin&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/not-like": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=not.like.Windows%2A&order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/pattern/not-match": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      },
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?name=not.match.7%24&order=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/empty-string": {
+    "body": [
+      {
+        "id": 6
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=eq.&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/missing-operator": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"0\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (0)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/reserved-unicode/reserved-ampersand": {
+    "body": [],
+    "headers": {
+      "content-location": "/csv_edge?label=eq.a%26b&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/reserved-comma": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=eq.comma%2C%20inside&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/reserved-hash": {
+    "body": [],
+    "headers": {
+      "content-location": "/csv_edge?label=eq.a%23b&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/reserved-percent": {
+    "body": [],
+    "headers": {
+      "content-location": "/csv_edge?label=like.100%25%2A&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/reserved-plus-is-space": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=eq.comma%2C%20inside&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/unicode-ilike-infix": {
+    "body": [
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=ilike.%2AH%C3%83%C2%89LLO%2A&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/unicode-in": {
+    "body": [
+      {
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=in.%28%22unicode%3A%20h%C3%83%C2%A9llo%20%C3%A2%C2%9C%C2%93%20%C3%A6%C2%97%C2%A5%C3%A6%C2%9C%C2%AC%22%2Cplain%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/unicode-like": {
+    "body": [
+      {
+        "id": 4,
+        "label": "unicode: héllo ✓ 日本"
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=like.unicode%2A&select=id%2Clabel",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/reserved-unicode/unicode-percent-encoded": {
+    "body": [
+      {
+        "id": 4,
+        "label": "unicode: héllo ✓ 日本"
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge?label=eq.unicode%3A%20h%C3%83%C2%A9llo%20%C3%A2%C2%9C%C2%93%20%C3%A6%C2%97%C2%A5%C3%A6%C2%9C%C2%AC&select=id%2Clabel",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/bit-eq": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?bits=eq.101&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/bit-in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?bits=in.%28101%2C010%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/bit-shorter-than-column": {
+    "body": [],
+    "headers": {
+      "content-location": "/type_cases?bits=eq.1&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/char-in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?code=in.%28abc%2Cab%29&order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/char-longer-than-column": {
+    "body": [],
+    "headers": {
+      "content-location": "/type_cases?code=eq.abcd&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/char-padded": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?code=eq.ab&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/citext-case-insensitive": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?email=eq.ALICE%40EXAMPLE.COM&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/citext-in": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?email=in.%28BOB%40example.com%29&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/enum-eq": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?select=id&status=eq.active",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/enum-eq-uppercase": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input value for enum status_enum: \"ONLINE\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/type/enum-gt": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?order=id&select=id&status=gt.draft",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/enum-in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?order=id&select=id&status=in.%28draft%2Cactive%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/enum-in-invalid": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input value for enum status_enum: \"ONLINE\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/type/int4-decimal-text": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type integer: \"10.0\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/type/int4-eq": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?qty=eq.10&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/int4-eq-no-match": {
+    "body": [],
+    "headers": {
+      "content-location": "/type_cases?qty=eq.3&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/int4-gt": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?qty=gt.10&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/numeric-1-005": {
+    "body": [],
+    "headers": {
+      "content-location": "/type_cases?price=eq.1.005&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/numeric-any": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?order=id&price=gt%28any%29.%7B10%2C19%7D&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/numeric-exact": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?price=eq.9.99&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/numeric-in": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?order=id&price=in.%289.99%2C19.5%29&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/numeric-no-rounding": {
+    "body": [],
+    "headers": {
+      "content-location": "/type_cases?price=eq.9.994&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/numeric-trailing-zero": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?price=eq.9.990&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/timestamptz-invalid": {
+    "body": {
+      "code": "22007",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type timestamp with time zone: \"yesterday-ish\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "filters/type/timestamptz-offset": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?at=gte.2024-06-15T14%3A30%3A00%2B02%3A00&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "filters/type/timestamptz-utc": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/type_cases?at=eq.2024-01-01T00%3A00%3A00Z&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

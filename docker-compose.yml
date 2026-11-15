@@ -1,0 +1,89 @@
+# TEST HARNESS ONLY. Superuser credentials and a superuser anon role; never deploy this.
+services:
+  db:
+    image: postgres:16
+    command: postgres -c shared_preload_libraries=pg_stat_statements
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      # Creates the Supabase API roles on a fresh container, so postgrest_supabase can log in
+      # as `authenticator` before Fixture.load!/0 has ever run.
+      - ./test/support/compat/supabase/roles.sql:/docker-entrypoint-initdb.d/10-roles.sql:ro
+    ports:
+      - "127.0.0.1:54320:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  postgrest:
+    image: postgrest/postgrest:v14.18
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://postgres:postgres@db:5432/pgrest_compat
+      PGRST_DB_SCHEMAS: test
+      PGRST_DB_ANON_ROLE: postgres
+      PGRST_DB_TX_END: commit-allow-override
+      PGRST_DB_PLAN_ENABLED: "true"
+      PGRST_DB_AGGREGATES_ENABLED: "true"
+      PGRST_ADMIN_SERVER_PORT: "3001"
+    ports:
+      - "127.0.0.1:54321:3000"
+      - "127.0.0.1:54322:3001"
+
+  postgrest_limits:
+    image: postgrest/postgrest:v14.18
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://postgres:postgres@db:5432/pgrest_compat
+      PGRST_DB_SCHEMAS: test
+      PGRST_DB_ANON_ROLE: postgres
+      PGRST_DB_TX_END: commit-allow-override
+      PGRST_DB_PLAN_ENABLED: "true"
+      PGRST_DB_MAX_ROWS: "2"
+      PGRST_DB_AGGREGATES_ENABLED: "false"
+    ports:
+      - "127.0.0.1:54329:3000"
+
+  postgrest_supabase:
+    image: postgrest/postgrest:v14.18
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://authenticator:authenticator@db:5432/pgrest_supabase
+      PGRST_DB_SCHEMAS: public,personal
+      PGRST_DB_ANON_ROLE: anon
+      PGRST_JWT_SECRET: reallyreallyreallyreallyverysafe
+      PGRST_DB_PRE_REQUEST: public.check_request
+      PGRST_DB_TX_END: commit-allow-override
+      PGRST_DB_PLAN_ENABLED: "true"
+      PGRST_DB_AGGREGATES_ENABLED: "true"
+      PGRST_ADMIN_SERVER_PORT: "3001"
+    ports:
+      - "127.0.0.1:54323:3000"
+      - "127.0.0.1:54324:3001"
+
+  # Postgres with pg-safeupdate, for the SQL-level safeupdate tests (no PostgREST in front:
+  # the port table has no port for one).
+  db_safeupdate:
+    profiles: ["safeupdate"]
+    build:
+      context: .
+      dockerfile: docker/pg-safeupdate.Dockerfile
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "127.0.0.1:54325:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 30

@@ -1,0 +1,627 @@
+{
+  "select_syntax/aggregate-avg-cast": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/aggregate-count": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/aggregate-sum": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/aggregate-unknown-fun": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"m\" expecting \"sum\", \"avg\", \"count\", \"max\" or \"min\"",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id.median())\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/alias": {
+    "body": [
+      {
+        "ident": 1
+      },
+      {
+        "ident": 2
+      },
+      {
+        "ident": 3
+      },
+      {
+        "ident": 4
+      },
+      {
+        "ident": 5
+      },
+      {
+        "ident": 6
+      },
+      {
+        "ident": 7
+      },
+      {
+        "ident": 8
+      },
+      {
+        "ident": 9
+      },
+      {
+        "ident": 10
+      },
+      {
+        "ident": 11
+      },
+      {
+        "ident": 12
+      },
+      {
+        "ident": 13
+      },
+      {
+        "ident": 14
+      },
+      {
+        "ident": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=ident%3Aid",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/cast-comma-splits": {
+    "body": [
+      {
+        "id": "1"
+      },
+      {
+        "id": "2"
+      },
+      {
+        "id": "3"
+      },
+      {
+        "id": "4"
+      },
+      {
+        "id": "5"
+      },
+      {
+        "id": "6"
+      },
+      {
+        "id": "7"
+      },
+      {
+        "id": "8"
+      },
+      {
+        "id": "9"
+      },
+      {
+        "id": "10"
+      },
+      {
+        "id": "11"
+      },
+      {
+        "id": "12"
+      },
+      {
+        "id": "13"
+      },
+      {
+        "id": "14"
+      },
+      {
+        "id": "15"
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id%3A%3Atext%2Cid",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/cast-dash-dash": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected '-' expecting letter, digit, \".\", \"::\", \")\", \",\" or end of input",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id::int--)\" (line 1, column 8)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/cast-dotted": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"b\" expecting \"sum\", \"avg\", \"count\", \"max\" or \"min\"",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id::a.b)\" (line 1, column 7)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/cast-quoted": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"\\\"\" expecting letter or digit",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id::\"int\")\" (line 1, column 5)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/cast-semicolon": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected ';' expecting letter, digit, \".\", \"::\", \")\", \",\" or end of input",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id::text;)\" (line 1, column 9)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/cast-spaced-name": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id%3A%3Adouble%20precision",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/cast-text": {
+    "body": [
+      {
+        "id": "1"
+      },
+      {
+        "id": "2"
+      },
+      {
+        "id": "3"
+      },
+      {
+        "id": "4"
+      },
+      {
+        "id": "5"
+      },
+      {
+        "id": "6"
+      },
+      {
+        "id": "7"
+      },
+      {
+        "id": "8"
+      },
+      {
+        "id": "9"
+      },
+      {
+        "id": "10"
+      },
+      {
+        "id": "11"
+      },
+      {
+        "id": "12"
+      },
+      {
+        "id": "13"
+      },
+      {
+        "id": "14"
+      },
+      {
+        "id": "15"
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id%3A%3Atext",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-alias": {
+    "body": [
+      {
+        "c": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "c": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "c": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "c": {
+          "id": 2
+        },
+        "id": 4
+      },
+      {
+        "c": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cc%3Aclients%28id%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-empty": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%28%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-hint": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      },
+      {
+        "clients": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%21client%28id%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-inner": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-left": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      },
+      {
+        "clients": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%21left%28id%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-spread": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Microsoft"
+      },
+      {
+        "id": 2,
+        "name": "Microsoft"
+      },
+      {
+        "id": 3,
+        "name": "Apple"
+      },
+      {
+        "id": 4,
+        "name": "Apple"
+      },
+      {
+        "id": 5,
+        "name": null
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2C...clients%28name%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/embed-spread-alias": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \".\" expecting \":\" or field name (* or [a..z0..9_$])",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id,a:...clients(name))\" (line 1, column 6)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/spaces": {
+    "body": [
+      {
+        "id": 1,
+        "ident": 1
+      },
+      {
+        "id": 2,
+        "ident": 2
+      },
+      {
+        "id": 3,
+        "ident": 3
+      },
+      {
+        "id": 4,
+        "ident": 4
+      },
+      {
+        "id": 5,
+        "ident": 5
+      },
+      {
+        "id": 6,
+        "ident": 6
+      },
+      {
+        "id": 7,
+        "ident": 7
+      },
+      {
+        "id": 8,
+        "ident": 8
+      },
+      {
+        "id": 9,
+        "ident": 9
+      },
+      {
+        "id": 10,
+        "ident": 10
+      },
+      {
+        "id": 11,
+        "ident": 11
+      },
+      {
+        "id": 12,
+        "ident": 12
+      },
+      {
+        "id": 13,
+        "ident": 13
+      },
+      {
+        "id": 14,
+        "ident": 14
+      },
+      {
+        "id": 15,
+        "ident": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=%20id%20%2C%20ident%3Aid%20",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "select_syntax/trailing-comma": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting \"...\", field name (* or [a..z0..9_$]), \"*\" or \"count()\"",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id,)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "select_syntax/unclosed-embed": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting letter, digit, \"-\", \"->>\", \"->\", \"::\", \".\", \")\", \",\" or end of input",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id,clients(id)\" (line 1, column 14)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

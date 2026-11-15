@@ -1,0 +1,96 @@
+{
+  "querystring/empty-value": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter ()\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "querystring/key-without-equals": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=&order=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "querystring/plus-is-space": {
+    "body": [],
+    "headers": {
+      "content-location": "/compound_pk?k2=eq.a%20b",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "querystring/semicolon-separator": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?id=eq.1&limit=0",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "querystring/unicode": {
+    "body": [],
+    "headers": {
+      "content-location": "/compound_pk?k2=eq.%C3%83%C2%A9t%C3%83%C2%A9",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

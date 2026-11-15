@@ -1,0 +1,382 @@
+{
+  "counting/exact-embed-not-null": {
+    "body": [
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 7"
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 10"
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "name": "IOS"
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "name": "OSX"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients=not.is.null&select=name%2Cclients%28name%29",
+      "content-range": "0-3/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "counting/exact-empty": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?id=eq.0",
+      "content-range": "*/0",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "counting/exact-empty-table": {
+    "body": [],
+    "headers": {
+      "content-location": "/compound_pk",
+      "content-range": "*/0",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "counting/exact-full-page": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-14/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "counting/exact-inner-join": {
+    "body": [
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 7"
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients.name=eq.Microsoft&select=name%2Cclients%21inner%28name%29",
+      "content-range": "0-1/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "counting/exact-limits": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-1/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/exact-offset-window": {
+    "body": [
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=2&offset=3&order=id&select=id",
+      "content-range": "3-4/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/exact-partial-page": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=2&order=id&select=id",
+      "content-range": "0-1/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/exact-with-range-header": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "2-4/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/handling-lenient-echoed": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=lenient"
+    },
+    "status": 200
+  },
+  "counting/head-exact": {
+    "body": null,
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-14/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "counting/head-exact-limit": {
+    "body": null,
+    "headers": {
+      "content-location": "/items?limit=2&offset=3&order=id&select=id",
+      "content-range": "3-4/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/none-empty": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?id=eq.0",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "counting/none-full-page": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "counting/preference-applied-combined": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact, handling=strict"
+    },
+    "status": 206
+  },
+  "counting/spread-inner-limit": {
+    "body": [
+      {
+        "id": 1,
+        "name": [
+          "Design w7",
+          "Code w7"
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?limit=1&order=id&select=id%2C...tasks%21inner%28name%29",
+      "content-range": "0-0/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/spread-null-filter-limit": {
+    "body": [
+      {
+        "id": 1,
+        "name": [
+          "Design w7",
+          "Code w7"
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?limit=1&order=id&select=id%2C...tasks%28name%29&tasks=not.is.null",
+      "content-range": "0-0/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "counting/tx-rollback-echoed": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "counting/unknown-preference-ignored": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

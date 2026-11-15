@@ -1,0 +1,218 @@
+{
+  "errors/denied-table-malformed-filter": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"f\" expecting \"not\" or operator (eq, gt, ...)",
+      "hint": null,
+      "message": "\"failed to parse filter (foo.1)\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/denied-table-malformed-order": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"n\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (id.nope)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/denied-table-malformed-select": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \",\" expecting \"...\", field name (* or [a..z0..9_$]), \"*\" or \"count()\"",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id,,)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/denied-table-order-bogus": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"b\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (id.bogus)\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/denied-table-select-open-paren": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting \"...\", field name (* or [a..z0..9_$]), \"*\", \"count()\" or \")\"",
+      "hint": null,
+      "message": "\"failed to parse select parameter (id()\" (line 1, column 4)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/denied-table-valid-filter": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table private_docs"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 401
+  },
+  "errors/foreign-key-violation": {
+    "body": {
+      "code": "23503",
+      "details": "Key (client_id)=(999) is not present in table \"clients\".",
+      "hint": null,
+      "message": "insert or update on table \"projects\" violates foreign key constraint \"client\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "errors/invalid-input-syntax": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"abc\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/invalid-integer-body": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"abc\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/invalid-path": {
+    "body": {
+      "code": "PGRST125",
+      "details": null,
+      "hint": null,
+      "message": "Invalid path specified in request URL"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "errors/not-null-violation": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (100, null).",
+      "hint": null,
+      "message": "null value in column \"name\" of relation \"clients\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/unique-violation": {
+    "body": {
+      "code": "23505",
+      "details": "Key (id)=(1) already exists.",
+      "hint": null,
+      "message": "duplicate key value violates unique constraint \"clients_pkey\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "errors/unknown-column-filter": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column items.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/unknown-column-order": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column items.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/unknown-column-select": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column items.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "errors/unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.faketable' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "errors/unknown-table-hint": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": "Perhaps you meant the table 'test.projects'",
+      "message": "Could not find the table 'test.projectx' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "errors/unknown-table-no-hint": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.projxxxx' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  }
+}

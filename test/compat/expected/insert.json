@@ -1,0 +1,852 @@
+{
+  "insert/bulk-empty-array": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/bulk-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/bulk-non-object-element": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/bulk-non-uniform-keys": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/bulk-representation": {
+    "body": [
+      {
+        "id": 100,
+        "name": "a"
+      },
+      {
+        "id": 101,
+        "name": "b"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/columns-blank": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting field name (* or [a..z0..9_$])",
+      "hint": null,
+      "message": "\"failed to parse columns parameter ()\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/columns-bulk-absent-is-null": {
+    "body": [
+      {
+        "id": 2,
+        "label": "a",
+        "note": null
+      },
+      {
+        "id": 3,
+        "label": null,
+        "note": "b"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/columns-bulk-non-object-element": {
+    "body": {
+      "code": "22023",
+      "details": null,
+      "hint": null,
+      "message": "argument of json_to_recordset must be an array of objects"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/columns-ignores-extra-keys": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 100,
+        "name": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/columns-unknown": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'helicopter' column of 'projects' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/columns-unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.helicopter' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "insert/count-estimated": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 100,
+        "name": "a"
+      },
+      {
+        "client_id": null,
+        "id": 101,
+        "name": "b"
+      }
+    ],
+    "headers": {
+      "content-range": "*/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=estimated, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/count-exact-bulk": {
+    "body": [
+      {
+        "id": 100
+      },
+      {
+        "id": 101
+      }
+    ],
+    "headers": {
+      "content-range": "*/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/count-exact-headers-only": {
+    "body": null,
+    "headers": {
+      "content-range": "*/1",
+      "location": "/projects?id=eq.100",
+      "preference-applied": "return=headers-only, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/count-exact-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/2",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/count-exact-single": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 100,
+        "name": "a"
+      }
+    ],
+    "headers": {
+      "content-range": "*/1",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/count-planned": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 100,
+        "name": "a"
+      },
+      {
+        "client_id": null,
+        "id": 101,
+        "name": "b"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=planned, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/default-absent-key-uses-default": {
+    "body": [
+      {
+        "id": 2,
+        "label": "only",
+        "note": "x"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/duplicate-pk": {
+    "body": {
+      "code": "23505",
+      "details": "Key (id)=(1) already exists.",
+      "hint": null,
+      "message": "duplicate key value violates unique constraint \"clients_pkey\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "insert/empty-body": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "Empty or invalid json"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/empty-object-array": {
+    "body": [
+      {
+        "id": 16
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/empty-object-representation": {
+    "body": [
+      {
+        "id": 16
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/empty-objects-bulk": {
+    "body": [
+      {
+        "id": 16
+      },
+      {
+        "id": 17
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/explicit-null-stays-null": {
+    "body": [
+      {
+        "id": 2,
+        "label": "x",
+        "note": null
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/foreign-key-violation": {
+    "body": {
+      "code": "23503",
+      "details": "Key (client_id)=(999) is not present in table \"clients\".",
+      "hint": null,
+      "message": "insert or update on table \"projects\" violates foreign key constraint \"client\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "insert/generated-always-column": {
+    "body": {
+      "code": "428C9",
+      "details": "Column \"double_id\" is a generated column.",
+      "hint": null,
+      "message": "cannot insert a non-DEFAULT value into column \"double_id\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/headers-only": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/projects?id=eq.100",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/headers-only-bulk": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/headers-only-composite": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/compound_pk?k1=eq.1&k2=eq.test",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/headers-only-encoding": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/compound_pk?k1=eq.1&k2=eq.a%20b%26c",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/headers-only-no-pk": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/headers-only-one-element-array": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/projects?id=eq.100",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/invalid-integer": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type bigint: \"abc\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/invalid-json": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "Empty or invalid json"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/js-quoted-columns": {
+    "body": [
+      {
+        "status": "ONLINE",
+        "username": "js_one"
+      },
+      {
+        "status": "ONLINE",
+        "username": "js_two"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "*/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/jsonb-roundtrip": {
+    "body": [
+      {
+        "arr_data": [
+          1,
+          2
+        ],
+        "id": 100,
+        "name": "j",
+        "settings": {
+          "a": [
+            1,
+            {
+              "b": null
+            }
+          ],
+          "c": "d"
+        },
+        "tags": [
+          "x",
+          "y"
+        ]
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/minimal-no-location": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/missing-default-bulk-null": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/missing-default-columns": {
+    "body": [
+      {
+        "id": 2,
+        "label": "x",
+        "note": "x"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/missing-default-columns-bulk-null": {
+    "body": [
+      {
+        "id": 2,
+        "label": null,
+        "note": "n1"
+      },
+      {
+        "id": 3,
+        "label": "l",
+        "note": null
+      },
+      {
+        "id": 4,
+        "label": "m",
+        "note": "x"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/missing-default-identity": {
+    "body": [
+      {
+        "id": 2,
+        "label": "x"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/missing-default-identity-bulk": {
+    "body": [
+      {
+        "id": 2,
+        "label": "x"
+      },
+      {
+        "id": 50,
+        "label": "y"
+      },
+      {
+        "id": 4,
+        "label": "z"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/missing-default-single": {
+    "body": [
+      {
+        "double_id": 4,
+        "id": 2,
+        "label": "x",
+        "note": "x"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/missing-null-bulk": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/not-null": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (100, null).",
+      "hint": null,
+      "message": "null value in column \"name\" of relation \"clients\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/not-null-composite": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (null, x, null).",
+      "hint": null,
+      "message": "null value in column \"k1\" of relation \"compound_pk\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "insert/preference-applied-order": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 100,
+        "name": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/representation-embed": {
+    "body": [
+      {
+        "id": 100,
+        "projects": []
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/representation-embed-parent": {
+    "body": [
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 100
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/representation-filter-ignored": {
+    "body": [
+      {
+        "id": 100
+      },
+      {
+        "id": 101
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/representation-order": {
+    "body": [
+      {
+        "id": 102,
+        "name": "c"
+      },
+      {
+        "id": 101,
+        "name": "b"
+      },
+      {
+        "id": 100,
+        "name": "a"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/representation-rename-cast": {
+    "body": [
+      {
+        "cId": "1",
+        "pId": "100",
+        "pName": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/representation-select": {
+    "body": [
+      {
+        "id": 100,
+        "name": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/select-ignored-by-default": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/select-ignored-by-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/single-default-prefs": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/single-representation": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 100,
+        "name": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/singular-empty-array": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 0 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "insert/singular-one-element-array": {
+    "body": {
+      "client_id": null,
+      "id": 100,
+      "name": "new"
+    },
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/singular-one-row": {
+    "body": {
+      "client_id": null,
+      "id": 100,
+      "name": "new"
+    },
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "insert/singular-two-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 2 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "insert/singular-two-rows-minimal": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 2 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "insert/unknown-payload-key": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'helicopter' column of 'projects' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

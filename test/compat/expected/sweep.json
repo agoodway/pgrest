@@ -1,0 +1,235 @@
+{
+  "sweep/bad-negative-json-path": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"-\" expecting digit",
+      "hint": null,
+      "message": "\"failed to parse select parameter (arr_data->>--34)\" (line 1, column 13)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "sweep/camel-ignore-1": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "sweep/camel-ignore-91": {
+    "body": [
+      {
+        "idUnitTest": 91,
+        "nameUnitTest": "updated"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "sweep/camel-merge-1": {
+    "body": [
+      {
+        "idUnitTest": 1,
+        "nameUnitTest": "updated"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "sweep/camel-merge-91": {
+    "body": [
+      {
+        "idUnitTest": 91,
+        "nameUnitTest": "updated"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "sweep/content-location-sorted": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=gt.1&name=like.%2A&order=id&select=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/foreign-filter": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/sweep_foreign_items?id=eq.1",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/foreign-select-order-limit": {
+    "body": [
+      {
+        "id": 15
+      },
+      {
+        "id": 14
+      }
+    ],
+    "headers": {
+      "content-location": "/sweep_foreign_items?limit=2&order=id.desc&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/nullable-key-location": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/test_null_pk_competitors_sponsors?id=eq.1&sponsor_id=is.null",
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 201
+  },
+  "sweep/typed-get": {
+    "body": {
+      "amount": 1.25,
+      "day": "2026-01-02",
+      "doc": {
+        "a": 1
+      },
+      "flag": true,
+      "ids": [
+        1,
+        2
+      ]
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/typed-invalid-get": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type boolean: \"oops\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "sweep/typed-null-get": {
+    "body": {
+      "amount": -2,
+      "day": "2024-02-29",
+      "doc": null,
+      "flag": false,
+      "ids": []
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/unicode-delete": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "sweep/unicode-insert": {
+    "body": [
+      {
+        "هویت": 1
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "sweep/unicode-read": {
+    "body": [],
+    "headers": {
+      "content-location": "/موارد",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/uppercase-rpc-get": {
+    "body": "hello",
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "sweep/uppercase-rpc-post": {
+    "body": "hello",
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "sweep/upsert-embed": {
+    "body": [
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1,
+        "name": "updated"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  }
+}

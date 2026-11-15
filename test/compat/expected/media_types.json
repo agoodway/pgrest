@@ -1,0 +1,1039 @@
+{
+  "media_types/accept-any": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-any-then-csv": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-array-json-plain": {
+    "body": [
+      {
+        "auditor": null,
+        "id": 1,
+        "referee": null
+      },
+      {
+        "auditor": null,
+        "id": 2,
+        "referee": null
+      },
+      {
+        "auditor": 2,
+        "id": 3,
+        "referee": 1
+      },
+      {
+        "auditor": 2,
+        "id": 4,
+        "referee": 1
+      },
+      {
+        "auditor": 4,
+        "id": 5,
+        "referee": 3
+      },
+      {
+        "auditor": 4,
+        "id": 6,
+        "referee": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?order=id&select=id%2Creferee%2Cauditor",
+      "content-range": "0-5/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-array-without-json-suffix": {
+    "body": [
+      {
+        "id": 1,
+        "referee": null
+      },
+      {
+        "id": 2,
+        "referee": null
+      },
+      {
+        "id": 3,
+        "referee": 1
+      },
+      {
+        "id": 4,
+        "referee": 1
+      },
+      {
+        "id": 5,
+        "referee": 3
+      },
+      {
+        "id": 6,
+        "referee": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?order=id&select=id%2Creferee",
+      "content-range": "0-5/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-csv-before-json": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-csv-overrides-any": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-csv-uppercase": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-csv-version-param": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-json-q-over-csv": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Microsoft"
+      },
+      {
+        "id": 2,
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-json-then-csv-with-param": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-two-unknown-request-order": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/unknowntype, text/other"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media_types/accept-unknown-list-specificity-order": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/bar;a=b, text/foo, text/baz"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media_types/accept-unknown-only": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/unknowntype"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media_types/accept-unknown-rescued-by-any": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/accept-unknown-then-csv": {
+    "body": "id,name\n1,Microsoft\n2,Apple",
+    "headers": {
+      "content-location": "/clients?order=id&select=id%2Cname",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-aggregate": {
+    "body": "client_id,n\n1,2\n2,2\n,1",
+    "headers": {
+      "content-location": "/projects?order=client_id&select=client_id%2Cn%3Acount%28%29",
+      "content-range": "0-2/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-all": {
+    "body": "id,txt,js,arr\n1,\"a,b\",,\n2,\"say \"\"hi\"\"\",,\n3,\"line1\nline2\",,\n4,\"héllo ✓ 日本\",,\n5,,,\n6,\"\",,\n7,\"\"\",\"\"\",,\n8,,\"{\"\"k\"\": \"\"v,w\"\", \"\"q\"\": \"\"\\\\\"\"\"\"}\",\"{1,2}\"\n9,,,{}",
+    "headers": {
+      "content-location": "/csv_edge_cases?order=id&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-8/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-1": {
+    "body": "id,txt,js,arr\n1,\"a,b\",,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.1&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-2": {
+    "body": "id,txt,js,arr\n2,\"say \"\"hi\"\"\",,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.2&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-3": {
+    "body": "id,txt,js,arr\n3,\"line1\nline2\",,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.3&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-4": {
+    "body": "id,txt,js,arr\n4,\"héllo ✓ 日本\",,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.4&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-5": {
+    "body": "id,txt,js,arr\n5,,,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.5&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-6": {
+    "body": "id,txt,js,arr\n6,\"\",,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.6&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-7": {
+    "body": "id,txt,js,arr\n7,\"\"\",\"\"\",,",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.7&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-8": {
+    "body": "id,txt,js,arr\n8,,\"{\"\"k\"\": \"\"v,w\"\", \"\"q\"\": \"\"\\\\\"\"\"\"}\",\"{1,2}\"",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.8&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-case-9": {
+    "body": "id,txt,js,arr\n9,,,{}",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.9&select=id%2Ctxt%2Cjs%2Carr",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-count-range": {
+    "body": "id,txt\n2,\"say \"\"hi\"\"\"\n3,\"line1\nline2\"\n4,\"héllo ✓ 日本\"",
+    "headers": {
+      "content-location": "/csv_edge_cases?order=id&select=id%2Ctxt",
+      "content-range": "1-3/9",
+      "content-type": "text/csv; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "media_types/csv-edge-empty": {
+    "body": "\n",
+    "headers": {
+      "content-location": "/csv_edge_cases?id=eq.0&select=id%2Ctxt",
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-head": {
+    "body": null,
+    "headers": {
+      "content-location": "/csv_edge_cases?select=id%2Ctxt",
+      "content-range": "0-8/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-edge-subset": {
+    "body": "txt\n\"a,b\"\n\"say \"\"hi\"\"\"\n\"line1\nline2\"\n\"héllo ✓ 日本\"\n\n\"\"\n\"\"\",\"\"\"\n\n",
+    "headers": {
+      "content-location": "/csv_edge_cases?order=id&select=txt",
+      "content-range": "0-8/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-embed": {
+    "body": "id,projects\n1,\"[{\"\"id\"\": 1, \"\"name\"\": \"\"Windows 7\"\"}, {\"\"id\"\": 2, \"\"name\"\": \"\"Windows 10\"\"}]\"",
+    "headers": {
+      "content-location": "/clients?id=eq.1&projects.order=id&select=id%2Cprojects%28id%2Cname%29",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-rpc-composite-empty": {
+    "body": "id\n",
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-rpc-empty-filter": {
+    "body": "id,name,client_id\n",
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-rpc-limit-zero": {
+    "body": "id,name,client_id\n",
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-spread": {
+    "body": "id,client\n1,Microsoft\n2,Microsoft\n3,Apple\n4,Apple\n5,",
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2C...clients%28client%3Aname%29",
+      "content-range": "0-4/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-table-alias": {
+    "body": "n,id\nMicrosoft,1\nApple,2",
+    "headers": {
+      "content-location": "/clients?limit=2&order=id&select=n%3Aname%2Cid",
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-table-embed-empty": {
+    "body": "\n",
+    "headers": {
+      "content-location": "/clients?id=eq.999&select=id%2Cprojects%28id%29",
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-table-limit-zero": {
+    "body": "\n",
+    "headers": {
+      "content-location": "/clients?limit=0&select=id%2Cname",
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/csv-unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"clients.name\".",
+      "message": "column clients.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "media_types/delete-csv-representation": {
+    "body": {
+      "code": "23503",
+      "details": "Key (id)=(1) is still referenced from table \"users_tasks\".",
+      "hint": null,
+      "message": "update or delete on table \"tasks\" violates foreign key constraint \"users_tasks_task_id_fkey\" on table \"users_tasks\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "media_types/patch-csv-representation": {
+    "body": "id,name\n1,renamed",
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "media_types/post-csv-bulk-representation": {
+    "body": "id,name\n100,\"a,b\"\n101,\"say \"\"hi\"\"\"",
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "media_types/post-csv-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "media_types/post-csv-representation": {
+    "body": "id,name\n100,new",
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "text/csv; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "media_types/rpc-add-them-array-json": {
+    "body": 3,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-add-them-csv": {
+    "body": "pgrst_scalar\n3",
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-add-them-object-stripped": {
+    "body": 3,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getallprojects-array-json": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getallprojects-array-stripped": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1
+      },
+      {
+        "client_id": 1,
+        "id": 2
+      },
+      {
+        "client_id": 2,
+        "id": 3
+      },
+      {
+        "client_id": 2,
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-range": "0-4/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getallprojects-csv": {
+    "body": "id,name\n1,\"Windows 7\"\n2,\"Windows 10\"\n3,IOS\n4,OSX\n5,Orphan",
+    "headers": {
+      "content-range": "0-4/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getitemrange-csv-get": {
+    "body": "id\n3\n4",
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getitemrange-csv-head": {
+    "body": null,
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getitemrange-csv-post": {
+    "body": "id\n3\n4",
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "text/csv; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "media_types/rpc-getproject-object-stripped": {
+    "body": {
+      "client_id": 2,
+      "id": 4
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-many-out-params-csv": {
+    "body": "my_json,num,str\n\"{\"\"a\"\": 1, \"\"b\"\": \"\"two\"\"}\",3,four",
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/rpc-ret-void-csv": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "media_types/stripped-array-get": {
+    "body": [
+      {
+        "id": 1,
+        "manager_id": 1,
+        "name": "Referee Org"
+      },
+      {
+        "id": 2,
+        "manager_id": 2,
+        "name": "Auditor Org"
+      },
+      {
+        "auditor": 2,
+        "id": 3,
+        "manager_id": 3,
+        "name": "Acme",
+        "referee": 1
+      },
+      {
+        "auditor": 2,
+        "id": 4,
+        "manager_id": 4,
+        "name": "Umbrella",
+        "referee": 1
+      },
+      {
+        "auditor": 4,
+        "id": 5,
+        "manager_id": 5,
+        "name": "Cyberdyne",
+        "referee": 3
+      },
+      {
+        "auditor": 4,
+        "id": 6,
+        "manager_id": 6,
+        "name": "Oscorp",
+        "referee": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?order=id&select=%2A",
+      "content-range": "0-5/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-array-patch": {
+    "body": [
+      {
+        "auditor": 2,
+        "id": 3,
+        "manager_id": 3,
+        "name": "John"
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "media_types/stripped-array-post": {
+    "body": [
+      {
+        "id": 7,
+        "manager_id": 6,
+        "name": "John"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "media_types/stripped-array-without-json-suffix": {
+    "body": [
+      {
+        "id": 1,
+        "manager_id": 1,
+        "name": "Referee Org"
+      },
+      {
+        "id": 2,
+        "manager_id": 2,
+        "name": "Auditor Org"
+      },
+      {
+        "auditor": 2,
+        "id": 3,
+        "manager_id": 3,
+        "name": "Acme",
+        "referee": 1
+      },
+      {
+        "auditor": 2,
+        "id": 4,
+        "manager_id": 4,
+        "name": "Umbrella",
+        "referee": 1
+      },
+      {
+        "auditor": 4,
+        "id": 5,
+        "manager_id": 5,
+        "name": "Cyberdyne",
+        "referee": 3
+      },
+      {
+        "auditor": 4,
+        "id": 6,
+        "manager_id": 6,
+        "name": "Oscorp",
+        "referee": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?order=id&select=%2A",
+      "content-range": "0-5/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-embed": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "auditor": {
+          "id": 2
+        },
+        "id": 3,
+        "referee": {
+          "id": 1,
+          "name": "Referee Org"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?id=in.%281%2C3%29&order=id&select=id%2Creferee%28id%2Cname%29%2Cauditor%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-explicit-array-get": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "auditor": 2,
+        "id": 3,
+        "referee": 1
+      },
+      {
+        "auditor": 2,
+        "id": 4,
+        "referee": 1
+      },
+      {
+        "auditor": 4,
+        "id": 5,
+        "referee": 3
+      },
+      {
+        "auditor": 4,
+        "id": 6,
+        "referee": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?order=id&select=id%2Creferee%2Cauditor",
+      "content-range": "0-5/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-explicit-array-patch": {
+    "body": [
+      {
+        "auditor": 2,
+        "id": 3,
+        "name": "John"
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "media_types/stripped-explicit-array-post": {
+    "body": [
+      {
+        "id": 7
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "media_types/stripped-explicit-object-get": {
+    "body": {
+      "id": 1
+    },
+    "headers": {
+      "content-location": "/organizations?limit=1&order=id&select=id%2Creferee%2Cauditor",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-json-column": {
+    "body": [
+      {
+        "id": 8,
+        "js": {
+          "k": "v,w",
+          "q": "\""
+        }
+      },
+      {
+        "id": 9
+      }
+    ],
+    "headers": {
+      "content-location": "/csv_edge_cases?id=in.%288%2C9%29&order=id&select=id%2Cjs",
+      "content-range": "0-1/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-name-uppercase": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3,
+        "referee": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?limit=3&order=id&select=id%2Creferee",
+      "content-range": "0-2/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-object-get": {
+    "body": {
+      "id": 1,
+      "manager_id": 1,
+      "name": "Referee Org"
+    },
+    "headers": {
+      "content-location": "/organizations?limit=1&order=id",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/stripped-object-not-singular": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 6 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media_types/stripped-object-patch-no-match": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 0 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media_types/stripped-object-post": {
+    "body": {
+      "id": 7
+    },
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.object+json;nulls=stripped; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "media_types/stripped-value-quoted": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3,
+        "referee": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?limit=3&order=id&select=id%2Creferee",
+      "content-range": "0-2/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/supabase-csv-users": {
+    "body": "username,data,age_range,status,catchphrase\nawailas,,\"[25,35)\",ONLINE,\"'bat' 'rat'\"\ndragarcia,,\"[20,30)\",ONLINE,\"'fat' 'rat'\"\njsonuser,\"{\"\"foo\"\": {\"\"bar\"\": {\"\"nested\"\": \"\"value\"\"}, \"\"baz\"\": \"\"string value\"\"}}\",\"[20,30)\",ONLINE,\"'json' 'test'\"\nkiwicopple,,\"[25,35)\",OFFLINE,\"'bat' 'cat'\"\nsupabot,,\"[1,2)\",ONLINE,\"'cat' 'fat'\"",
+    "headers": {
+      "content-location": "/users?order=username&select=%2A",
+      "content-profile": "public",
+      "content-range": "0-4/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/supabase-single": {
+    "body": {
+      "age_range": "[1,2)",
+      "catchphrase": "'cat' 'fat'",
+      "data": null,
+      "status": "ONLINE",
+      "username": "supabot"
+    },
+    "headers": {
+      "content-location": "/users?select=%2A&username=eq.supabot",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/supabase-strip-nulls": {
+    "body": [
+      {
+        "age_range": "[25,35)",
+        "catchphrase": "'bat' 'rat'",
+        "status": "ONLINE",
+        "username": "awailas"
+      },
+      {
+        "age_range": "[20,30)",
+        "catchphrase": "'fat' 'rat'",
+        "status": "ONLINE",
+        "username": "dragarcia"
+      },
+      {
+        "age_range": "[20,30)",
+        "catchphrase": "'json' 'test'",
+        "data": {
+          "foo": {
+            "bar": {
+              "nested": "value"
+            },
+            "baz": "string value"
+          }
+        },
+        "status": "ONLINE",
+        "username": "jsonuser"
+      },
+      {
+        "age_range": "[25,35)",
+        "catchphrase": "'bat' 'cat'",
+        "status": "OFFLINE",
+        "username": "kiwicopple"
+      },
+      {
+        "age_range": "[1,2)",
+        "catchphrase": "'cat' 'fat'",
+        "status": "ONLINE",
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=username&select=%2A",
+      "content-profile": "public",
+      "content-range": "0-4/*",
+      "content-type": "application/vnd.pgrst.array+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media_types/supabase-strip-nulls-single": {
+    "body": {
+      "age_range": "[1,2)",
+      "catchphrase": "'cat' 'fat'",
+      "status": "ONLINE",
+      "username": "supabot"
+    },
+    "headers": {
+      "content-location": "/users?select=%2A&username=eq.supabot",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json;nulls=stripped; charset=utf-8"
+    },
+    "status": 200
+  }
+}

@@ -1,0 +1,3049 @@
+{
+  "embedding/basics/composite-children": {
+    "body": [
+      {
+        "comments": [
+          {
+            "content": "Needs to be delivered ASAP"
+          }
+        ],
+        "task_id": 6,
+        "user_id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/users_tasks?select=%2A%2Ccomments%28content%29&task_id=eq.6&user_id=eq.2",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/composite-fk": {
+    "body": [
+      {
+        "commenter_id": 1,
+        "content": "Needs to be delivered ASAP",
+        "id": 1,
+        "task_id": 6,
+        "user_id": 2,
+        "users_tasks": {
+          "userId": 2
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/comments?order=id&select=%2A%2Cusers_tasks%28userId%3Auser_id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/composite-fk-m2m": {
+    "body": [
+      {
+        "filename": "autoexec.bat",
+        "users_tasks": [
+          {
+            "task_id": 1,
+            "user_id": 1
+          },
+          {
+            "task_id": 1,
+            "user_id": 3
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/files?filename=eq.autoexec.bat&project_id=eq.1&select=filename%2Cusers_tasks%28user_id%2Ctask_id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/embedded-filter": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1,
+            "name": "Windows 7"
+          },
+          {
+            "id": 2,
+            "name": "Windows 10"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": []
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.name=like.Win%2A&projects.order=id&select=id%2Cprojects%28id%2Cname%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/embedded-filter-not-embedded": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'nope' is included in the 'select' query parameter.",
+      "message": "'nope' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embedding/basics/embedded-filter-two-levels": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1,
+            "tasks": [
+              {
+                "id": 1
+              },
+              {
+                "id": 2
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "tasks": []
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 3,
+            "tasks": []
+          },
+          {
+            "id": 4,
+            "tasks": []
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id&projects.tasks.id=lt.3&projects.tasks.order=id&select=id%2Cprojects%28id%2Ctasks%28id%29%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/embedded-filter-unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"projects_1.name\".",
+      "message": "column projects_1.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embedding/basics/embedded-logic": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 3
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.or=%28id.eq.1%2Cid.eq.3%29&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/embedded-not-logic": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 4
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.not.or=%28id.eq.1%2Cid.eq.3%29&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/limit-not-a-number": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 3
+          },
+          {
+            "id": 4
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.limit=abc&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/limit-offset-per-parent": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 4
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.limit=1&projects.offset=1&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/limit-per-parent": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 3
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.limit=1&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/limit-zero-per-parent": {
+    "body": [
+      {
+        "id": 1,
+        "projects": []
+      },
+      {
+        "id": 2,
+        "projects": []
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.limit=0&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/m2m": {
+    "body": [
+      {
+        "id": 1,
+        "users": [
+          {
+            "id": 1
+          },
+          {
+            "id": 3
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "users": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "users": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "users": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "users": [
+          {
+            "id": 2
+          },
+          {
+            "id": 3
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "users": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "users": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "users": []
+      }
+    ],
+    "headers": {
+      "content-location": "/tasks?order=id&select=id%2Cusers%28id%29&users.order=id",
+      "content-range": "0-7/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/m2m-alias": {
+    "body": [
+      {
+        "id": 1,
+        "theUsers": [
+          {
+            "id": 1
+          },
+          {
+            "id": 3
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "theUsers": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "theUsers": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "theUsers": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "theUsers": [
+          {
+            "id": 2
+          },
+          {
+            "id": 3
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "theUsers": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "theUsers": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "theUsers": []
+      }
+    ],
+    "headers": {
+      "content-location": "/tasks?order=id&select=id%2CtheUsers%3Ausers%28id%29&theUsers.order=id",
+      "content-range": "0-7/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/m2m-reverse": {
+    "body": [
+      {
+        "id": 1,
+        "tasks": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          },
+          {
+            "id": 3
+          },
+          {
+            "id": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "tasks": [
+          {
+            "id": 5
+          },
+          {
+            "id": 6
+          },
+          {
+            "id": 7
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "tasks": [
+          {
+            "id": 1
+          },
+          {
+            "id": 5
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=id%2Ctasks%28id%29&tasks.order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/m2m-then-m2o": {
+    "body": [
+      {
+        "name": "Angela Martin",
+        "tasks": [
+          {
+            "name": "Design w7",
+            "project": {
+              "name": "Windows 7"
+            }
+          },
+          {
+            "name": "Code w7",
+            "project": {
+              "name": "Windows 7"
+            }
+          },
+          {
+            "name": "Design w10",
+            "project": {
+              "name": "Windows 10"
+            }
+          },
+          {
+            "name": "Code w10",
+            "project": {
+              "name": "Windows 10"
+            }
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?id=eq.1&select=name%2Ctasks%28name%2Cproject%3Aprojects%28name%29%29&tasks.order=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/m2o-and-o2m": {
+    "body": [
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1,
+        "name": "Windows 7",
+        "tasks": [
+          {
+            "id": 1,
+            "name": "Design w7"
+          },
+          {
+            "id": 2,
+            "name": "Code w7"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq.1&select=id%2Cname%2Cclients%28%2A%29%2Ctasks%28id%2Cname%29&tasks.order=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/missing-parent-null": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=in.%281%2C5%29&order=id&select=id%2Cclients%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/no-children-empty": {
+    "body": [
+      {
+        "id": 5,
+        "tasks": []
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=in.%285%29&select=id%2Ctasks%28id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/renamed": {
+    "body": [
+      {
+        "myId": 1,
+        "name": "Windows 7",
+        "project_client": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "project_tasks": [
+          {
+            "id": 1,
+            "name": "Design w7"
+          },
+          {
+            "id": 2,
+            "name": "Code w7"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq.1&project_tasks.order=id&select=myId%3Aid%2Cname%2Cproject_client%3Aclients%28%2A%29%2Cproject_tasks%3Atasks%28id%2Cname%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/renamed-nested-keys": {
+    "body": [
+      {
+        "client": {
+          "clientId": 1,
+          "name": "Microsoft"
+        },
+        "name": "Windows 7"
+      },
+      {
+        "client": {
+          "clientId": 1,
+          "name": "Microsoft"
+        },
+        "name": "Windows 10"
+      },
+      {
+        "client": {
+          "clientId": 2,
+          "name": "Apple"
+        },
+        "name": "IOS"
+      },
+      {
+        "client": {
+          "clientId": 2,
+          "name": "Apple"
+        },
+        "name": "OSX"
+      },
+      {
+        "client": null,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=name%2Cclient%3Aclients%28clientId%3Aid%2Cname%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/root-and-embedded-filter": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 2,
+            "name": "Windows 10"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?id=eq.1&projects.id=gt.1&projects.order=id&select=id%2Cprojects%28id%2Cname%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/same-table-twice": {
+    "body": [
+      {
+        "a": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "b": [
+          {
+            "name": "Design w7"
+          },
+          {
+            "name": "Code w7"
+          }
+        ],
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?a.order=id&b.order=id&id=eq.1&select=id%2Ca%3Atasks%28id%29%2Cb%3Atasks%28name%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/star-embed": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Microsoft",
+        "projects": [
+          {
+            "client_id": 1,
+            "id": 1,
+            "name": "Windows 7"
+          },
+          {
+            "client_id": 1,
+            "id": 2,
+            "name": "Windows 10"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Apple",
+        "projects": [
+          {
+            "client_id": 2,
+            "id": 3,
+            "name": "IOS"
+          },
+          {
+            "client_id": 2,
+            "id": 4,
+            "name": "OSX"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id&select=%2A%2Cprojects%28%2A%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/three-levels": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1,
+            "tasks": [
+              {
+                "id": 1,
+                "users": [
+                  {
+                    "id": 1
+                  },
+                  {
+                    "id": 3
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "users": [
+                  {
+                    "id": 1
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "tasks": [
+              {
+                "id": 3,
+                "users": [
+                  {
+                    "id": 1
+                  }
+                ]
+              },
+              {
+                "id": 4,
+                "users": [
+                  {
+                    "id": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 3,
+            "tasks": [
+              {
+                "id": 5,
+                "users": [
+                  {
+                    "id": 2
+                  },
+                  {
+                    "id": 3
+                  }
+                ]
+              },
+              {
+                "id": 6,
+                "users": [
+                  {
+                    "id": 2
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "tasks": [
+              {
+                "id": 7,
+                "users": [
+                  {
+                    "id": 2
+                  }
+                ]
+              },
+              {
+                "id": 8,
+                "users": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id&projects.tasks.order=id&projects.tasks.users.order=id&select=id%2Cprojects%28id%2Ctasks%28id%2Cusers%28id%29%29%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/basics/two-levels": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1,
+            "tasks": [
+              {
+                "id": 1
+              },
+              {
+                "id": 2
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "tasks": [
+              {
+                "id": 3
+              },
+              {
+                "id": 4
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?id=eq.1&projects.order=id&projects.tasks.order=id&select=id%2Cprojects%28id%2Ctasks%28id%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/counts/embedded-limit": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "projects": [
+          {
+            "id": 3
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.limit=1&select=id%2Cprojects%28id%29",
+      "content-range": "0-1/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "embedding/counts/inner-join-page-total": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "0-3/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "embedding/counts/null-filter": {
+    "body": [
+      {
+        "name": "Windows 7"
+      },
+      {
+        "name": "Windows 10"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients=not.is.null&limit=2&order=id&select=name%2Cclients%28%29",
+      "content-range": "0-1/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "embedding/counts/o2m-inner-filter": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "id": 1
+          }
+        ],
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities.id=eq.1&select=id%2Cchild_entities%21inner%28id%29",
+      "content-range": "0-0/1",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "embedding/counts/root-limit": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?limit=1&order=id&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-0/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "embedding/disambiguation/ambiguous-two-fks": {
+    "body": {
+      "code": "PGRST201",
+      "details": [
+        {
+          "cardinality": "many-to-one",
+          "embedding": "orders with addresses",
+          "relationship": "billing using orders(billing_address_id) and addresses(id)"
+        },
+        {
+          "cardinality": "many-to-one",
+          "embedding": "orders with addresses",
+          "relationship": "shipping using orders(shipping_address_id) and addresses(id)"
+        }
+      ],
+      "hint": "Try changing 'addresses' to one of the following: 'addresses!billing', 'addresses!shipping'. Find the desired relationship in the 'details' key.",
+      "message": "Could not embed because more than one relationship was found for 'orders' and 'addresses'"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "embedding/disambiguation/by-column": {
+    "body": [
+      {
+        "billing_address_id": {
+          "id": 1
+        },
+        "id": 1,
+        "name": "order 1",
+        "shipping_address_id": {
+          "id": 2
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/orders?id=eq.1&select=id%2Cname%2Cbilling_address_id%28id%29%2Cshipping_address_id%28id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/disambiguation/by-constraint": {
+    "body": [
+      {
+        "billing": {
+          "address": "address 1"
+        },
+        "id": 1,
+        "name": "order 1",
+        "shipping": {
+          "address": "address 2"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/orders?id=eq.1&select=id%2Cname%2Cbilling%28address%29%2Cshipping%28address%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/disambiguation/fk-column": {
+    "body": [
+      {
+        "client_id": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": {
+          "id": 2,
+          "name": "Apple"
+        },
+        "id": 3,
+        "name": "IOS"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=in.%281%2C3%29&order=id&select=id%2Cname%2Cclient_id%28id%2Cname%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/disambiguation/fk-constraint-named-client": {
+    "body": [
+      {
+        "client": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client": {
+          "id": 2,
+          "name": "Apple"
+        },
+        "id": 3,
+        "name": "IOS"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=in.%281%2C3%29&order=id&select=id%2Cname%2Cclient%28id%2Cname%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/disambiguation/hint-unknown": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'projects' and 'clients' using the hint 'nope' in the schema 'test', but no matches were found.",
+      "hint": null,
+      "message": "Could not find a relationship between 'projects' and 'clients' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embedding/disambiguation/inner-with-hint": {
+    "body": [
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients.id=eq.2&order=id&select=id%2Cclients%21client%21inner%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/disambiguation/junction-hint": {
+    "body": [
+      {
+        "ambig_b": [
+          {
+            "id": 1
+          },
+          {
+            "id": 3
+          }
+        ],
+        "id": 1
+      },
+      {
+        "ambig_b": [
+          {
+            "id": 2
+          }
+        ],
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/ambig_a?ambig_b.order=id&order=id&select=id%2Cambig_b%21ambig_ab%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/disambiguation/no-relationship": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'clients' and 'tasks' in the schema 'test', but no matches were found.",
+      "hint": null,
+      "message": "Could not find a relationship between 'clients' and 'tasks' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embedding/empty/inner-filter": {
+    "body": [
+      {
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "id": 4,
+        "name": "OSX"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients.id=eq.2&order=id&select=id%2Cname%2Cclients%21inner%28%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/empty/m2m-inner": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Angela Martin"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=%2A%2Ctasks%21inner%28%29&tasks.id=eq.3",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/empty/m2o": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "id": 2,
+        "name": "Windows 10"
+      },
+      {
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cname%2Cclients%28%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/empty/nested-inner": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Angela Martin"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=%2A%2Cusers_tasks%21inner%28tasks%21inner%28projects%28%29%29%29&users_tasks.tasks.id=eq.3",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/empty/o2m-inner": {
+    "body": [
+      {
+        "id": 2,
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.name=eq.IOS&select=id%2Cname%2Cprojects%21inner%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/empty/root-only-embeds": {
+    "body": [
+      {},
+      {}
+    ],
+    "headers": {
+      "content-location": "/projects?limit=2&order=id&select=clients%28%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/inner-order-embedded-column": {
+    "body": [
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2,
+          "name": "Apple"
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2,
+          "name": "Apple"
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=clients%28name%29.desc%2Cid&select=id%2Cclients%21inner%28id%2Cname%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/inner-with-count": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?limit=2&order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2m-inner": {
+    "body": [
+      {
+        "id": 1,
+        "users": [
+          {
+            "id": 1
+          },
+          {
+            "id": 3
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "users": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "users": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "users": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "users": [
+          {
+            "id": 2
+          },
+          {
+            "id": 3
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "users": [
+          {
+            "id": 2
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "users": [
+          {
+            "id": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/tasks?order=id&select=id%2Cusers%21inner%28id%29&users.order=id",
+      "content-range": "0-6/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2m-inner-filter": {
+    "body": [
+      {
+        "id": 1,
+        "tasks": [
+          {
+            "id": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "tasks": [
+          {
+            "id": 1
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=id%2Ctasks%21inner%28id%29&tasks.id=eq.1",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2o-inner": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2o-inner-filter-1": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients.id=eq.1&order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2o-inner-filter-2": {
+    "body": [
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients.id=eq.2&order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2o-inner-filter-none": {
+    "body": [],
+    "headers": {
+      "content-location": "/projects?clients.id=eq.0&order=id&select=id%2Cclients%21inner%28id%29",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/m2o-left": {
+    "body": [
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "id": 2
+        },
+        "id": 4
+      },
+      {
+        "clients": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%21left%28id%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/multiple-inner": {
+    "body": [
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 7",
+        "tasks": [
+          {
+            "name": "Design w7"
+          },
+          {
+            "name": "Code w7"
+          }
+        ]
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 10",
+        "tasks": [
+          {
+            "name": "Design w10"
+          },
+          {
+            "name": "Code w10"
+          }
+        ]
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "name": "IOS",
+        "tasks": [
+          {
+            "name": "Design IOS"
+          },
+          {
+            "name": "Code IOS"
+          }
+        ]
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "name": "OSX",
+        "tasks": [
+          {
+            "name": "Design OSX"
+          },
+          {
+            "name": "Code OSX"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=name%2Cclients%21inner%28name%29%2Ctasks%21inner%28name%29&tasks.order=id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/nested-left-under-inner": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "grandchild_entities": [
+              {
+                "id": 2
+              }
+            ],
+            "id": 1
+          },
+          {
+            "grandchild_entities": [],
+            "id": 2
+          },
+          {
+            "grandchild_entities": [],
+            "id": 4
+          },
+          {
+            "grandchild_entities": [],
+            "id": 5
+          }
+        ],
+        "id": 1
+      },
+      {
+        "child_entities": [
+          {
+            "grandchild_entities": [],
+            "id": 3
+          },
+          {
+            "grandchild_entities": [],
+            "id": 6
+          }
+        ],
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities.grandchild_entities.id=eq.2&child_entities.order=id&order=id&select=id%2Cchild_entities%21inner%28id%2Cgrandchild_entities%28id%29%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/o2m-inner": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          },
+          {
+            "id": 4
+          },
+          {
+            "id": 5
+          }
+        ],
+        "id": 1
+      },
+      {
+        "child_entities": [
+          {
+            "id": 3
+          },
+          {
+            "id": 6
+          }
+        ],
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities.order=id&order=id&select=id%2Cchild_entities%21inner%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/o2m-inner-filter": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "id": 1
+          }
+        ],
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities.id=eq.1&order=id&select=id%2Cchild_entities%21inner%28id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/o2m-inner-filter-none": {
+    "body": [],
+    "headers": {
+      "content-location": "/entities?child_entities.id=eq.0&order=id&select=id%2Cchild_entities%21inner%28id%29",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/o2m-left": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          },
+          {
+            "id": 4
+          },
+          {
+            "id": 5
+          }
+        ],
+        "id": 1
+      },
+      {
+        "child_entities": [
+          {
+            "id": 3
+          },
+          {
+            "id": 6
+          }
+        ],
+        "id": 2
+      },
+      {
+        "child_entities": [],
+        "id": 3
+      },
+      {
+        "child_entities": [],
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities.order=id&order=id&select=id%2Cchild_entities%21left%28id%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/o2m-two-levels": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "grandchild_entities": [
+              {
+                "id": 1
+              }
+            ],
+            "id": 1
+          },
+          {
+            "grandchild_entities": [
+              {
+                "id": 5
+              }
+            ],
+            "id": 2
+          }
+        ],
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities.grandchild_entities.id=in.%281%2C5%29&child_entities.grandchild_entities.order=id&child_entities.order=id&order=id&select=id%2Cchild_entities%21inner%28id%2Cgrandchild_entities%21inner%28id%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/only-direct-parent": {
+    "body": [
+      {
+        "id": 1,
+        "projects": null
+      },
+      {
+        "id": 2,
+        "projects": null
+      },
+      {
+        "id": 3,
+        "projects": null
+      },
+      {
+        "id": 4,
+        "projects": null
+      },
+      {
+        "id": 5,
+        "projects": {
+          "clients": {
+            "id": 2
+          },
+          "id": 3
+        }
+      },
+      {
+        "id": 6,
+        "projects": {
+          "clients": {
+            "id": 2
+          },
+          "id": 3
+        }
+      },
+      {
+        "id": 7,
+        "projects": {
+          "clients": {
+            "id": 2
+          },
+          "id": 4
+        }
+      },
+      {
+        "id": 8,
+        "projects": {
+          "clients": {
+            "id": 2
+          },
+          "id": 4
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/tasks?order=id&projects.clients.id=eq.2&select=id%2Cprojects%28id%2Cclients%21inner%28id%29%29",
+      "content-range": "0-7/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/inner/two-levels-below": {
+    "body": [
+      {
+        "id": 1,
+        "projects": {
+          "clients": {
+            "id": 1
+          },
+          "id": 1
+        }
+      },
+      {
+        "id": 2,
+        "projects": {
+          "clients": {
+            "id": 1
+          },
+          "id": 1
+        }
+      },
+      {
+        "id": 3,
+        "projects": {
+          "clients": {
+            "id": 1
+          },
+          "id": 2
+        }
+      },
+      {
+        "id": 4,
+        "projects": {
+          "clients": {
+            "id": 1
+          },
+          "id": 2
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/tasks?order=id&projects.clients.id=eq.1&select=id%2Cprojects%21inner%28id%2Cclients%21inner%28id%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/limits/embedded-limit-above-max": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Microsoft",
+        "projects": [
+          {
+            "client_id": 1,
+            "id": 1,
+            "name": "Windows 7"
+          },
+          {
+            "client_id": 1,
+            "id": 2,
+            "name": "Windows 10"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Apple",
+        "projects": [
+          {
+            "client_id": 2,
+            "id": 3,
+            "name": "IOS"
+          },
+          {
+            "client_id": 2,
+            "id": 4,
+            "name": "OSX"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.limit=5&projects.order=id&select=%2A%2Cprojects%28%2A%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/limits/m2m": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Angela Martin",
+        "tasks": [
+          {
+            "id": 1,
+            "name": "Design w7",
+            "project_id": 1
+          },
+          {
+            "id": 2,
+            "name": "Code w7",
+            "project_id": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Michael Scott",
+        "tasks": [
+          {
+            "id": 5,
+            "name": "Design IOS",
+            "project_id": 3
+          },
+          {
+            "id": 6,
+            "name": "Code IOS",
+            "project_id": 3
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=%2A%2Ctasks%28%2A%29&tasks.order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/limits/root": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/limits/to-many-embed": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Microsoft",
+        "projects": [
+          {
+            "client_id": 1,
+            "id": 1,
+            "name": "Windows 7"
+          },
+          {
+            "client_id": 1,
+            "id": 2,
+            "name": "Windows 10"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Apple",
+        "projects": [
+          {
+            "client_id": 2,
+            "id": 3,
+            "name": "IOS"
+          },
+          {
+            "client_id": 2,
+            "id": 4,
+            "name": "OSX"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id&select=%2A%2Cprojects%28%2A%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/limits/to-one-embed": {
+    "body": [
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2Cclients%28%2A%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/is-not-null-keyword": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"projects.client_id\".",
+      "message": "column projects.clients does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embedding/null_filters/m2m-is-null": {
+    "body": [
+      {
+        "name": "Michael Scott"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=name%2Ctasks%28%29&tasks=is.null&tasks.id=eq.1",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/m2m-not-null": {
+    "body": [
+      {
+        "name": "Angela Martin"
+      },
+      {
+        "name": "Dwight Schrute"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=name%2Ctasks%28%29&tasks=not.is.null&tasks.id=eq.1",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/m2o-is-null": {
+    "body": [
+      {
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients=is.null&select=name%2Cclients%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/m2o-not-null": {
+    "body": [
+      {
+        "name": "Windows 7"
+      },
+      {
+        "name": "Windows 10"
+      },
+      {
+        "name": "IOS"
+      },
+      {
+        "name": "OSX"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients=not.is.null&order=id&select=name%2Cclients%28%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/m2o-not-null-with-columns": {
+    "body": [
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 7"
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "name": "Windows 10"
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "name": "IOS"
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "name": "OSX"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients=not.is.null&order=id&select=name%2Cclients%28name%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/nested": {
+    "body": [
+      {
+        "child_entities": [
+          {
+            "name": "child entity 1"
+          },
+          {
+            "name": "child entity 2"
+          }
+        ],
+        "name": "entity 1"
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities=not.is.null&child_entities.grandchild_entities=not.is.null&child_entities.order=id&order=id&select=name%2Cchild_entities%28name%2Cgrandchild_entities%28%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/o2m-is-null": {
+    "body": [
+      {
+        "name": "entity 3"
+      },
+      {
+        "name": null
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities=is.null&order=id&select=name%2Cchild_entities%28%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/o2m-not-null": {
+    "body": [
+      {
+        "name": "entity 1"
+      },
+      {
+        "name": "entity 2"
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?child_entities=not.is.null&order=id&select=name%2Cchild_entities%28%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/or-across-embeds": {
+    "body": [
+      {
+        "name": "entity 1"
+      },
+      {
+        "name": "entity 2"
+      },
+      {
+        "name": "entity 3"
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?or=%28child_entities.not.is.null%2Cname.eq.entity%203%29&order=id&select=name%2Cchild_entities%28%29%2Cgrandchild_entities%3Achild_entities%28grandchild_entities%28%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/null_filters/with-count": {
+    "body": [
+      {
+        "name": "Windows 7"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?clients=not.is.null&limit=1&order=id&select=name%2Cclients%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/ambiguous": {
+    "body": {
+      "code": "PGRST201",
+      "details": [
+        {
+          "cardinality": "one-to-many",
+          "embedding": "ambig_a with ambig_b",
+          "relationship": "ambig_b_a_id_fkey using ambig_a(id) and ambig_b(a_id)"
+        },
+        {
+          "cardinality": "many-to-many",
+          "embedding": "ambig_a with ambig_b",
+          "relationship": "ambig_ab using ambig_ab_a_id_fkey(a_id) and ambig_ab_b_id_fkey(b_id)"
+        }
+      ],
+      "hint": "Try changing 'ambig_b' to one of the following: 'ambig_b!ambig_b_a_id_fkey', 'ambig_b!ambig_ab'. Find the desired relationship in the 'details' key.",
+      "message": "Could not embed because more than one relationship was found for 'ambig_a' and 'ambig_b'"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "embedding/one_to_one/by-column": {
+    "body": [
+      {
+        "country_id": {
+          "name": "Afghanistan"
+        },
+        "name": "Kabul"
+      },
+      {
+        "country_id": {
+          "name": "Algeria"
+        },
+        "name": "Algiers"
+      }
+    ],
+    "headers": {
+      "content-location": "/capital?order=id&select=name%2Ccountry_id%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/by-constraint": {
+    "body": [
+      {
+        "capital_country_id_fkey": {
+          "name": "Afghanistan"
+        },
+        "name": "Kabul"
+      },
+      {
+        "capital_country_id_fkey": {
+          "name": "Algeria"
+        },
+        "name": "Algiers"
+      }
+    ],
+    "headers": {
+      "content-location": "/capital?order=id&select=name%2Ccapital_country_id_fkey%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/fk-is-pk": {
+    "body": [
+      {
+        "address": "Street 1",
+        "students": {
+          "name": "John Doe"
+        }
+      },
+      {
+        "address": "Street 2",
+        "students": {
+          "name": "Jane Doe"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/students_info?order=id&select=address%2Cstudents%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/fk-is-pk-reverse": {
+    "body": [
+      {
+        "name": "John Doe",
+        "students_info": {
+          "address": "Street 1"
+        }
+      },
+      {
+        "name": "Jane Doe",
+        "students_info": {
+          "address": "Street 2"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/students?order=id&select=name%2Cstudents_info%28address%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/hint-column": {
+    "body": [
+      {
+        "capital": {
+          "name": "Kabul"
+        },
+        "name": "Afghanistan"
+      },
+      {
+        "capital": {
+          "name": "Algiers"
+        },
+        "name": "Algeria"
+      }
+    ],
+    "headers": {
+      "content-location": "/country?order=id&select=name%2Ccapital%21country_id%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/unique-fk": {
+    "body": [
+      {
+        "capital": {
+          "name": "Kabul"
+        },
+        "name": "Afghanistan"
+      },
+      {
+        "capital": {
+          "name": "Algiers"
+        },
+        "name": "Algeria"
+      }
+    ],
+    "headers": {
+      "content-location": "/country?order=id&select=name%2Ccapital%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/one_to_one/unique-fk-reverse": {
+    "body": [
+      {
+        "country": {
+          "name": "Afghanistan"
+        },
+        "name": "Kabul"
+      },
+      {
+        "country": {
+          "name": "Algeria"
+        },
+        "name": "Algiers"
+      }
+    ],
+    "headers": {
+      "content-location": "/capital?order=id&select=name%2Ccountry%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/children": {
+    "body": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "id": "4",
+                "name": "Grandkid One"
+              }
+            ],
+            "id": "2",
+            "name": "Kid One"
+          },
+          {
+            "children": [
+              {
+                "id": "5",
+                "name": "Grandkid Two"
+              }
+            ],
+            "id": "3",
+            "name": "Kid Two"
+          }
+        ],
+        "id": "1",
+        "name": "Parental Unit"
+      }
+    ],
+    "headers": {
+      "content-location": "/family_tree?children.children.order=id&children.order=id&id=eq.1&select=id%2Cname%2Cchildren%3Afamily_tree%21parent%28id%2Cname%2Cchildren%3Afamily_tree%21parent%28id%2Cname%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/organizations-children": {
+    "body": [
+      {
+        "auditees": [],
+        "id": 1,
+        "refereeds": [
+          {
+            "id": 3,
+            "name": "Acme"
+          },
+          {
+            "id": 4,
+            "name": "Umbrella"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?auditees.order=id&id=eq.1&refereeds.order=id&select=id%2Crefereeds%3Aorganizations%21referee%28id%2Cname%29%2Cauditees%3Aorganizations%21auditor%28id%2Cname%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/organizations-two-self-fks": {
+    "body": [
+      {
+        "auditor": {
+          "id": 2,
+          "name": "Auditor Org"
+        },
+        "id": 3,
+        "name": "Acme",
+        "referee": {
+          "id": 1,
+          "name": "Referee Org"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/organizations?id=eq.3&select=id%2Cname%2Creferee%28id%2Cname%29%2Cauditor%28id%2Cname%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/parent": {
+    "body": [
+      {
+        "id": "3",
+        "parent": {
+          "id": "1",
+          "name": "Parental Unit",
+          "parent": null
+        }
+      },
+      {
+        "id": "4",
+        "parent": {
+          "id": "2",
+          "name": "Kid One",
+          "parent": {
+            "id": "1",
+            "name": "Parental Unit",
+            "parent": null
+          }
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/family_tree?id=in.%283%2C4%29&order=id&select=id%2Cparent%28id%2Cname%2Cparent%28%2A%29%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/parent-and-children-aliased": {
+    "body": [
+      {
+        "c": [
+          {
+            "id": "4"
+          }
+        ],
+        "id": "2",
+        "p": {
+          "id": "1"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/family_tree?c.order=id&id=eq.2&select=id%2Cp%3Aparent%28id%29%2Cc%3Afamily_tree%21parent%28id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/parent-then-children": {
+    "body": [
+      {
+        "id": "2",
+        "name": "Kid One",
+        "parent": {
+          "children": [
+            {
+              "id": "2",
+              "name": "Kid One"
+            },
+            {
+              "id": "3",
+              "name": "Kid Two"
+            }
+          ],
+          "id": "1",
+          "name": "Parental Unit"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/family_tree?id=eq.2&select=id%2Cname%2Cparent%28id%2Cname%2Cchildren%3Afamily_tree%21parent%28id%2Cname%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/self/same-table-twice-aliases": {
+    "body": [
+      {
+        "a": [],
+        "b": [],
+        "id": "4"
+      }
+    ],
+    "headers": {
+      "content-location": "/family_tree?a.order=id&b.order=id&id=eq.4&select=id%2Ca%3Afamily_tree%21parent%28id%29%2Cb%3Afamily_tree%21parent%28name%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/empty-spread": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?limit=2&order=id&select=id%2C...clients%28%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/inside-embed": {
+    "body": [
+      {
+        "child_entity": {
+          "name": "child entity 1",
+          "parent_name": "entity 1"
+        },
+        "name": "grandchild entity 1"
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?limit=1&order=id&select=name%2Cchild_entity%3Achild_entities%28name%2C...entities%28parent_name%3Aname%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/m2m-junction-columns-dropped": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Angela Martin",
+        "tasks": [
+          {
+            "id": 1,
+            "name": "Design w7",
+            "project_id": 1
+          },
+          {
+            "id": 2,
+            "name": "Code w7",
+            "project_id": 1
+          },
+          {
+            "id": 3,
+            "name": "Design w10",
+            "project_id": 2
+          },
+          {
+            "id": 4,
+            "name": "Code w10",
+            "project_id": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?limit=1&order=id&select=%2A%2Ctasks%3Ausers_tasks%28...tasks%28%2A%29%29&tasks.order=task_id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/m2m-junction-columns-kept": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Angela Martin",
+        "tasks": [
+          {
+            "id": 1,
+            "name": "Design w7",
+            "project_id": 1,
+            "task_id": 1,
+            "user_id": 1
+          },
+          {
+            "id": 2,
+            "name": "Code w7",
+            "project_id": 1,
+            "task_id": 2,
+            "user_id": 1
+          },
+          {
+            "id": 3,
+            "name": "Design w10",
+            "project_id": 2,
+            "task_id": 3,
+            "user_id": 1
+          },
+          {
+            "id": 4,
+            "name": "Code w10",
+            "project_id": 2,
+            "task_id": 4,
+            "user_id": 1
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?limit=1&order=id&select=%2A%2Ctasks%3Ausers_tasks%28%2A%2C...tasks%28%2A%29%29&tasks.order=task_id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/nested": {
+    "body": [
+      {
+        "grandparent_name": "entity 1",
+        "name": "grandchild entity 1",
+        "parent_name": "child entity 1"
+      },
+      {
+        "grandparent_name": "entity 1",
+        "name": "grandchild entity 2",
+        "parent_name": "child entity 1"
+      },
+      {
+        "grandparent_name": "entity 1",
+        "name": "grandchild entity 3",
+        "parent_name": "child entity 2"
+      }
+    ],
+    "headers": {
+      "content-location": "/grandchild_entities?limit=3&order=id&select=name%2C...child_entities%28parent_name%3Aname%2C...entities%28grandparent_name%3Aname%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/o2o": {
+    "body": [
+      {
+        "capital": "Kabul",
+        "name": "Afghanistan"
+      },
+      {
+        "capital": "Algiers",
+        "name": "Algeria"
+      }
+    ],
+    "headers": {
+      "content-location": "/country?order=id&select=name%2C...capital%28capital%3Aname%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many": {
+    "body": [
+      {
+        "name": "Microsoft"
+      },
+      {
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&select=name%2C...projects%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-filtered": {
+    "body": [
+      {
+        "name": "Microsoft"
+      },
+      {
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.name=like.Win%2A&select=name%2C...projects%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-inner": {
+    "body": [
+      {
+        "name": "Microsoft"
+      },
+      {
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id&select=name%2C...projects%21inner%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-m2m": {
+    "body": [
+      {
+        "name": "Angela Martin"
+      },
+      {
+        "name": "Michael Scott"
+      },
+      {
+        "name": "Dwight Schrute"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=name%2C...tasks%28name%29&tasks.order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-null-filter": {
+    "body": [],
+    "headers": {
+      "content-location": "/clients?order=id&projects=is.null&select=name%2C...projects%28projects%3Aname%29",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-order-by-unselected": {
+    "body": [
+      {
+        "name": "Microsoft"
+      },
+      {
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id.desc&select=name%2C...projects%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-ordered": {
+    "body": [
+      {
+        "id": [
+          2,
+          1
+        ],
+        "name": "Microsoft"
+      },
+      {
+        "id": [
+          4,
+          3
+        ],
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id.desc&select=name%2C...projects%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-many-two-columns": {
+    "body": [
+      {
+        "id": [
+          1,
+          2
+        ],
+        "name": "Microsoft"
+      },
+      {
+        "id": [
+          3,
+          4
+        ],
+        "name": "Apple"
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?order=id&projects.order=id&select=name%2C...projects%28id%2Cname%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-one": {
+    "body": [
+      {
+        "client_name": "Microsoft",
+        "id": 1
+      },
+      {
+        "client_name": "Microsoft",
+        "id": 2
+      },
+      {
+        "client_name": "Apple",
+        "id": 3
+      },
+      {
+        "client_name": "Apple",
+        "id": 4
+      },
+      {
+        "client_name": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2C...clients%28client_name%3Aname%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embedding/spread/to-one-star": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Microsoft"
+      },
+      {
+        "id": 2,
+        "name": "Microsoft"
+      },
+      {
+        "id": 3,
+        "name": "Apple"
+      },
+      {
+        "id": 4,
+        "name": "Apple"
+      },
+      {
+        "id": 5,
+        "name": null
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=id%2C...clients%28%2A%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

@@ -1,0 +1,925 @@
+{
+  "preferences/lenient-unknown-get": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=lenient"
+    },
+    "status": 200
+  },
+  "preferences/lenient-unknown-post": {
+    "body": [
+      {
+        "auditor": null,
+        "id": 7,
+        "manager_id": 6,
+        "name": "John",
+        "referee": null
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback, handling=lenient"
+    },
+    "status": 201
+  },
+  "preferences/lenient-unknown-rpc": {
+    "body": 1,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback, handling=lenient"
+    },
+    "status": 200
+  },
+  "preferences/lenient-unknown-separate-headers": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=lenient"
+    },
+    "status": 200
+  },
+  "preferences/max-affected-default-handling": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-delete-exact": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=10"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-delete-one": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=1"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-delete-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 14 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-delete-within": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=10"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-garbage-strict": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=strict"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-get-ignored": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=strict"
+    },
+    "status": 200
+  },
+  "preferences/max-affected-lenient-delete-one": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=lenient"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-lenient-delete-over": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=lenient"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-lenient-delete-within": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=lenient"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-lenient-patch-zero": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback, handling=lenient"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-patch-negative": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 1 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-patch-no-match": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=0"
+    },
+    "status": 204
+  },
+  "preferences/max-affected-patch-representation": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 3 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-patch-zero": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 1 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-post-ignored": {
+    "body": [
+      {
+        "auditor": null,
+        "id": 7,
+        "manager_id": 6,
+        "name": "John",
+        "referee": null
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback, handling=strict"
+    },
+    "status": 201
+  },
+  "preferences/max-affected-rpc-get-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 5 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-rpc-get-within": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=strict, max-affected=5"
+    },
+    "status": 200
+  },
+  "preferences/max-affected-rpc-scalar": {
+    "body": {
+      "code": "PGRST128",
+      "details": null,
+      "hint": null,
+      "message": "Function must return SETOF or TABLE when max-affected preference is used with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-rpc-scalar-lenient": {
+    "body": 3,
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback, handling=lenient"
+    },
+    "status": 200
+  },
+  "preferences/max-affected-rpc-setof-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 15 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-rpc-setof-within": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=20"
+    },
+    "status": 200
+  },
+  "preferences/max-affected-rpc-strict-unknown-first": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: anything",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-rpc-table-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 15 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/max-affected-rpc-table-within": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=20"
+    },
+    "status": 200
+  },
+  "preferences/max-affected-rpc-unknown-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.no_such_function without parameters or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.no_such_function without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "preferences/max-affected-rpc-void": {
+    "body": {
+      "code": "PGRST128",
+      "details": null,
+      "hint": null,
+      "message": "Function must return SETOF or TABLE when max-affected preference is used with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/strict-known-only": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1",
+      "content-range": "0-0/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact, handling=strict"
+    },
+    "status": 206
+  },
+  "preferences/strict-unknown-get": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: anything",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/strict-unknown-post": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: anything",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/strict-unknown-rpc": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: anything",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/strict-unknown-separate-headers": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: something, else",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/strict-unknown-value": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: return=foo, count=bogus",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-delete-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 5 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-delete-within": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=5"
+    },
+    "status": 204
+  },
+  "preferences/supabase-rpc-offline-user-scalar": {
+    "body": {
+      "code": "PGRST128",
+      "details": null,
+      "hint": null,
+      "message": "Function must return SETOF or TABLE when max-affected preference is used with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-rpc-set-users-offline-match-one": {
+    "body": [
+      {
+        "age_range": "[1,2)",
+        "catchphrase": "'cat' 'fat'",
+        "data": null,
+        "status": "OFFLINE",
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=1"
+    },
+    "status": 200
+  },
+  "preferences/supabase-rpc-set-users-offline-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 5 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-rpc-set-users-offline-within": {
+    "body": [
+      {
+        "age_range": "[1,2)",
+        "catchphrase": "'cat' 'fat'",
+        "data": null,
+        "status": "OFFLINE",
+        "username": "supabot"
+      },
+      {
+        "age_range": "[25,35)",
+        "catchphrase": "'bat' 'cat'",
+        "data": null,
+        "status": "OFFLINE",
+        "username": "kiwicopple"
+      },
+      {
+        "age_range": "[25,35)",
+        "catchphrase": "'bat' 'rat'",
+        "data": null,
+        "status": "OFFLINE",
+        "username": "awailas"
+      },
+      {
+        "age_range": "[20,30)",
+        "catchphrase": "'fat' 'rat'",
+        "data": null,
+        "status": "OFFLINE",
+        "username": "dragarcia"
+      },
+      {
+        "age_range": "[20,30)",
+        "catchphrase": "'json' 'test'",
+        "data": {
+          "foo": {
+            "bar": {
+              "nested": "value"
+            },
+            "baz": "string value"
+          }
+        },
+        "status": "OFFLINE",
+        "username": "jsonuser"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=5"
+    },
+    "status": 200
+  },
+  "preferences/supabase-rpc-void": {
+    "body": {
+      "code": "PGRST128",
+      "details": null,
+      "hint": null,
+      "message": "Function must return SETOF or TABLE when max-affected preference is used with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-update-over": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 4 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-update-over-representation": {
+    "body": {
+      "code": "PGRST124",
+      "details": "The query affects 4 rows",
+      "hint": null,
+      "message": "Query result exceeds max-affected preference constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/supabase-update-within": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback, handling=strict, max-affected=1"
+    },
+    "status": 204
+  },
+  "preferences/timezone-first-invalid": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: timezone=Invalid/Timezone, timezone=UTC",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/timezone-first-wins": {
+    "body": [
+      {
+        "t": "2023-10-18T12:37:59.611+00:00"
+      },
+      {
+        "t": "2023-10-18T14:37:59.611+00:00"
+      },
+      {
+        "t": "2023-10-18T16:37:59.611+00:00"
+      }
+    ],
+    "headers": {
+      "content-location": "/timestamps",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=strict, timezone=UTC"
+    },
+    "status": 200
+  },
+  "preferences/timezone-invalid-default": {
+    "body": [
+      {
+        "t": "2023-10-18T12:37:59.611+00:00"
+      },
+      {
+        "t": "2023-10-18T14:37:59.611+00:00"
+      },
+      {
+        "t": "2023-10-18T16:37:59.611+00:00"
+      }
+    ],
+    "headers": {
+      "content-location": "/timestamps",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "preferences/timezone-invalid-lenient": {
+    "body": [
+      {
+        "t": "2023-10-18T12:37:59.611+00:00"
+      },
+      {
+        "t": "2023-10-18T14:37:59.611+00:00"
+      },
+      {
+        "t": "2023-10-18T16:37:59.611+00:00"
+      }
+    ],
+    "headers": {
+      "content-location": "/timestamps",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=lenient"
+    },
+    "status": 200
+  },
+  "preferences/timezone-invalid-strict": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: timezone=Invalid/Timezone",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/timezone-invalid-strict-mixed": {
+    "body": {
+      "code": "PGRST122",
+      "details": "Invalid preferences: nope, timezone=Invalid/Timezone, later",
+      "hint": null,
+      "message": "Invalid preferences given with handling=strict"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "preferences/timezone-lenient-default": {
+    "body": [
+      {
+        "t": "2023-10-18T05:37:59.611-07:00"
+      },
+      {
+        "t": "2023-10-18T07:37:59.611-07:00"
+      },
+      {
+        "t": "2023-10-18T09:37:59.611-07:00"
+      }
+    ],
+    "headers": {
+      "content-location": "/timestamps",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "timezone=America/Los_Angeles"
+    },
+    "status": 200
+  },
+  "preferences/timezone-post-representation": {
+    "body": [
+      {
+        "auditor": null,
+        "id": 7,
+        "manager_id": 6,
+        "name": "John",
+        "referee": null
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback, timezone=Asia/Tokyo"
+    },
+    "status": 201
+  },
+  "preferences/timezone-rpc": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "timezone=Asia/Tokyo"
+    },
+    "status": 200
+  },
+  "preferences/timezone-strict": {
+    "body": [
+      {
+        "t": "2023-10-18T05:37:59.611-07:00"
+      },
+      {
+        "t": "2023-10-18T07:37:59.611-07:00"
+      },
+      {
+        "t": "2023-10-18T09:37:59.611-07:00"
+      }
+    ],
+    "headers": {
+      "content-location": "/timestamps",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "handling=strict, timezone=America/Los_Angeles"
+    },
+    "status": 200
+  }
+}

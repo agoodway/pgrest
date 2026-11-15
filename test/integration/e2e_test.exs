@@ -1,293 +1,169 @@
 defmodule PgRest.Integration.E2ETest do
-  use PgRest.Integration.Case
+  use PgRest.Integration.Case, async: false
 
   alias Supabase.PostgREST
 
-  defp seed_products(repo) do
-    {3, products} =
-      repo.insert_all(
-        "e2e_products",
-        [
-          %{name: "Widget A", price: Decimal.new("9.99"), category: "gadgets", active: true},
-          %{name: "Widget B", price: Decimal.new("49.99"), category: "electronics", active: true},
-          %{name: "Gizmo C", price: Decimal.new("199.99"), category: "electronics", active: false}
-        ],
-        returning: [:id, :name, :price, :category, :active]
-      )
-
-    products
+  defp select(client, table, columns \\ "*") do
+    client |> PostgREST.from(table) |> PostgREST.select(columns, returning: true)
   end
 
-  defp seed_reviews(repo, product_id) do
-    {2, reviews} =
-      repo.insert_all(
-        "e2e_reviews",
-        [
-          %{body: "Great product!", rating: 5, e2e_product_id: product_id},
-          %{body: "Not bad", rating: 3, e2e_product_id: product_id}
-        ],
-        returning: [:id, :body, :rating, :e2e_product_id]
-      )
-
-    reviews
-  end
-
-  alias PgRest.Integration.Repo
-
-  describe "read operations" do
-    setup %{client: client} do
-      products = seed_products(Repo)
-      %{products: products, client: client}
-    end
-
-    test "list all products", %{client: client, products: products} do
-      {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.execute()
+  describe "reads" do
+    test "list all rows", %{client: client} do
+      {:ok, resp} = client |> select("clients") |> PostgREST.execute()
 
       assert resp.status in [200, 206]
-      assert length(resp.body) == length(products)
+      assert resp.body |> Enum.map(& &1["name"]) |> Enum.sort() == ["Apple", "Microsoft"]
     end
 
     test "filter eq", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.eq("category", "electronics")
-        |> PostgREST.execute()
+        client |> select("projects") |> PostgREST.eq("client_id", 1) |> PostgREST.execute()
 
-      assert resp.status in [200, 206]
-      assert length(resp.body) == 2
-      assert Enum.all?(resp.body, &(&1["category"] == "electronics"))
+      assert Enum.sort(Enum.map(resp.body, & &1["name"])) == ["Windows 10", "Windows 7"]
     end
 
     test "filter range with gt and lt", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.all_of([{:gt, "price", 10}, {:lt, "price", 100}])
+        client
+        |> select("items")
+        |> PostgREST.all_of([{:gt, "id", 3}, {:lt, "id", 6}])
+        |> PostgREST.order("id", asc: true)
         |> PostgREST.execute()
 
-      assert resp.status in [200, 206]
-      assert length(resp.body) == 1
-      assert hd(resp.body)["name"] == "Widget B"
+      assert Enum.map(resp.body, & &1["id"]) == [4, 5]
     end
 
     test "filter ilike", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.ilike("name", "%widget%")
+        client
+        |> select("projects")
+        |> PostgREST.ilike("name", "%WINDOWS%")
         |> PostgREST.execute()
 
-      assert resp.status in [200, 206]
       assert length(resp.body) == 2
-      assert Enum.all?(resp.body, &String.contains?(&1["name"], "Widget"))
     end
 
     test "order descending", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.order("price")
+        client
+        |> select("items", ["id"])
+        |> PostgREST.order("id")
+        |> PostgREST.limit(3)
         |> PostgREST.execute()
 
-      assert resp.status in [200, 206]
-
-      prices =
-        resp.body
-        |> Enum.map(& &1["price"])
-        |> Enum.map(&Decimal.new/1)
-
-      assert prices == Enum.sort(prices, {:desc, Decimal})
+      assert Enum.map(resp.body, & &1["id"]) == [15, 14, 13]
     end
 
-    test "limit and offset", %{client: client} do
+    test "range pages the rows", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.order("price", asc: true)
-        |> PostgREST.limit(2)
-        |> PostgREST.execute()
-
-      assert resp.status in [200, 206]
-      assert length(resp.body) == 2
-
-      # Offset by 1 — should skip cheapest, get middle + expensive
-      {:ok, resp2} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.order("price", asc: true)
+        client
+        |> select("items", ["id"])
+        |> PostgREST.order("id", asc: true)
         |> PostgREST.range(1, 2)
         |> PostgREST.execute()
 
-      assert resp2.status in [200, 206]
-      assert length(resp2.body) == 2
-      assert hd(resp2.body)["name"] == "Widget B"
-    end
-  end
-
-  describe "select and embed operations" do
-    setup %{client: client} do
-      [product | _] = products = seed_products(Repo)
-      reviews = seed_reviews(Repo, product.id)
-      %{products: products, reviews: reviews, product: product, client: client}
+      assert resp.status == 206
+      assert Enum.map(resp.body, & &1["id"]) == [2, 3]
     end
 
     test "select specific columns", %{client: client} do
-      {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select(["id", "name"], returning: true)
-        |> PostgREST.execute()
+      {:ok, resp} = client |> select("projects", ["id", "name"]) |> PostgREST.execute()
 
-      assert resp.status in [200, 206]
       first = hd(resp.body)
-      assert Map.has_key?(first, "id")
-      assert Map.has_key?(first, "name")
-      refute Map.has_key?(first, "price")
-      refute Map.has_key?(first, "category")
-    end
-
-    test "embed has_many — products with reviews", %{client: client, product: product} do
-      {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select(["*", "e2e_reviews(*)"], returning: true)
-        |> PostgREST.eq("id", product.id)
-        |> PostgREST.execute()
-
-      assert resp.status in [200, 206]
-      assert [record] = resp.body
-      assert is_list(record["e2e_reviews"])
-      assert length(record["e2e_reviews"]) == 2
-    end
-
-    test "embed belongs_to — reviews with product", %{client: client, product: product} do
-      # PostgREST uses table names, but PgRest resolves by Ecto association name.
-      # belongs_to :e2e_product → association name is "e2e_product" (singular)
-      {:ok, resp} =
-        PostgREST.from(client, "e2e_reviews")
-        |> PostgREST.select(["*", "e2e_product(*)"], returning: true)
-        |> PostgREST.eq("e2e_product_id", product.id)
-        |> PostgREST.execute()
-
-      assert resp.status in [200, 206]
-      assert length(resp.body) == 2
-      first = hd(resp.body)
-      assert is_map(first["e2e_product"])
-      assert first["e2e_product"]["name"] == product.name
+      assert Map.keys(first) |> Enum.sort() == ["id", "name"]
     end
   end
 
-  describe "write operations" do
-    test "create single record", %{client: client} do
+  describe "embeds" do
+    test "one-to-many", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.insert(%{
-          "name" => "New Product",
-          "price" => "29.99",
-          "category" => "gadgets"
-        })
+        client
+        |> select("clients", ["id", "projects(id)"])
+        |> PostgREST.eq("id", 1)
         |> PostgREST.execute()
 
-      assert resp.status == 201
-      assert [created] = resp.body
-      assert created["name"] == "New Product"
+      assert [%{"projects" => projects}] = resp.body
+      assert length(projects) == 2
     end
 
-    test "update by id", %{client: client} do
-      [product | _] = seed_products(Repo)
-
+    test "many-to-one", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.update(%{"price" => "19.99"})
-        |> PostgREST.eq("id", product.id)
+        client
+        |> select("projects", ["id", "clients(name)"])
+        |> PostgREST.eq("id", 3)
         |> PostgREST.execute()
 
-      assert resp.status == 200
-      assert [updated] = resp.body
-      assert updated["price"] == "19.99"
-    end
-
-    test "delete by id", %{client: client} do
-      [product | _] = seed_products(Repo)
-
-      {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.delete()
-        |> PostgREST.eq("id", product.id)
-        |> PostgREST.execute()
-
-      assert resp.status == 200
-      assert [deleted] = resp.body
-      assert deleted["id"] == product.id
-
-      # Verify it's gone
-      {:ok, list_resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.eq("id", product.id)
-        |> PostgREST.execute()
-
-      assert list_resp.body == []
+      assert [%{"clients" => %{"name" => "Apple"}}] = resp.body
     end
   end
 
-  describe "bulk operations" do
-    test "bulk create", %{client: client} do
+  describe "writes (rolled back)" do
+    test "insert returns the representation", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.insert(%{
-          "name" => "Bulk A",
-          "price" => "10.00",
-          "category" => "bulk"
-        })
+        client
+        |> PostgREST.from("clients")
+        |> PostgREST.insert(%{"id" => 100, "name" => "New Client"})
+        |> PostgREST.rollback()
         |> PostgREST.execute()
 
       assert resp.status == 201
-
-      {:ok, resp2} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.insert(%{
-          "name" => "Bulk B",
-          "price" => "20.00",
-          "category" => "bulk"
-        })
-        |> PostgREST.execute()
-
-      assert resp2.status == 201
-
-      # Verify both exist
-      {:ok, list_resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
-        |> PostgREST.eq("category", "bulk")
-        |> PostgREST.execute()
-
-      assert length(list_resp.body) == 2
+      assert [%{"id" => 100, "name" => "New Client"}] = resp.body
     end
 
-    test "bulk delete by filter", %{client: client} do
-      seed_products(Repo)
-
+    test "update by filter", %{client: client} do
       {:ok, resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.delete()
-        |> PostgREST.eq("active", "false")
+        client
+        |> PostgREST.from("clients")
+        |> PostgREST.update(%{"name" => "Renamed"})
+        |> PostgREST.eq("id", 1)
+        |> PostgREST.rollback()
         |> PostgREST.execute()
 
       assert resp.status == 200
-      assert [deleted] = resp.body
-      assert deleted["name"] == "Gizmo C"
+      assert [%{"id" => 1, "name" => "Renamed"}] = resp.body
+    end
 
-      # Verify only active products remain
-      {:ok, list_resp} =
-        PostgREST.from(client, "e2e_products")
-        |> PostgREST.select("*", returning: true)
+    test "delete by filter", %{client: client} do
+      {:ok, resp} =
+        client
+        |> PostgREST.from("projects")
+        |> PostgREST.delete()
+        |> PostgREST.eq("id", 5)
+        |> PostgREST.rollback()
         |> PostgREST.execute()
 
-      assert length(list_resp.body) == 2
-      assert Enum.all?(list_resp.body, &(&1["active"] == true))
+      assert resp.status == 200
+      assert [%{"id" => 5, "name" => "Orphan"}] = resp.body
+    end
+
+    test "the rollback left the fixture untouched", %{client: client} do
+      {:ok, resp} =
+        client |> select("projects", ["id"]) |> PostgREST.eq("id", 5) |> PostgREST.execute()
+
+      assert [%{"id" => 5}] = resp.body
+    end
+  end
+
+  describe "errors" do
+    test "a unique violation is a PostgREST 409", %{client: client, base_url: base_url} do
+      {:error, error} =
+        client
+        |> PostgREST.from("clients")
+        |> PostgREST.insert(%{"id" => 1, "name" => "dup"})
+        |> PostgREST.rollback()
+        |> PostgREST.execute()
+
+      assert error.metadata.resp_status == 409
+
+      # The client reads the body with atom keys and so drops the code; read it raw.
+      resp =
+        Req.post!("#{base_url}/rest/v1/clients",
+          json: %{"id" => 1, "name" => "dup"},
+          headers: [{"prefer", "tx=rollback"}]
+        )
+
+      assert resp.status == 409
+      assert resp.body["code"] == "23505"
     end
   end
 end

@@ -18,6 +18,7 @@ defmodule PgRest.MixProject do
       name: "PgRest",
       source_url: @source_url,
       docs: docs(),
+      test_ignore_filters: [~r{/scenarios/}],
       dialyzer: [plt_add_apps: [:mix, :ex_unit], ignore_warnings: ".dialyzer_ignore.exs"]
     ]
   end
@@ -28,7 +29,8 @@ defmodule PgRest.MixProject do
 
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {PgRest.Application, []}
     ]
   end
 
@@ -37,7 +39,6 @@ defmodule PgRest.MixProject do
 
   defp aliases do
     [
-      test: ["ecto.create --quiet -r PgRest.Integration.Repo", "test"],
       quality: [
         "compile --warnings-as-errors",
         "deps.unlock --unused",
@@ -59,6 +60,7 @@ defmodule PgRest.MixProject do
       {:ecto_sql, "~> 3.14"},
       {:postgrex, "~> 0.22"},
       {:jason, "~> 1.4"},
+      {:nimble_parsec, "~> 1.4", runtime: false},
 
       # Dev/Test
       {:ex_doc, "~> 0.40", only: :dev, runtime: false},
@@ -72,7 +74,9 @@ defmodule PgRest.MixProject do
       # Integration test deps
       {:supabase_potion, "~> 1.0", only: :test},
       {:supabase_postgrest, "~> 1.3", only: :test},
-      {:bandit, "~> 1.14", only: :test}
+      {:bandit, "~> 1.14", only: :test},
+      {:stream_data, "~> 1.1", only: :test},
+      {:req, "~> 0.5", only: :test}
     ]
   end
 
@@ -85,14 +89,28 @@ defmodule PgRest.MixProject do
       maintainers: ["Chase Pursley"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url},
-      files: ~w(lib mix.exs README.md LICENSE .formatter.exs)
+      files: ~w(lib docs/guides mix.exs README.md CHANGELOG.md LICENSE .formatter.exs)
     ]
   end
 
   defp docs do
     [
       main: "readme",
-      extras: ["README.md"],
+      extras: [
+        "README.md",
+        "docs/guides/configuration.md",
+        "docs/guides/resources.md",
+        "docs/guides/rpc.md",
+        "docs/guides/authorization-and-rls.md",
+        "docs/guides/compatibility.md",
+        "docs/guides/telemetry.md",
+        "docs/guides/testing.md",
+        "docs/guides/upgrading-0.1-to-0.2.md",
+        "CHANGELOG.md"
+      ],
+      groups_for_extras: [
+        Guides: ~r{docs/guides/}
+      ],
       source_ref: "v#{@version}"
     ]
   end

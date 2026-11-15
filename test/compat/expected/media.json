@@ -1,0 +1,304 @@
+{
+  "media/accept-any": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/accept-application-json": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/accept-application-wildcard": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: application/*"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/accept-case-and-params": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/accept-q-values": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/accept-q-values-object-first": {
+    "body": {
+      "id": 5
+    },
+    "headers": {
+      "content-location": "/items?id=eq.5&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/accept-two-unknown": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/unknowntype, text/other"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/accept-unknown": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/unknowntype"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/accept-unknown-q-sorted": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/bar, text/foo"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/accept-unknown-single-q": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: text/foo"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/accept-unknown-then-any": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/content-location-no-query": {
+    "body": [
+      {
+        "a": null,
+        "b": null
+      },
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": "2",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/content-location-sorted": {
+    "body": [],
+    "headers": {
+      "content-location": "/no_pk?a=eq.1&b=eq.1",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/default-json": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/head-singular": {
+    "body": null,
+    "headers": {
+      "content-location": "/items?id=eq.5&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/invalid-path": {
+    "body": {
+      "code": "PGRST125",
+      "details": null,
+      "hint": null,
+      "message": "Invalid path specified in request URL"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "media/singular-embed": {
+    "body": {
+      "id": 1,
+      "projects": [
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ]
+    },
+    "headers": {
+      "content-location": "/clients?id=eq.1&projects.order=id&select=id%2Cprojects%28id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/singular-limit-one": {
+    "body": {
+      "id": 1
+    },
+    "headers": {
+      "content-location": "/items?limit=1&order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/singular-many-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 15 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/singular-one-row": {
+    "body": {
+      "id": 5
+    },
+    "headers": {
+      "content-location": "/items?id=eq.5&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "media/singular-with-count": {
+    "body": {
+      "id": 5
+    },
+    "headers": {
+      "content-location": "/items?id=eq.5&select=id",
+      "content-range": "0-0/1",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "media/singular-zero-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 0 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "media/unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.nonexistent' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "media/unknown-table-typo": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": "Perhaps you meant the table 'test.clients'",
+      "message": "Could not find the table 'test.client' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  }
+}

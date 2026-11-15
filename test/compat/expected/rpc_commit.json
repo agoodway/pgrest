@@ -1,0 +1,26 @@
+{
+  "rpc_commit/singular-before-max-affected": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 15 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "rpc_commit/singular-delete-rolls-back": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 15 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  }
+}

@@ -1,0 +1,948 @@
+{
+  "put/array-no-match-bad-other-element": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type smallint: \"x\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/array-no-match-persists-nothing": {
+    "body": {
+      "code": "PGRST115",
+      "details": null,
+      "hint": null,
+      "message": "Payload values do not match URL in primary key column(s)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/array-other-element-extra-key": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/array-other-element-jsonb-array": {
+    "body": [
+      {
+        "and_starting_col": null,
+        "id": 100,
+        "jsonb_col": null,
+        "name": null,
+        "or_starting_col": null,
+        "parent_id": null
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/array-other-element-jsonb-scalar": {
+    "body": [
+      {
+        "and_starting_col": null,
+        "id": 100,
+        "jsonb_col": null,
+        "name": null,
+        "or_starting_col": null,
+        "parent_id": null
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/array-other-element-missing-key": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/array-other-element-not-an-object": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/array-other-element-text-array": {
+    "body": [
+      {
+        "and_starting_col": null,
+        "id": 100,
+        "jsonb_col": null,
+        "name": "a",
+        "or_starting_col": null,
+        "parent_id": null
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/array-other-element-text-object": {
+    "body": [
+      {
+        "and_starting_col": null,
+        "id": 100,
+        "jsonb_col": null,
+        "name": "a",
+        "or_starting_col": null,
+        "parent_id": null
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/array-other-element-type-error": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type smallint: \"x\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/array-unknown-column-everywhere": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'bogus' column of 'tiobe_pls' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/camel-case-pk-insert": {
+    "body": [
+      {
+        "idUnitTest": 7,
+        "nameUnitTest": "unit test 7"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/camel-case-pk-minimal": {
+    "body": null,
+    "headers": {
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "put/camel-case-pk-return-minimal": {
+    "body": null,
+    "headers": {
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 204
+  },
+  "put/columns-ignored": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 5
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/columns-non-uniform-keys": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/columns-unknown-ignored": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 5
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/composite-first-only": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/composite-last-only": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/duplicate-pk-filter-different": {
+    "body": {
+      "code": "PGRST115",
+      "details": null,
+      "hint": null,
+      "message": "Payload values do not match URL in primary key column(s)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/duplicate-pk-filter-equal": {
+    "body": [
+      {
+        "name": "Go",
+        "rank": 19
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/embedded-resource-ordered": {
+    "body": [
+      {
+        "id": 0,
+        "name": "tardis-upserted",
+        "web_content": [
+          {
+            "name": "bar"
+          },
+          {
+            "name": "fezz"
+          },
+          {
+            "name": "foo"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/filter-in": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/filter-logic": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/filter-negated": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/filter-none": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/filter-not-pk": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/filter-pk-neq": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/filter-pk-plus-other": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/insert-composite-pk": {
+    "body": [
+      {
+        "company": "GEX",
+        "first_name": "Susan",
+        "last_name": "Heidt",
+        "occupation": "Railroad engineer",
+        "salary": "$48,000.00"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-count-exact": {
+    "body": [
+      {
+        "name": "Go",
+        "rank": 19
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-headers-only": {
+    "body": null,
+    "headers": {
+      "preference-applied": "return=headers-only, tx=rollback"
+    },
+    "status": 204
+  },
+  "put/insert-object-media": {
+    "body": {
+      "name": "Ruby",
+      "rank": 11
+    },
+    "headers": {
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-only-pk-cols": {
+    "body": [
+      {
+        "id": 10
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-partitioned-composite-pk": {
+    "body": [
+      {
+        "car_brand_name": null,
+        "name": "Supra",
+        "year": 2021
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-resolution-ignored": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 7
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/insert-select": {
+    "body": [
+      {
+        "rank": 19
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-single-pk": {
+    "body": [
+      {
+        "name": "Go",
+        "rank": 19
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/insert-single-pk-default-prefer": {
+    "body": null,
+    "headers": {
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "put/insert-single-pk-minimal": {
+    "body": null,
+    "headers": {
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 204
+  },
+  "put/insert-unknown-column": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'nope' column of 'tiobe_pls' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/invalid-json": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "Empty or invalid json"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/limit": {
+    "body": {
+      "code": "PGRST114",
+      "details": null,
+      "hint": null,
+      "message": "limit/offset querystring parameters are not allowed for PUT"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/no-pk-table": {
+    "body": {
+      "code": "PGRST105",
+      "details": null,
+      "hint": null,
+      "message": "Filters must include all and only primary key columns with 'eq' operators"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 405
+  },
+  "put/non-uniform-keys-before-filters": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/offset": {
+    "body": {
+      "code": "PGRST114",
+      "details": null,
+      "hint": null,
+      "message": "limit/offset querystring parameters are not allowed for PUT"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/on-conflict-ignored": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 7
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/pk-decimal-scale": {
+    "body": [
+      {
+        "n": 1.5,
+        "v": "b"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/pk-mismatch": {
+    "body": {
+      "code": "PGRST115",
+      "details": null,
+      "hint": null,
+      "message": "Payload values do not match URL in primary key column(s)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/pk-mismatch-composite": {
+    "body": {
+      "code": "PGRST115",
+      "details": null,
+      "hint": null,
+      "message": "Payload values do not match URL in primary key column(s)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/pk-null-in-payload": {
+    "body": {
+      "code": "PGRST115",
+      "details": null,
+      "hint": null,
+      "message": "Payload values do not match URL in primary key column(s)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/pk-number-vs-text": {
+    "body": [
+      {
+        "id": 10
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "put/pk-payload-boolean-for-integer": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type integer: \"true\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/pk-payload-float-for-integer": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type integer: \"1.0\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/pk-typed-payload-leading-zero": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/pk-typed-url-leading-zero": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/pk-url-not-castable": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type integer: \"x\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/pk-whitespace": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/response-guc-insert": {
+    "body": [
+      {
+        "c": "c9",
+        "id": 9
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback",
+      "x-put": "from-trigger"
+    },
+    "status": 202
+  },
+  "put/response-guc-update": {
+    "body": [
+      {
+        "c": "c9",
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback",
+      "x-put": "from-trigger"
+    },
+    "status": 202
+  },
+  "put/unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.nope' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "put/update-check-violation": {
+    "body": {
+      "code": "23514",
+      "details": "Failing row contains (3, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..., null).",
+      "hint": null,
+      "message": "new row for relation \"projects\" violates check constraint \"projects_name_length\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/update-composite-pk": {
+    "body": [
+      {
+        "company": "Gamma Gas",
+        "first_name": "Frances M.",
+        "last_name": "Roe",
+        "occupation": "Railroad engineer",
+        "salary": "$60,000.00"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-explicit-null": {
+    "body": [
+      {
+        "client_id": null,
+        "id": 3,
+        "name": "Renamed"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-first-element-only": {
+    "body": {
+      "name": "Java",
+      "rank": 19
+    },
+    "headers": {
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-fk-violation": {
+    "body": {
+      "code": "23503",
+      "details": "Key (client_id)=(999) is not present in table \"clients\".",
+      "hint": null,
+      "message": "insert or update on table \"projects\" violates foreign key constraint \"client\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "put/update-ignores-range": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 5
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-missing-default-ignored": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 1
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-no-max-affected-bound": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 5
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback, handling=strict"
+    },
+    "status": 200
+  },
+  "put/update-not-null-violation": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (3, null, null).",
+      "hint": null,
+      "message": "null value in column \"name\" of relation \"projects\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "put/update-only-pk-cols": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-partial-payload-keeps-other-columns": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "Renamed"
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-partitioned-composite-pk": {
+    "body": [
+      {
+        "car_brand_name": null,
+        "name": "DeLorean",
+        "year": 1981
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-second-element-matches": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 19
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-single-pk": {
+    "body": [
+      {
+        "name": "Java",
+        "rank": 13
+      }
+    ],
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "put/update-single-pk-minimal": {
+    "body": null,
+    "headers": {
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 204
+  }
+}

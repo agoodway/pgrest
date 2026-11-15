@@ -1,0 +1,236 @@
+{
+  "errors_custom/401-custom-headers": {
+    "body": {
+      "code": "123",
+      "details": null,
+      "hint": null,
+      "message": "ABC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "x-custom": "value"
+    },
+    "status": 401
+  },
+  "errors_custom/401-empty-headers": {
+    "body": {
+      "code": "123",
+      "details": null,
+      "hint": null,
+      "message": "ABC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 401
+  },
+  "errors_custom/bad-details-type": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for MESSAGE: '{\"code\":\"123\",\"message\":\"ABC\",\"details\":{}}'",
+      "hint": "MESSAGE must be a JSON object with obligatory keys: 'code', 'message' and optional keys: 'details', 'hint'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/bad-header-type": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for DETAIL: '{\"status\":402,\"headers\":{\"X-Test\":1}}'",
+      "hint": "DETAIL must be a JSON object with obligatory keys: 'status', 'headers' and optional key: 'status_text'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/missing-headers": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for DETAIL: '{\"status\":402}'",
+      "hint": "DETAIL must be a JSON object with obligatory keys: 'status', 'headers' and optional key: 'status_text'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/null-headers": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for DETAIL: '{\"status\":402,\"headers\":null}'",
+      "hint": "DETAIL must be a JSON object with obligatory keys: 'status', 'headers' and optional key: 'status_text'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/numeric-code": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for MESSAGE: '{\"code\":123,\"message\":\"ABC\"}'",
+      "hint": "MESSAGE must be a JSON object with obligatory keys: 'code', 'message' and optional keys: 'details', 'hint'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/payment-header": {
+    "body": {
+      "code": "123",
+      "details": "Quota exceeded",
+      "hint": "Upgrade your plan",
+      "message": "Payment Required"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "x-powered-by": "Nerd Rage"
+    },
+    "status": 402
+  },
+  "errors_custom/raise_pt402": {
+    "body": {
+      "code": "PT402",
+      "details": "Quota exceeded",
+      "hint": "Upgrade your plan",
+      "message": "Payment Required"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 402
+  },
+  "errors_custom/raise_sqlstate_invalid_json_details": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for DETAIL: 'INVALID'",
+      "hint": "DETAIL must be a JSON object with obligatory keys: 'status', 'headers' and optional key: 'status_text'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/raise_sqlstate_invalid_json_message": {
+    "body": {
+      "code": "PGRST121",
+      "details": "Invalid JSON value for MESSAGE: 'INVALID'",
+      "hint": "MESSAGE must be a JSON object with obligatory keys: 'code', 'message' and optional keys: 'details', 'hint'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/raise_sqlstate_missing_details": {
+    "body": {
+      "code": "PGRST121",
+      "details": "DETAIL is missing in the RAISE statement",
+      "hint": "DETAIL must be a JSON object with obligatory keys: 'status', 'headers' and optional key: 'status_text'.",
+      "message": "Could not parse JSON in the \"RAISE SQLSTATE 'PGRST'\" error"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/raise_sqlstate_test1": {
+    "body": {
+      "code": "123",
+      "details": "DEF",
+      "hint": "XYZ",
+      "message": "ABC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "x-header": "str"
+    },
+    "status": 332
+  },
+  "errors_custom/raise_sqlstate_test2": {
+    "body": {
+      "code": "123",
+      "details": null,
+      "hint": null,
+      "message": "ABC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "x-header": "str"
+    },
+    "status": 332
+  },
+  "errors_custom/raise_sqlstate_test3": {
+    "body": {
+      "code": "123",
+      "details": null,
+      "hint": null,
+      "message": "ABC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "x-header": "str"
+    },
+    "status": 404
+  },
+  "errors_custom/raise_sqlstate_test4": {
+    "body": {
+      "code": "123",
+      "details": null,
+      "hint": null,
+      "message": "ABC"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "x-header": "str"
+    },
+    "status": 404
+  },
+  "errors_custom/state-42P17": {
+    "body": {
+      "code": "42P17",
+      "details": null,
+      "hint": null,
+      "message": "custom state"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/state-54001": {
+    "body": {
+      "code": "54001",
+      "details": null,
+      "hint": null,
+      "message": "custom state"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "errors_custom/state-PT699": {
+    "body": {
+      "code": "PT699",
+      "details": null,
+      "hint": null,
+      "message": "custom state"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 699
+  }
+}

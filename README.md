@@ -4,44 +4,18 @@
 [![Hex Docs](https://img.shields.io/badge/hex-docs-blue.svg)](https://hexdocs.pm/pgrest)
 [![License](https://img.shields.io/hexpm/l/pgrest.svg)](https://github.com/agoodway/pgrest/blob/main/LICENSE)
 
-> A PostgREST and Supabase-compatible REST API powered by Elixir and Ecto.
+> A PostgREST-compatible REST API powered by Elixir and Ecto, differential-tested against PostgREST v14.
 
-Define Ecto schemas, get a full REST API that works with existing PostgREST clients like `@supabase/postgrest-js`. Queries are parsed into Ecto expressions — no raw SQL, no runtime code generation.
+PgRest serves the PostgREST HTTP API that `@supabase/postgrest-js` speaks, from
+your own Phoenix or Plug app. Your Ecto schemas are the contract: each request
+is parsed into an AST and compiled to one parameterized SQL statement per read,
+with your `scope/2` callbacks (tenancy, soft deletes) applied to the root and
+every embed. It is a Plug that runs in your BEAM process on your Ecto repo; there
+is no sidecar service. Compatibility is measured, not assumed: a differential
+suite replays scenarios against a pinned PostgREST.
 
-## Why PgRest?
-
-[PostgREST](https://docs.postgrest.org/) and [Supabase](https://supabase.com/) are fantastic battle-tested solutions, but they run as separate services. PgRest brings the same query language and client compatibility to Elixir — no sidecar process, no migration from Supabase, just add it to your existing Phoenix or Plug app.
-
-- **Drop-in client compatibility** — Works with `@supabase/postgrest-js` and any PostgREST client. Same URL syntax, same operators, same response format.
-- **Ecto-native** — Schemas define your API resources. Filters become `where` clauses, embeds become `preload`, inner joins become `join`. All type-safe through Ecto's query builder.
-- **Scoped by default** — `scope/2` callbacks for tenant isolation and soft deletes. Custom `handle_param/4` for search, geo-queries, or any app-specific filter.
-- **No extra infrastructure** — It's a Plug. Runs in your existing BEAM process, uses your existing Ecto repo. No separate service to deploy or manage.
-
-## Demo App
-
-See [`demo/`](demo/) for an interactive query explorer built with Phoenix LiveView. It runs 18 example queries live against a seeded project/task database using `@supabase/postgrest-js`, showing the client code, generated SQL, JSON response, and timing for each.
-
-The repo ships a Hivemind wrapper that serves the demo at
-[`localhost:4042`](http://localhost:4042):
-
-```bash
-bin/pgrest start
-bin/pgrest stop
-bin/pgrest console
-```
-
-Requires a local Postgres reachable at `localhost:5432` (`mix ecto.setup`
-from `demo/` creates the database). Or run the demo directly:
-
-```bash
-cd demo && mix setup && mix phx.server
-```
-
-## Prerequisites
-
-- Elixir 1.19+
-- PostgreSQL with an Ecto repository
-- A Plug-based application (Phoenix, Bandit, etc.)
+Requires Elixir 1.19+, PostgreSQL with an Ecto repository and a Plug-based
+application.
 
 ## Installation
 
@@ -50,7 +24,7 @@ Add `pgrest` to your dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:pgrest, "~> 0.1.0"}
+    {:pgrest, "~> 0.2.0"}
   ]
 end
 ```
@@ -63,20 +37,20 @@ mix deps.get
 
 ## Quick Start
 
-### 1. Define a Resource
-
-A resource is an Ecto schema that uses `PgRest.Resource`:
+### 1. Define a resource
 
 ```elixir
 defmodule MyApp.API.Tasks do
   use Ecto.Schema
-  use PgRest.Resource
+  use PgRest.Resource, custom_params: ["search"]
   import Ecto.Query
 
   schema "tasks" do
     field :title, :string
     field :status, :string
-    field :priority, :string
+    field :due_date, :date
+    field :deleted_at, :utc_datetime
+    field :internal_notes, :string, redact: true
     belongs_to :project, MyApp.API.Projects
     timestamps()
   end
@@ -85,7 +59,7 @@ defmodule MyApp.API.Tasks do
   @impl PgRest.Resource
   def scope(query, _context), do: where(query, [t], is_nil(t.deleted_at))
 
-  # Optional: custom URL params (?search=foo)
+  # Optional: custom URL params (?search=foo), declared in `use` above
   @impl PgRest.Resource
   def handle_param("search", value, query, _context) do
     where(query, [t], ilike(t.title, ^"%#{value}%"))
@@ -95,26 +69,16 @@ defmodule MyApp.API.Tasks do
 end
 ```
 
-### 2. Start the Registry
-
-Add `PgRest.Registry` to your supervision tree. With `:otp_app`, it auto-discovers every module that has `use PgRest.Resource`:
+### 2. Start the registry
 
 ```elixir
 children = [
   MyApp.Repo,
-  {PgRest.Registry, otp_app: :my_app},
+  {PgRest.Registry, otp_app: :my_app}
 ]
 ```
 
-Or pass an explicit list:
-
-```elixir
-{PgRest.Registry, modules: [MyApp.API.Tasks, MyApp.API.Projects]}
-```
-
-### 3. Mount the Plug
-
-In your router, forward API requests to `PgRest.Plug`:
+### 3. Mount the plug
 
 ```elixir
 # Phoenix router
@@ -124,14 +88,13 @@ forward "/api", PgRest.Plug, repo: MyApp.Repo
 forward "/api", to: PgRest.Plug, init_opts: [repo: MyApp.Repo]
 ```
 
-### 4. Query with Any PostgREST Client
+### 4. Query with any PostgREST client
 
 ```javascript
 import { PostgrestClient } from '@supabase/postgrest-js'
 
 const api = new PostgrestClient('http://localhost:4000/api')
 
-// Filter, order, paginate
 const { data } = await api
   .from('tasks')
   .select('title,status,project(name)')
@@ -146,90 +109,40 @@ Or with plain HTTP:
 GET /api/tasks?status=eq.pending&select=title,status,project(name)&order=due_date.asc&limit=10
 ```
 
-## How It Works
+## Demo
 
-Every request flows through the same pipeline:
-
-```
-Base query (from schema)
-    |
-scope/2 (tenant isolation, soft deletes — always runs)
-    |
-URL filters (?status=eq.active&priority=eq.high)
-    |
-handle_param/4 (custom params: ?search=, ?within_miles=)
-    |
-select, order, limit, offset → Repo.all()
-```
-
-URL parameters are parsed into an AST, then applied as Ecto query expressions. The parser handles the full PostgREST operator set: comparison (`eq`, `neq`, `gt`, `gte`, `lt`, `lte`), pattern matching (`like`, `ilike`, `match`), containment (`in`, `cs`, `cd`, `ov`), full-text search (`fts`, `plfts`, `phfts`, `wfts`), logical grouping (`and`, `or`, `not`), and relationship embedding via `select`.
-
-## Using the Query Builder Directly
-
-The parser and filter modules work independently of HTTP. You can use them to build Ecto queries from PostgREST-style parameter maps anywhere — LiveView, GenServers, background jobs:
-
-```elixir
-params = %{"status" => "eq.pending", "priority" => "eq.high", "order" => "due_date.asc", "limit" => "10"}
-
-{:ok, parsed} = PgRest.Parser.parse(params, allowed_fields: MyApp.Tasks.__schema__(:fields))
-{:ok, filters} = PgRest.TypeCaster.cast_filters(parsed.filters, MyApp.Tasks)
-
-query =
-  MyApp.Tasks
-  |> PgRest.Filter.apply_all(filters)
-  |> PgRest.Order.apply_order(parsed.order)
-  |> Ecto.Query.limit(^parsed.limit)
-
-Repo.all(query)
-```
-
-The result is a composable `%Ecto.Query{}` — pipe it further, add your own clauses, or pass it to streams.
-
-## Plug Options
-
-```elixir
-forward "/api", PgRest.Plug,
-  repo: MyApp.Repo,           # Required — Ecto repo module
-  json: Jason,                 # JSON encoder (default: Jason)
-  max_limit: 1000,             # Max rows per request (default: nil = no limit)
-  context_builder: &build/2    # Custom context from conn → map
-```
-
-## Resource Callbacks
-
-| Callback          | Purpose                                          | Default              |
-|-------------------|--------------------------------------------------|----------------------|
-| `scope/2`         | Always-applied query filter (tenancy, soft deletes) | No-op             |
-| `handle_param/4`  | Custom URL parameter handling                    | No-op                |
-| `changeset/3`     | Create/update changeset                          | Casts all schema fields |
-| `after_load/2`    | Post-processing after DB load                    | Identity             |
-
-## Supported Operations
-
-| HTTP Method                            | PostgREST Equivalent  | Description                                  |
-|----------------------------------------|-----------------------|----------------------------------------------|
-| `GET /resource`                        | `GET /table`          | List with filters, ordering, pagination      |
-| `GET /resource?select=a,b,rel(c)`      | Resource embedding    | Preload associations                         |
-| `GET /resource?rel.field=eq.x`         | Embedded filters      | Filter on associated records                 |
-| `GET /resource?select=*,rel!inner(*)` | Inner join            | Only return rows with matching associations  |
-| `POST /resource`                       | `POST /table`         | Create (single or bulk)                      |
-| `PATCH /resource?filters`              | `PATCH /table?filters` | Update matching rows                        |
-| `DELETE /resource?filters`             | `DELETE /table?filters` | Delete matching rows                       |
-
-## Telemetry
-
-PgRest emits `:telemetry` events for all operations:
-
-```
-[:pg_rest, :query, :start]    — %{resource: module, operation: atom, repo: module}
-[:pg_rest, :query, :stop]     — includes duration
-[:pg_rest, :query, :exception] — on failure
-```
-
-## Testing
+[`demo/`](https://github.com/agoodway/pgrest/tree/main/demo) is a Phoenix
+LiveView query explorer. It runs example queries against seeded data with
+`@supabase/postgrest-js` and shows the client code, generated SQL, response and
+timing for each.
 
 ```bash
+bin/pgrest start      # Hivemind, serves localhost:4042
+bin/pgrest stop
+bin/pgrest console    # remote shell into the demo node
+```
+
+Or without Hivemind: `cd demo && mix setup && mix phx.server`.
+
+## Documentation
+
+- [Configuration](docs/guides/configuration.md): plug options, registry, body parsing, statement timeout, repo logging
+- [Resources](docs/guides/resources.md): resource options, `allow:`, schema prefixes, column exposure, security notes
+- [Functions and RPC](docs/guides/rpc.md): declarations, introspection, scoped results and response overrides
+- [Authorization and RLS](docs/guides/authorization-and-rls.md): policies, roles and security boundaries
+- [Compatibility](docs/guides/compatibility.md): supported operations, request pipeline, known differences from PostgREST
+- [Telemetry](docs/guides/telemetry.md): events and metadata
+- [Testing](docs/guides/testing.md): the docker compose test harness
+- [Upgrading from 0.1 to 0.2](docs/guides/upgrading-0.1-to-0.2.md)
+- [CHANGELOG](CHANGELOG.md)
+- [HexDocs](https://hexdocs.pm/pgrest) for the API reference
+
+## Development
+
+```bash
+docker compose up -d db
 mix test
+mix quality
 ```
 
 ## License

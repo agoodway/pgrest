@@ -1,0 +1,279 @@
+{
+  "rpc_resolution/get-extra-arg": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.add_them with parameters a, b, smthelse, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function test.add_them(a, b)",
+      "message": "Could not find the function test.add_them(a, b, smthelse) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/get-missing-arg": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.add_them with parameter a, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function test.add_them(a, b)",
+      "message": "Could not find the function test.add_them(a) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/get-no-params-unknown": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.noparamsprox without parameters, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function test.noparamsproc",
+      "message": "Could not find the function test.noparamsprox without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/get-overloaded": {
+    "body": {
+      "code": "PGRST203",
+      "details": null,
+      "hint": "Try renaming the parameters or the function itself in the database so function overloading can be resolved",
+      "message": "Could not choose the best candidate function between: test.overloaded_same_args(arg => integer), test.overloaded_same_args(arg => xml), test.overloaded_same_args(arg => text, num => integer)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "rpc_resolution/get-overloaded-enum": {
+    "body": {
+      "code": "PGRST203",
+      "details": null,
+      "hint": "Try renaming the parameters or the function itself in the database so function overloading can be resolved",
+      "message": "Could not choose the best candidate function between: test.overloaded_enum_arg(arg => test.status_enum), test.overloaded_enum_arg(arg => text)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "rpc_resolution/get-unknown-arg-hint": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhello with parameter nam, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function test.sayhello(name)",
+      "message": "Could not find the function test.sayhello(nam) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/get-unknown-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhell without parameters, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function test.sayhello",
+      "message": "Could not find the function test.sayhell without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/get-unnamed-json-param": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.unnamed_json_param with parameter a, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.unnamed_json_param(a) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-bytea-unknown-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhell with a single unnamed bytea parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.sayhell in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-named-json-param": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.named_json_param with parameters A, B, C or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.named_json_param(A, B, C) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-overloaded": {
+    "body": {
+      "code": "PGRST203",
+      "details": null,
+      "hint": "Try renaming the parameters or the function itself in the database so function overloading can be resolved",
+      "message": "Could not choose the best candidate function between: test.overloaded_same_args(arg => integer), test.overloaded_same_args(arg => xml), test.overloaded_same_args(arg => text, num => integer)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "rpc_resolution/post-text-no-params-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.noparamsproc with a single unnamed text parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.noparamsproc in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-text-to-json-param": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.unnamed_json_param with a single unnamed text parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.unnamed_json_param in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-text-unknown-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhell with a single unnamed text parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.sayhell in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-unknown-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhell with parameter name or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function test.sayhello",
+      "message": "Could not find the function test.sayhell(name) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/post-unnamed-json-param": {
+    "body": {
+      "A": 1,
+      "B": 2,
+      "C": 3
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "rpc_resolution/post-xml-unknown-function": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function test.sayhell with a single unnamed xml parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function test.sayhell in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/supabase-blurb-message-no-args": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function public.blurb_message without parameters or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function public.blurb_message without parameters in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/supabase-blurb-message-unnamed": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function public.blurb_message with parameter  or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function public.blurb_message() in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/supabase-created-ago": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function public.created_ago with parameter id or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function public.created_ago(id) in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/supabase-text-to-unnamed-xml": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function public.polymorphic_function_with_unnamed_text with a single unnamed xml parameter, but no matches were found in the schema cache.",
+      "hint": null,
+      "message": "Could not find the function public.polymorphic_function_with_unnamed_text in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/supabase-unnamed-integer": {
+    "body": {
+      "code": "PGRST202",
+      "details": "Searched for the function public.polymorphic_function_with_unnamed_integer with parameter  or with a single unnamed json/jsonb parameter, but no matches were found in the schema cache.",
+      "hint": "Perhaps you meant to call the function public.polymorphic_function_with_unnamed_text",
+      "message": "Could not find the function public.polymorphic_function_with_unnamed_integer() in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "rpc_resolution/supabase-unresolvable-function": {
+    "body": {
+      "code": "PGRST203",
+      "details": null,
+      "hint": "Try renaming the parameters or the function itself in the database so function overloading can be resolved",
+      "message": "Could not choose the best candidate function between: public.postgrest_unresolvable_function(a => integer), public.postgrest_unresolvable_function(a => text)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  }
+}

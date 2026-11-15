@@ -1,0 +1,423 @@
+{
+  "range/disjoint": {
+    "body": {
+      "code": "PGRST103",
+      "details": "Limit should be greater than or equal to zero.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "range/head-with-range": {
+    "body": null,
+    "headers": {
+      "content-location": "/items?order=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/header-lower-gt-upper": {
+    "body": {
+      "code": "PGRST103",
+      "details": "The lower boundary must be lower than or equal to the upper boundary in the Range header.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "range/header-only": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/header-open-ended": {
+    "body": [
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id",
+      "content-range": "10-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/header-unparseable": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/limit-nan-offset-five": {
+    "body": {
+      "code": "PGRST103",
+      "details": "Limit should be greater than or equal to zero.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "range/limit-nan-offset-zero": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?limit=abc&offset=0&order=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/limit-negative": {
+    "body": {
+      "code": "PGRST103",
+      "details": "Limit should be greater than or equal to zero.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "range/limit-not-a-number": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=abc&order=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/limit-offset": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=3&offset=2&order=id",
+      "content-range": "2-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/limit-zero": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?limit=0&order=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/limit-zero-offset": {
+    "body": {
+      "code": "PGRST103",
+      "details": "Limit should be greater than or equal to zero.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "range/limit-zero-with-header": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?limit=0&order=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/offset-negative": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?offset=-1&order=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/offset-only": {
+    "body": [
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?offset=12&order=id",
+      "content-range": "12-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/offset-past-end": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?offset=100&order=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/overlap": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=5&offset=2&order=id",
+      "content-range": "2-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/overlap-header-wider": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=2&offset=1&order=id",
+      "content-range": "1-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "range/post-scalar-body": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "range/post-with-range": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 201
+  },
+  "range/put-with-limit": {
+    "body": {
+      "code": "PGRST114",
+      "details": null,
+      "hint": null,
+      "message": "limit/offset querystring parameters are not allowed for PUT"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

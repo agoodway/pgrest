@@ -1,0 +1,385 @@
+{
+  "pagination/embedded-limits": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 1,
+            "tasks": [
+              {
+                "id": 1
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "tasks": [
+              {
+                "id": 3
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?limit=1&order=id.asc&projects.limit=2&projects.order=id.asc&projects.tasks.limit=1&projects.tasks.order=id.asc&select=id%2Cprojects%28id%2Ctasks%28id%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/head-limit-offset": {
+    "body": null,
+    "headers": {
+      "content-location": "/items?limit=3&offset=2&order=id.asc&select=id",
+      "content-range": "2-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/limit": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=3&order=id.asc&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/limit-negative": {
+    "body": {
+      "code": "PGRST103",
+      "details": "Limit should be greater than or equal to zero.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "pagination/limit-offset": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=3&offset=2&order=id.asc&select=id",
+      "content-range": "2-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/limit-zero": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?limit=0&order=id&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/offset-empty-table-count": {
+    "body": {
+      "code": "PGRST103",
+      "details": "An offset of 1 was requested, but there are only 0 rows.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-location": "/compound_pk?offset=1",
+      "content-range": "*/0",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 416
+  },
+  "pagination/offset-equals-total-count": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?offset=15&order=id&select=id",
+      "content-range": "*/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "pagination/offset-negative": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?offset=-4&order=id&select=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/offset-past-end-count": {
+    "body": {
+      "code": "PGRST103",
+      "details": "An offset of 100 was requested, but there are only 15 rows.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-location": "/items?offset=100&order=id&select=id",
+      "content-range": "*/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 416
+  },
+  "pagination/offset-past-end-no-count": {
+    "body": [],
+    "headers": {
+      "content-location": "/items?offset=100&order=id&select=id",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/offset-zero-empty": {
+    "body": [],
+    "headers": {
+      "content-location": "/compound_pk?offset=0",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/offset-zero-empty-count": {
+    "body": [],
+    "headers": {
+      "content-location": "/compound_pk?offset=0",
+      "content-range": "*/0",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 200
+  },
+  "pagination/range-beats-limit": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?limit=3&order=id.asc&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/range-beyond-end": {
+    "body": [
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "10-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/range-empty-table": {
+    "body": [],
+    "headers": {
+      "content-location": "/compound_pk",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/range-first-two": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/range-lower-gt-upper": {
+    "body": {
+      "code": "PGRST103",
+      "details": "The lower boundary must be lower than or equal to the upper boundary in the Range header.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 416
+  },
+  "pagination/range-open-ended": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-14/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "pagination/range-past-end-count": {
+    "body": {
+      "code": "PGRST103",
+      "details": "An offset of 100 was requested, but there are only 15 rows.",
+      "hint": null,
+      "message": "Requested range not satisfiable"
+    },
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "*/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 416
+  },
+  "pagination/range-single": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?order=id&select=id",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

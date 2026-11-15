@@ -1,0 +1,934 @@
+{
+  "update_delete/delete-count-exact": {
+    "body": null,
+    "headers": {
+      "content-range": "*/3",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/delete-default-prefs": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/delete-dotted-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column complex_items.a.b does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/delete-dotted-column-unsafe": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column complex_items.a.b does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/delete-dotted-json-key": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-dotted-json-key-unsafe": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-embed-parent": {
+    "body": [
+      {
+        "clients": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-embedded-param-count": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clients' is included in the 'select' query parameter.",
+      "message": "'clients' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/delete-embedded-param-count-unsafe": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clients' is included in the 'select' query parameter.",
+      "message": "'clients' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/delete-fk-violation": {
+    "body": {
+      "code": "23503",
+      "details": "Key (id)=(1) is still referenced from table \"projects\".",
+      "hint": null,
+      "message": "update or delete on table \"clients\" violates foreign key constraint \"client\" on table \"projects\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "update_delete/delete-limit-offset-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/15",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/delete-limit-offset-order": {
+    "body": [
+      {
+        "id": 15
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "*/15",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-logic-tree": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-no-filter-all-rows": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 12
+      },
+      {
+        "id": 13
+      },
+      {
+        "id": 14
+      },
+      {
+        "id": 15
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-no-match": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-no-match-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/delete-pk-less": {
+    "body": [
+      {
+        "a": "1",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-representation-count": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "*/1",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-select-ignored": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/delete-select-rename-cast": {
+    "body": [
+      {
+        "pId": "5",
+        "pName": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-singular-many-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 5 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "update_delete/delete-singular-no-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 0 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "update_delete/delete-singular-one-row": {
+    "body": {
+      "id": 3
+    },
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/delete-typo-filter": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"items.id\".",
+      "message": "column items.idd does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/delete-unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.fake' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "update_delete/patch-bad-enum-value": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input value for enum status_enum: \"OFFLINE\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-columns": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Only",
+        "tags": [
+          "a"
+        ]
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-columns-no-match": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-columns-unknown": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'helicopter' column of 'complex_items' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-count-exact": {
+    "body": null,
+    "headers": {
+      "content-range": "0-2/3",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-count-exact-representation": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-range": "0-1/2",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, count=exact, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-default-prefs": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-dotted-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column complex_items.a.b does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-dotted-column-unsafe": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column complex_items.a.b does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-dotted-json-key": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-dotted-json-key-unsafe": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-embed-in-representation": {
+    "body": [
+      {
+        "clients": {
+          "id": 1,
+          "name": "Microsoft"
+        },
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-embed-is-null-representation": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"projects.client_id\".",
+      "message": "column projects.clients does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-embedded-param-minimal": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clients' is included in the 'select' query parameter.",
+      "message": "'clients' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-embedded-param-minimal-unsafe": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clients' is included in the 'select' query parameter.",
+      "message": "'clients' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-embedded-param-with-filter": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clients' is included in the 'select' query parameter.",
+      "message": "'clients' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-embedded-param-with-filter-unsafe": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clients' is included in the 'select' query parameter.",
+      "message": "'clients' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-empty-array": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-empty-array-representation": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-empty-body": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "Empty or invalid json"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-empty-object": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-empty-object-representation": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-enum": {
+    "body": [
+      {
+        "id": 1,
+        "status": "archived"
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-filter-on-modified-column": {
+    "body": [
+      {
+        "id": 1,
+        "name": "updated entity"
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-fk-violation": {
+    "body": {
+      "code": "23503",
+      "details": "Key (client_id)=(999) is not present in table \"clients\".",
+      "hint": null,
+      "message": "insert or update on table \"projects\" violates foreign key constraint \"client\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "update_delete/patch-invalid-json": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "Empty or invalid json"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-jsonb-column": {
+    "body": [
+      {
+        "id": 1,
+        "settings": {
+          "a": [
+            1,
+            2
+          ]
+        }
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-limit-offset-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "0-2/3",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-limit-offset-order": {
+    "body": [
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-logic-tree": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-missing-default": {
+    "body": [
+      {
+        "field-with_sep": 1,
+        "id": 3,
+        "name": "N"
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "missing=default, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-multiple-rows-pk-less": {
+    "body": null,
+    "headers": {
+      "content-range": "0-1/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-no-filter-all-rows": {
+    "body": [
+      {
+        "a": null,
+        "b": "1"
+      },
+      {
+        "a": "1",
+        "b": "1"
+      },
+      {
+        "a": "2",
+        "b": "1"
+      }
+    ],
+    "headers": {
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-no-match": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-not-null-violation": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (1, null).",
+      "hint": null,
+      "message": "null value in column \"name\" of relation \"clients\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-null": {
+    "body": [
+      {
+        "id": 1,
+        "name": null
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-pk-less-representation": {
+    "body": [
+      {
+        "a": "1",
+        "b": "1"
+      },
+      {
+        "a": "2",
+        "b": "1"
+      }
+    ],
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-representation": {
+    "body": [
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-representation-no-match": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-select-ignored-by-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-singular-many-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 3 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "update_delete/patch-singular-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "0-0/*",
+      "preference-applied": "return=minimal, tx=rollback"
+    },
+    "status": 204
+  },
+  "update_delete/patch-singular-no-rows": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 0 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "update_delete/patch-singular-one-row": {
+    "body": {
+      "id": 1,
+      "name": "S"
+    },
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "update_delete/patch-typo-filter": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"complex_items.id\".",
+      "message": "column complex_items.idd does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-unknown-payload-column": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'helicopter' column of 'complex_items' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "update_delete/patch-unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.fake' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  }
+}

@@ -1,0 +1,4863 @@
+{
+  "plan/accept-csv-before-plan": {
+    "body": "id\n1",
+    "headers": {
+      "content-location": "/projects?id=eq.1&select=id",
+      "content-range": "0-0/*",
+      "content-type": "text/csv; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/accept-plan-before-json": {
+    "body": "Aggregate  (cost=8.18..8.20 rows=1 width=144)\n  ->  Index Scan using projects_pkey on projects  (cost=0.15..8.17 rows=1 width=40)\n        Index Cond: (id = 1)\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/accept-q-below-json": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq.1",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/accept-unknown-for-falls-back": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq.1",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/aggregate": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Aggregate",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Partial Mode": "Simple",
+              "Plan Rows": 1,
+              "Plan Width": 8,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Node Type": "Seq Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1200,
+                  "Plan Width": 64,
+                  "Relation Name": "projects",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 22.0
+                }
+              ],
+              "Startup Cost": 25.0,
+              "Strategy": "Plain",
+              "Total Cost": 25.01
+            }
+          ],
+          "Startup Cost": 25.02,
+          "Strategy": "Plain",
+          "Total Cost": 25.04
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/bad-filter": {
+    "body": {
+      "code": "22P02",
+      "details": null,
+      "hint": null,
+      "message": "invalid input syntax for type integer: \"\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "plan/count-exact": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Aggregate",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Partial Mode": "Simple",
+              "Plan Rows": 1,
+              "Plan Width": 8,
+              "Plans": [
+                {
+                  "Alias": "projects_1",
+                  "Async Capable": false,
+                  "Node Type": "Seq Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1200,
+                  "Plan Width": 0,
+                  "Relation Name": "projects",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 22.0
+                }
+              ],
+              "Startup Cost": 25.0,
+              "Strategy": "Plain",
+              "Subplan Name": "InitPlan 1 (returns $0)",
+              "Total Cost": 25.01
+            },
+            {
+              "Async Capable": false,
+              "Node Type": "Limit",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Node Type": "Seq Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1200,
+                  "Plan Width": 40,
+                  "Relation Name": "projects",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 22.0
+                }
+              ],
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 25.04,
+          "Strategy": "Plain",
+          "Total Cost": 25.06
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/count-planned": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Limit",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Node Type": "Seq Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1200,
+                  "Plan Width": 40,
+                  "Relation Name": "projects",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 22.0
+                }
+              ],
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.03,
+          "Strategy": "Plain",
+          "Total Cost": 0.05
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/default-is-text": {
+    "body": "Aggregate  (cost=15.61..15.63 rows=1 width=144)\n  ->  Bitmap Heap Scan on projects  (cost=8.48..15.59 rows=3 width=40)\n        Recheck Cond: (id = ANY ('{1,2,3}'::integer[]))\n        ->  Bitmap Index Scan on projects_pkey  (cost=0.00..8.48 rows=3 width=0)\n              Index Cond: (id = ANY ('{1,2,3}'::integer[]))\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/delete": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Delete",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 3,
+              "Plan Width": 6,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Node Type": "Bitmap Heap Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 3,
+                  "Plan Width": 6,
+                  "Plans": [
+                    {
+                      "Async Capable": false,
+                      "Index Cond": "(id = ANY ('{1,2,3}'::integer[]))",
+                      "Index Name": "projects_pkey",
+                      "Node Type": "Bitmap Index Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 3,
+                      "Plan Width": 0,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 8.48
+                    }
+                  ],
+                  "Recheck Cond": "(id = ANY ('{1,2,3}'::integer[]))",
+                  "Relation Name": "projects",
+                  "Startup Cost": 8.48,
+                  "Total Cost": 15.59
+                }
+              ],
+              "Relation Name": "projects",
+              "Startup Cost": 8.48,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 15.59
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 3,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.06
+            }
+          ],
+          "Startup Cost": 15.66,
+          "Strategy": "Plain",
+          "Total Cost": 15.68
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/delete-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.047,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.014,
+          "Actual Total Time": 0.014,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 3,
+              "Actual Startup Time": 0.01,
+              "Actual Total Time": 0.011,
+              "Alias": "items",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Delete",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 3,
+              "Plan Width": 6,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 3,
+                  "Actual Startup Time": 0.006,
+                  "Actual Total Time": 0.006,
+                  "Alias": "items",
+                  "Async Capable": false,
+                  "Exact Heap Blocks": 1,
+                  "Lossy Heap Blocks": 0,
+                  "Node Type": "Bitmap Heap Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 3,
+                  "Plan Width": 6,
+                  "Plans": [
+                    {
+                      "Actual Loops": 1,
+                      "Actual Rows": 3,
+                      "Actual Startup Time": 0.003,
+                      "Actual Total Time": 0.003,
+                      "Async Capable": false,
+                      "Index Cond": "(id = ANY ('{1,2,3}'::bigint[]))",
+                      "Index Name": "items_pkey",
+                      "Node Type": "Bitmap Index Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 3,
+                      "Plan Width": 0,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 8.49
+                    }
+                  ],
+                  "Recheck Cond": "(id = ANY ('{1,2,3}'::bigint[]))",
+                  "Relation Name": "items",
+                  "Rows Removed by Index Recheck": 0,
+                  "Startup Cost": 8.49,
+                  "Total Cost": 15.6
+                }
+              ],
+              "Relation Name": "items",
+              "Startup Cost": 8.49,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 15.6
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 3,
+              "Actual Startup Time": 0.01,
+              "Actual Total Time": 0.012,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 3,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.06
+            }
+          ],
+          "Startup Cost": 15.67,
+          "Strategy": "Plain",
+          "Total Cost": 15.69
+        },
+        "Planning Time": 0.064,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/delete-object-verbose": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "''::text",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "'{}'::text[]",
+            "COALESCE((json_agg(ROW(projects.id, projects.name, projects.client_id)) -> 0), 'null'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "projects_1",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Delete",
+              "Output": [
+                "projects_1.id",
+                "projects_1.name",
+                "projects_1.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 6,
+              "Plans": [
+                {
+                  "Alias": "projects_1",
+                  "Async Capable": false,
+                  "Index Cond": "(projects_1.id = 6)",
+                  "Index Name": "projects_pkey",
+                  "Node Type": "Index Scan",
+                  "Output": [
+                    "projects_1.ctid"
+                  ],
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 6,
+                  "Relation Name": "projects",
+                  "Scan Direction": "Forward",
+                  "Schema": "test",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                }
+              ],
+              "Relation Name": "projects",
+              "Schema": "test",
+              "Startup Cost": 0.15,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 8.17
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 8.2,
+          "Strategy": "Plain",
+          "Total Cost": 8.22
+        },
+        "Query Identifier": -6324151403261605472
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-inner-m2m": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1270,
+              "Plan Width": 68,
+              "Plans": [
+                {
+                  "Alias": "users",
+                  "Async Capable": false,
+                  "Node Type": "Seq Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1270,
+                  "Plan Width": 36,
+                  "Relation Name": "users",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 22.7
+                },
+                {
+                  "Async Capable": false,
+                  "Filter": "((json_agg(ROW(tasks.id, tasks.name, tasks.project_id)))::jsonb IS NOT NULL)",
+                  "Node Type": "Aggregate",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Partial Mode": "Simple",
+                  "Plan Rows": 1,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Async Capable": false,
+                      "Inner Unique": false,
+                      "Join Type": "Inner",
+                      "Node Type": "Nested Loop",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 40,
+                      "Plans": [
+                        {
+                          "Alias": "tasks",
+                          "Async Capable": false,
+                          "Index Cond": "(id = 1)",
+                          "Index Name": "tasks_pkey",
+                          "Node Type": "Index Scan",
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Outer",
+                          "Plan Rows": 1,
+                          "Plan Width": 40,
+                          "Relation Name": "tasks",
+                          "Scan Direction": "Forward",
+                          "Startup Cost": 0.15,
+                          "Total Cost": 8.17
+                        },
+                        {
+                          "Alias": "users_tasks",
+                          "Async Capable": false,
+                          "Index Cond": "((task_id = 1) AND (user_id = users.id))",
+                          "Index Name": "users_tasks_pkey",
+                          "Node Type": "Index Only Scan",
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Inner",
+                          "Plan Rows": 1,
+                          "Plan Width": 4,
+                          "Relation Name": "users_tasks",
+                          "Scan Direction": "Forward",
+                          "Startup Cost": 0.15,
+                          "Total Cost": 8.17
+                        }
+                      ],
+                      "Startup Cost": 0.31,
+                      "Total Cost": 16.36
+                    }
+                  ],
+                  "Startup Cost": 16.36,
+                  "Strategy": "Plain",
+                  "Total Cost": 16.38
+                }
+              ],
+              "Startup Cost": 16.36,
+              "Total Cost": 20838.0
+            }
+          ],
+          "Startup Cost": 20844.35,
+          "Strategy": "Plain",
+          "Total Cost": 20844.37
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-inner-m2o": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": true,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 76,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "projects_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Relation Name": "projects",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Alias": "clients_1",
+                  "Async Capable": false,
+                  "Index Cond": "(id = projects.client_id)",
+                  "Index Name": "clients_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "clients",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                }
+              ],
+              "Startup Cost": 0.3,
+              "Total Cost": 16.35
+            }
+          ],
+          "Startup Cost": 16.38,
+          "Strategy": "Plain",
+          "Total Cost": 16.4
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-inner-o2m": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 68,
+              "Plans": [
+                {
+                  "Alias": "clients",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "clients_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "clients",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Async Capable": false,
+                  "Filter": "((json_agg(ROW(projects_1.id, projects_1.name, projects_1.client_id)))::jsonb IS NOT NULL)",
+                  "Node Type": "Aggregate",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Partial Mode": "Simple",
+                  "Plan Rows": 1,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Alias": "projects_1",
+                      "Async Capable": false,
+                      "Filter": "(client_id = clients.id)",
+                      "Node Type": "Seq Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 6,
+                      "Plan Width": 40,
+                      "Relation Name": "projects",
+                      "Startup Cost": 0.0,
+                      "Total Cost": 25.0
+                    }
+                  ],
+                  "Startup Cost": 25.02,
+                  "Strategy": "Plain",
+                  "Total Cost": 25.04
+                }
+              ],
+              "Startup Cost": 25.17,
+              "Total Cost": 33.22
+            }
+          ],
+          "Startup Cost": 33.23,
+          "Strategy": "Plain",
+          "Total Cost": 33.24
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-many-to-many": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Left",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 68,
+              "Plans": [
+                {
+                  "Alias": "users",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "users_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "users",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Async Capable": false,
+                  "Node Type": "Aggregate",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Partial Mode": "Simple",
+                  "Plan Rows": 1,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Async Capable": false,
+                      "Hash Cond": "(tasks.id = users_tasks.task_id)",
+                      "Inner Unique": true,
+                      "Join Type": "Inner",
+                      "Node Type": "Hash Join",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 11,
+                      "Plan Width": 40,
+                      "Plans": [
+                        {
+                          "Alias": "tasks",
+                          "Async Capable": false,
+                          "Node Type": "Seq Scan",
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Outer",
+                          "Plan Rows": 1200,
+                          "Plan Width": 40,
+                          "Relation Name": "tasks",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 22.0
+                        },
+                        {
+                          "Async Capable": false,
+                          "Node Type": "Hash",
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Inner",
+                          "Plan Rows": 11,
+                          "Plan Width": 4,
+                          "Plans": [
+                            {
+                              "Alias": "users_tasks",
+                              "Async Capable": false,
+                              "Node Type": "Bitmap Heap Scan",
+                              "Parallel Aware": false,
+                              "Parent Relationship": "Outer",
+                              "Plan Rows": 11,
+                              "Plan Width": 4,
+                              "Plans": [
+                                {
+                                  "Async Capable": false,
+                                  "Index Cond": "(user_id = users.id)",
+                                  "Index Name": "users_tasks_pkey",
+                                  "Node Type": "Bitmap Index Scan",
+                                  "Parallel Aware": false,
+                                  "Parent Relationship": "Outer",
+                                  "Plan Rows": 11,
+                                  "Plan Width": 0,
+                                  "Startup Cost": 0.0,
+                                  "Total Cost": 25.11
+                                }
+                              ],
+                              "Recheck Cond": "(user_id = users.id)",
+                              "Relation Name": "users_tasks",
+                              "Startup Cost": 25.11,
+                              "Total Cost": 35.78
+                            }
+                          ],
+                          "Startup Cost": 35.78,
+                          "Total Cost": 35.78
+                        }
+                      ],
+                      "Startup Cost": 35.92,
+                      "Total Cost": 61.08
+                    }
+                  ],
+                  "Startup Cost": 61.11,
+                  "Strategy": "Plain",
+                  "Total Cost": 61.12
+                }
+              ],
+              "Startup Cost": 61.26,
+              "Total Cost": 69.3
+            }
+          ],
+          "Startup Cost": 69.31,
+          "Strategy": "Plain",
+          "Total Cost": 69.33
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-many-to-one": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": true,
+              "Join Type": "Left",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 72,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "projects_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Relation Name": "projects",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Alias": "clients_1",
+                  "Async Capable": false,
+                  "Index Cond": "(id = projects.client_id)",
+                  "Index Name": "clients_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "clients",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                }
+              ],
+              "Startup Cost": 0.3,
+              "Total Cost": 16.35
+            }
+          ],
+          "Startup Cost": 16.38,
+          "Strategy": "Plain",
+          "Total Cost": 16.4
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-not-null-o2m": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 68,
+              "Plans": [
+                {
+                  "Alias": "clients",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "clients_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "clients",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Async Capable": false,
+                  "Filter": "((json_agg(ROW(projects_1.id, projects_1.name, projects_1.client_id)))::jsonb IS NOT NULL)",
+                  "Node Type": "Aggregate",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Partial Mode": "Simple",
+                  "Plan Rows": 1,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Alias": "projects_1",
+                      "Async Capable": false,
+                      "Filter": "(client_id = clients.id)",
+                      "Node Type": "Seq Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 6,
+                      "Plan Width": 40,
+                      "Relation Name": "projects",
+                      "Startup Cost": 0.0,
+                      "Total Cost": 25.0
+                    }
+                  ],
+                  "Startup Cost": 25.02,
+                  "Strategy": "Plain",
+                  "Total Cost": 25.04
+                }
+              ],
+              "Startup Cost": 25.17,
+              "Total Cost": 33.22
+            }
+          ],
+          "Startup Cost": 33.23,
+          "Strategy": "Plain",
+          "Total Cost": 33.24
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-one-to-many": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Left",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 68,
+              "Plans": [
+                {
+                  "Alias": "clients",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "clients_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "clients",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Async Capable": false,
+                  "Node Type": "Aggregate",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Partial Mode": "Simple",
+                  "Plan Rows": 1,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Alias": "projects_1",
+                      "Async Capable": false,
+                      "Filter": "(client_id = clients.id)",
+                      "Node Type": "Seq Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 6,
+                      "Plan Width": 40,
+                      "Relation Name": "projects",
+                      "Startup Cost": 0.0,
+                      "Total Cost": 25.0
+                    }
+                  ],
+                  "Startup Cost": 25.02,
+                  "Strategy": "Plain",
+                  "Total Cost": 25.03
+                }
+              ],
+              "Startup Cost": 25.17,
+              "Total Cost": 33.21
+            }
+          ],
+          "Startup Cost": 33.22,
+          "Strategy": "Plain",
+          "Total Cost": 33.24
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/embed-spread": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": true,
+              "Join Type": "Left",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 64,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Index Cond": "(id = 1)",
+                  "Index Name": "projects_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "projects",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                },
+                {
+                  "Alias": "clients_1",
+                  "Async Capable": false,
+                  "Index Cond": "(id = projects.client_id)",
+                  "Index Name": "clients_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Plan Rows": 1,
+                  "Plan Width": 36,
+                  "Relation Name": "clients",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                }
+              ],
+              "Startup Cost": 0.3,
+              "Total Cost": 16.35
+            }
+          ],
+          "Startup Cost": 16.36,
+          "Strategy": "Plain",
+          "Total Cost": 16.38
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-any": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"*/*\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-array-plain": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-array-stripped": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.array+json;nulls=stripped\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-csv": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(pgrst_source.id, pgrst_source.name))",
+            "(($1 || '\n'::text) || COALESCE(string_agg(\"substring\"((ROW(pgrst_source.id, pgrst_source.name))::text, 2, (length((ROW(pgrst_source.id, pgrst_source.name))::text) - 2)), '\n'::text), ''::text))",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(projects.id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Output": [
+                "projects.id",
+                "projects.name"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 36,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Schema": "test",
+              "Startup Cost": 0.15,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 8.17
+            },
+            {
+              "Async Capable": false,
+              "Node Type": "Aggregate",
+              "Output": [
+                "COALESCE(string_agg((json_object_keys((row_to_json(hh.*)))), ','::text), ''::text)"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Partial Mode": "Simple",
+              "Plan Rows": 1,
+              "Plan Width": 32,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Node Type": "ProjectSet",
+                  "Output": [
+                    "json_object_keys((row_to_json(hh.*)))"
+                  ],
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 100,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Async Capable": false,
+                      "Node Type": "Limit",
+                      "Output": [
+                        "(row_to_json(hh.*))"
+                      ],
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Plans": [
+                        {
+                          "Alias": "hh",
+                          "Async Capable": false,
+                          "CTE Name": "pgrst_source",
+                          "Node Type": "CTE Scan",
+                          "Output": [
+                            "row_to_json(hh.*)"
+                          ],
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Outer",
+                          "Plan Rows": 1,
+                          "Plan Width": 32,
+                          "Startup Cost": 0.0,
+                          "Total Cost": 0.02
+                        }
+                      ],
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.02
+                    }
+                  ],
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.53
+                }
+              ],
+              "Startup Cost": 0.78,
+              "Strategy": "Plain",
+              "Subplan Name": "InitPlan 2 (returns $1)",
+              "Total Cost": 0.79
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Output": [
+                "pgrst_source.id",
+                "pgrst_source.name"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 36,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 9.01,
+          "Strategy": "Plain",
+          "Total Cost": 9.03
+        },
+        "Query Identifier": -3908531364631832612
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"text/csv\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-csv-text": {
+    "body": "Aggregate  (cost=9.01..9.03 rows=1 width=144)\n  CTE pgrst_source\n    ->  Index Scan using projects_pkey on projects  (cost=0.15..8.17 rows=1 width=36)\n          Index Cond: (id = 1)\n  InitPlan 2 (returns $1)\n    ->  Aggregate  (cost=0.78..0.79 rows=1 width=32)\n          ->  ProjectSet  (cost=0.00..0.53 rows=100 width=32)\n                ->  Limit  (cost=0.00..0.02 rows=1 width=32)\n                      ->  CTE Scan on pgrst_source hh  (cost=0.00..0.02 rows=1 width=32)\n  ->  CTE Scan on pgrst_source  (cost=0.00..0.02 rows=1 width=36)\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"text/csv\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-json-verbose": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "COALESCE(json_agg(ROW(projects.id, projects.name, projects.client_id)), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Schema": "test",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        },
+        "Query Identifier": -8788950181428066512
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-object-json-name": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-object-many-rows": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.03
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-object-stripped": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json;nulls=stripped\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-object-verbose": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "COALESCE((json_agg(ROW(projects.id, projects.name, projects.client_id)) -> 0), 'null'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(projects.id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Schema": "test",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        },
+        "Query Identifier": -5493746732298889296
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/for-octet-stream": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: application/vnd.pgrst.plan+json; for=\"application/octet-stream\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "plan/for-plan-nested": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: application/vnd.pgrst.plan+text; for=\"application/vnd.pgrst.plan+text; for=\"application/json\"\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "plan/for-text-plain-with-options": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: application/vnd.pgrst.plan+json; for=\"text/plain\"; options=verbose|buffers"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "plan/for-text-xml": {
+    "body": {
+      "code": "PGRST107",
+      "details": null,
+      "hint": null,
+      "message": "None of these media types are available: application/vnd.pgrst.plan+json; for=\"text/xml\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "plan/for-uppercase-type": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Index Cond": "(id = 1)",
+              "Index Name": "projects_pkey",
+              "Node Type": "Index Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Scan Direction": "Forward",
+              "Startup Cost": 0.15,
+              "Total Cost": 8.17
+            }
+          ],
+          "Startup Cost": 8.18,
+          "Strategy": "Plain",
+          "Total Cost": 8.2
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/insert": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Name": "json_to_record",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.04,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/insert-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.206,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.047,
+          "Actual Total Time": 0.047,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.043,
+              "Actual Total Time": 0.043,
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 1,
+                  "Actual Startup Time": 0.019,
+                  "Actual Total Time": 0.019,
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Name": "json_to_record",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.044,
+              "Actual Total Time": 0.044,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.04,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        },
+        "Planning Time": 0.037,
+        "Triggers": [
+          {
+            "Calls": 1,
+            "Constraint Name": "client",
+            "Relation": "projects",
+            "Time": 0.143,
+            "Trigger Name": "RI_ConstraintTrigger_c_571835"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/insert-bad-column": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'nope' column of 'projects' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "plan/insert-bulk-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.14,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.041,
+          "Actual Total Time": 0.041,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 10,
+              "Actual Startup Time": 0.025,
+              "Actual Total Time": 0.036,
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 100,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 10,
+                  "Actual Startup Time": 0.013,
+                  "Actual Total Time": 0.013,
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Name": "json_to_recordset",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 100,
+                  "Plan Width": 40,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 1.0
+                }
+              ],
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 1.0
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 10,
+              "Actual Startup Time": 0.026,
+              "Actual Total Time": 0.037,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 100,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 2.0
+            }
+          ],
+          "Startup Cost": 3.25,
+          "Strategy": "Plain",
+          "Total Cost": 3.27
+        },
+        "Planning Time": 0.027,
+        "Triggers": [
+          {
+            "Calls": 10,
+            "Constraint Name": "client",
+            "Relation": "projects",
+            "Time": 0.075,
+            "Trigger Name": "RI_ConstraintTrigger_c_571835"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/insert-keys-differ": {
+    "body": {
+      "code": "PGRST102",
+      "details": null,
+      "hint": null,
+      "message": "All object keys must match"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "plan/insert-representation-object-verbose": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "''::text",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "'{}'::text[]",
+            "COALESCE((json_agg(ROW(projects.id, projects.name, projects.client_id)) -> 0), 'null'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "projects_1",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Output": [
+                "projects_1.id",
+                "projects_1.name",
+                "projects_1.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Call": "json_to_record('{\"client_id\":1,\"id\":100,\"name\":\"Project 100\"}'::json)",
+                  "Function Name": "json_to_record",
+                  "Node Type": "Function Scan",
+                  "Output": [
+                    "_.id",
+                    "_.name",
+                    "_.client_id"
+                  ],
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Schema": "pg_catalog",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Relation Name": "projects",
+              "Schema": "test",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.04,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        },
+        "Query Identifier": 7446037971883430982
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/insert-text": {
+    "body": "Aggregate  (cost=0.04..0.06 rows=1 width=200)\n  CTE pgrst_source\n    ->  Insert on projects  (cost=0.00..0.01 rows=1 width=40)\n          ->  Function Scan on json_to_record _  (cost=0.00..0.01 rows=1 width=40)\n  ->  CTE Scan on pgrst_source  (cost=0.00..0.02 rows=1 width=4)\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/max-affected-not-enforced": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-all-reordered": {
+    "body": [
+      {
+        "Execution Time": 0.023,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.013,
+          "Actual Total Time": 0.013,
+          "Async Capable": false,
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "COALESCE(json_agg(ROW(projects.id, projects.name, projects.client_id)), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 5,
+              "Actual Startup Time": 0.003,
+              "Actual Total Time": 0.004,
+              "Alias": "projects",
+              "Async Capable": false,
+              "Local Dirtied Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Written Blocks": 0,
+              "Node Type": "Seq Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Schema": "test",
+              "Shared Dirtied Blocks": 0,
+              "Shared Hit Blocks": 1,
+              "Shared Read Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Startup Cost": 0.0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Total Cost": 22.0,
+              "WAL Bytes": 0,
+              "WAL FPI": 0,
+              "WAL Records": 0
+            }
+          ],
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Total Cost": 28.02,
+          "WAL Bytes": 0,
+          "WAL FPI": 0,
+          "WAL Records": 0
+        },
+        "Planning": {
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.039,
+        "Query Identifier": -8788950181428066512,
+        "Settings": {
+          "search_path": "\"test\", \"public\""
+        },
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze|verbose|settings|buffers|wal; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-analyze-wal": {
+    "body": [
+      {
+        "Execution Time": 0.029,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.018,
+          "Actual Total Time": 0.018,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 5,
+              "Actual Startup Time": 0.008,
+              "Actual Total Time": 0.009,
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0,
+              "WAL Bytes": 0,
+              "WAL FPI": 0,
+              "WAL Records": 0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02,
+          "WAL Bytes": 0,
+          "WAL FPI": 0,
+          "WAL Records": 0
+        },
+        "Planning Time": 0.049,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze|wal; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-buffers": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Local Dirtied Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Written Blocks": 0,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Shared Dirtied Blocks": 0,
+              "Shared Hit Blocks": 0,
+              "Shared Read Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Startup Cost": 0.0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Total Cost": 28.02
+        },
+        "Planning": {
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=buffers; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-empty-value": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-settings": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        },
+        "Settings": {
+          "search_path": "\"test\", \"public\""
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=settings; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-text-verbose": {
+    "body": "Aggregate  (cost=28.00..28.02 rows=1 width=144)\n  Output: NULL::bigint, count(ROW(projects.id, projects.name, projects.client_id)), COALESCE(json_agg(ROW(projects.id, projects.name, projects.client_id)), '[]'::json), NULLIF(current_setting('response.headers'::text, true), ''::text), NULLIF(current_setting('response.status'::text, true), ''::text), ''::text\n  ->  Seq Scan on test.projects  (cost=0.00..22.00 rows=1200 width=40)\n        Output: projects.id, projects.name, projects.client_id\nQuery Identifier: -8788950181428066512\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-unknown-ignored": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "COALESCE(json_agg(ROW(projects.id, projects.name, projects.client_id)), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Schema": "test",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        },
+        "Query Identifier": -8788950181428066512
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-verbose": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(projects.id, projects.name, projects.client_id))",
+            "COALESCE(json_agg(ROW(projects.id, projects.name, projects.client_id)), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Output": [
+                "projects.id",
+                "projects.name",
+                "projects.client_id"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Schema": "test",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        },
+        "Query Identifier": -8788950181428066512
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/options-wrong-case-ignored": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1200,
+              "Plan Width": 40,
+              "Relation Name": "projects",
+              "Startup Cost": 0.0,
+              "Total Cost": 22.0
+            }
+          ],
+          "Startup Cost": 28.0,
+          "Strategy": "Plain",
+          "Total Cost": 28.02
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/order-limit-offset": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Limit",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 2,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Node Type": "Sort",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1200,
+                  "Plan Width": 40,
+                  "Plans": [
+                    {
+                      "Alias": "projects",
+                      "Async Capable": false,
+                      "Node Type": "Seq Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1200,
+                      "Plan Width": 40,
+                      "Relation Name": "projects",
+                      "Startup Cost": 0.0,
+                      "Total Cost": 22.0
+                    }
+                  ],
+                  "Sort Key": [
+                    "projects.name DESC"
+                  ],
+                  "Startup Cost": 37.51,
+                  "Total Cost": 40.51
+                }
+              ],
+              "Startup Cost": 37.51,
+              "Total Cost": 37.52
+            }
+          ],
+          "Startup Cost": 37.53,
+          "Strategy": "Plain",
+          "Total Cost": 37.55
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/range-header": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Limit",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 2,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Alias": "projects",
+                  "Async Capable": false,
+                  "Index Name": "projects_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1200,
+                  "Plan Width": 40,
+                  "Relation Name": "projects",
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 66.15
+                }
+              ],
+              "Startup Cost": 0.15,
+              "Total Cost": 0.26
+            }
+          ],
+          "Startup Cost": 0.28,
+          "Strategy": "Plain",
+          "Total Cost": 0.3
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-analyze-stable": {
+    "body": [
+      {
+        "Execution Time": 0.05,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.038,
+          "Actual Total Time": 0.038,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 5,
+              "Actual Startup Time": 0.03,
+              "Actual Total Time": 0.03,
+              "Alias": "pgrst_call",
+              "Async Capable": false,
+              "Function Name": "getallprojects",
+              "Node Type": "Function Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 2019,
+              "Plan Width": 40,
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 20.44
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.032,
+              "Actual Total Time": 0.032,
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Filter": "(id = 1)",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 10,
+              "Plan Width": 40,
+              "Rows Removed by Filter": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 45.43
+            }
+          ],
+          "Startup Cost": 65.92,
+          "Strategy": "Plain",
+          "Total Cost": 65.94
+        },
+        "Planning Time": 0.031,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-count-exact": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "pgrst_call",
+              "Async Capable": false,
+              "Function Name": "getallprojects",
+              "Node Type": "Function Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 2019,
+              "Plan Width": 40,
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 20.44
+            },
+            {
+              "Async Capable": false,
+              "Node Type": "Aggregate",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Partial Mode": "Simple",
+              "Plan Rows": 1,
+              "Plan Width": 8,
+              "Plans": [
+                {
+                  "Alias": "projects_1",
+                  "Async Capable": false,
+                  "CTE Name": "pgrst_source",
+                  "Node Type": "CTE Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 2019,
+                  "Plan Width": 0,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 40.38
+                }
+              ],
+              "Startup Cost": 45.43,
+              "Strategy": "Plain",
+              "Subplan Name": "InitPlan 2 (returns $1)",
+              "Total Cost": 45.44
+            },
+            {
+              "Alias": "_postgrest_t",
+              "Async Capable": false,
+              "Node Type": "Subquery Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 64,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Node Type": "Limit",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Subquery",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Plans": [
+                    {
+                      "Alias": "projects",
+                      "Async Capable": false,
+                      "CTE Name": "pgrst_source",
+                      "Node Type": "CTE Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 2019,
+                      "Plan Width": 40,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 40.38
+                    }
+                  ],
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.02
+                }
+              ],
+              "Startup Cost": 0.0,
+              "Total Cost": 0.03
+            }
+          ],
+          "Startup Cost": 65.91,
+          "Strategy": "Plain",
+          "Total Cost": 65.94
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-for-csv": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "pgrst_call",
+              "Async Capable": false,
+              "Function Name": "getallprojects",
+              "Node Type": "Function Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 2019,
+              "Plan Width": 32,
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 20.44
+            },
+            {
+              "Async Capable": false,
+              "Node Type": "Aggregate",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Partial Mode": "Simple",
+              "Plan Rows": 1,
+              "Plan Width": 32,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Node Type": "ProjectSet",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 100,
+                  "Plan Width": 32,
+                  "Plans": [
+                    {
+                      "Async Capable": false,
+                      "Node Type": "Limit",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Plans": [
+                        {
+                          "Alias": "hh",
+                          "Async Capable": false,
+                          "CTE Name": "pgrst_source",
+                          "Node Type": "CTE Scan",
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Outer",
+                          "Plan Rows": 2019,
+                          "Plan Width": 32,
+                          "Startup Cost": 0.0,
+                          "Total Cost": 45.43
+                        }
+                      ],
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.02
+                    }
+                  ],
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.53
+                }
+              ],
+              "Startup Cost": 0.78,
+              "Strategy": "Plain",
+              "Subplan Name": "InitPlan 2 (returns $1)",
+              "Total Cost": 0.79
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 2019,
+              "Plan Width": 32,
+              "Startup Cost": 0.0,
+              "Total Cost": 40.38
+            }
+          ],
+          "Startup Cost": 107.04,
+          "Strategy": "Plain",
+          "Total Cost": 107.07
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"text/csv\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-for-object": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "pgrst_call",
+              "Async Capable": false,
+              "Function Name": "getproject",
+              "Node Type": "Function Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 10.25
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 20.0
+            }
+          ],
+          "Startup Cost": 35.25,
+          "Strategy": "Plain",
+          "Total Cost": 35.28
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/vnd.pgrst.object+json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-inlined-sql-function": {
+    "body": "Aggregate  (cost=15.02..15.04 rows=1 width=144)\n  ->  Bitmap Heap Scan on items  (cost=4.27..14.97 rows=11 width=8)\n        Recheck Cond: ((id > '10'::bigint) AND (id <= '15'::bigint))\n        ->  Bitmap Index Scan on items_pkey  (cost=0.00..4.27 rows=11 width=0)\n              Index Cond: ((id > '10'::bigint) AND (id <= '15'::bigint))\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-post-scalar": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 140,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Node Type": "Limit",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 8,
+                  "Plans": [
+                    {
+                      "Alias": "_",
+                      "Async Capable": false,
+                      "Function Name": "json_to_record",
+                      "Node Type": "Function Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 8,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.01
+                    }
+                  ],
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                },
+                {
+                  "Async Capable": false,
+                  "Node Type": "Result",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Plan Rows": 1,
+                  "Plan Width": 4,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.04
+            },
+            {
+              "Alias": "add_them",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.06,
+          "Strategy": "Plain",
+          "Total Cost": 0.08
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-post-volatile": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Node Type": "Limit",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 4,
+                  "Plans": [
+                    {
+                      "Alias": "_",
+                      "Async Capable": false,
+                      "Function Name": "json_to_record",
+                      "Node Type": "Function Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 4,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.01
+                    }
+                  ],
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                },
+                {
+                  "Alias": "pgrst_call",
+                  "Async Capable": false,
+                  "Function Name": "getproject",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Plan Rows": 1000,
+                  "Plan Width": 40,
+                  "Startup Cost": 0.25,
+                  "Total Cost": 10.25
+                }
+              ],
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 20.26
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 20.0
+            }
+          ],
+          "Startup Cost": 45.27,
+          "Strategy": "Plain",
+          "Total Cost": 45.29
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-post-volatile-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.161,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.135,
+          "Actual Total Time": 0.135,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 2,
+              "Actual Startup Time": 0.128,
+              "Actual Total Time": 0.129,
+              "Async Capable": false,
+              "Inner Unique": false,
+              "Join Type": "Inner",
+              "Node Type": "Nested Loop",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 1,
+                  "Actual Startup Time": 0.007,
+                  "Actual Total Time": 0.008,
+                  "Async Capable": false,
+                  "Node Type": "Limit",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 40,
+                  "Plans": [
+                    {
+                      "Actual Loops": 1,
+                      "Actual Rows": 1,
+                      "Actual Startup Time": 0.007,
+                      "Actual Total Time": 0.007,
+                      "Alias": "_",
+                      "Async Capable": false,
+                      "Function Name": "json_to_record",
+                      "Node Type": "Function Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 40,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.01
+                    }
+                  ],
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                },
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 2,
+                  "Actual Startup Time": 0.12,
+                  "Actual Total Time": 0.12,
+                  "Alias": "pgrst_call",
+                  "Async Capable": false,
+                  "Function Name": "setprojects",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Inner",
+                  "Plan Rows": 1000,
+                  "Plan Width": 40,
+                  "Startup Cost": 0.25,
+                  "Total Cost": 10.25
+                }
+              ],
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 20.26
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 2,
+              "Actual Startup Time": 0.129,
+              "Actual Total Time": 0.129,
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 20.0
+            }
+          ],
+          "Startup Cost": 45.27,
+          "Strategy": "Plain",
+          "Total Cost": 45.29
+        },
+        "Planning Time": 0.037,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-scalar": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 140,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Result",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Alias": "add_them",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.03,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-setof": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "pgrst_call",
+              "Async Capable": false,
+              "Function Name": "getallprojects",
+              "Node Type": "Function Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 2019,
+              "Plan Width": 40,
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 20.44
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Filter": "(id = ANY ('{1,2,3}'::integer[]))",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 30,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 47.95
+            }
+          ],
+          "Startup Cost": 68.54,
+          "Strategy": "Plain",
+          "Total Cost": 68.56
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-setof-args": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "pgrst_call",
+              "Async Capable": false,
+              "Function Name": "getproject",
+              "Node Type": "Function Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Startup Cost": 0.25,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 10.25
+            },
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1000,
+              "Plan Width": 40,
+              "Startup Cost": 0.0,
+              "Total Cost": 20.0
+            }
+          ],
+          "Startup Cost": 35.25,
+          "Strategy": "Plain",
+          "Total Cost": 35.27
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-setof-text": {
+    "body": "Aggregate  (cost=70.92..70.94 rows=1 width=144)\n  CTE pgrst_source\n    ->  Function Scan on getallprojects pgrst_call  (cost=0.25..20.44 rows=2019 width=40)\n  ->  CTE Scan on pgrst_source projects  (cost=0.00..40.38 rows=2019 width=40)\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/rpc-void": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 140,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Result",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.26
+            },
+            {
+              "Alias": "ret_void",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.29,
+          "Strategy": "Plain",
+          "Total Cost": 0.31
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/single-filter-json": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "Bitmap Heap Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 3,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Index Cond": "(id = ANY ('{1,2,3}'::integer[]))",
+                  "Index Name": "projects_pkey",
+                  "Node Type": "Bitmap Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 3,
+                  "Plan Width": 0,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 8.48
+                }
+              ],
+              "Recheck Cond": "(id = ANY ('{1,2,3}'::integer[]))",
+              "Relation Name": "projects",
+              "Startup Cost": 8.48,
+              "Total Cost": 15.59
+            }
+          ],
+          "Startup Cost": 15.61,
+          "Strategy": "Plain",
+          "Total Cost": 15.63
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/single-filter-text": {
+    "body": "Aggregate  (cost=15.61..15.63 rows=1 width=144)\n  ->  Bitmap Heap Scan on projects  (cost=8.48..15.59 rows=3 width=40)\n        Recheck Cond: (id = ANY ('{1,2,3}'::integer[]))\n        ->  Bitmap Index Scan on projects_pkey  (cost=0.00..8.48 rows=3 width=0)\n              Index Cond: (id = ANY ('{1,2,3}'::integer[]))\n",
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-accept-profile": {
+    "body": "Aggregate  (cost=19.45..19.47 rows=1 width=144)\n  ->  Seq Scan on users  (cost=0.00..16.30 rows=630 width=32)\n",
+    "headers": {
+      "content-profile": "personal",
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-all-options": {
+    "body": [
+      {
+        "Execution Time": 0.03,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.019,
+          "Actual Total Time": 0.02,
+          "Async Capable": false,
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(users.username, users.data, users.age_range, users.status, users.catchphrase))",
+            "COALESCE(json_agg(ROW(users.username, users.data, users.age_range, users.status, users.catchphrase)), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 5,
+              "Actual Startup Time": 0.003,
+              "Actual Total Time": 0.004,
+              "Alias": "users",
+              "Async Capable": false,
+              "Local Dirtied Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Written Blocks": 0,
+              "Node Type": "Seq Scan",
+              "Output": [
+                "users.username",
+                "users.data",
+                "users.age_range",
+                "users.status",
+                "users.catchphrase"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 510,
+              "Plan Width": 132,
+              "Relation Name": "users",
+              "Schema": "public",
+              "Shared Dirtied Blocks": 0,
+              "Shared Hit Blocks": 1,
+              "Shared Read Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Startup Cost": 0.0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Total Cost": 15.1,
+              "WAL Bytes": 0,
+              "WAL FPI": 0,
+              "WAL Records": 0
+            }
+          ],
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Startup Cost": 17.65,
+          "Strategy": "Plain",
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Total Cost": 17.67,
+          "WAL Bytes": 0,
+          "WAL FPI": 0,
+          "WAL Records": 0
+        },
+        "Planning": {
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.039,
+        "Query Identifier": 3447857447558518498,
+        "Settings": {
+          "search_path": "\"public\", \"public\""
+        },
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze|verbose|settings|buffers|wal; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-analyze": {
+    "body": "Aggregate  (cost=17.65..17.67 rows=1 width=144) (actual time=0.072..0.072 rows=1 loops=1)\n  ->  Seq Scan on users  (cost=0.00..15.10 rows=510 width=132) (actual time=0.004..0.005 rows=5 loops=1)\nPlanning Time: 0.037 ms\nExecution Time: 0.085 ms\n",
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-csv": {
+    "body": "Aggregate  (cost=37.57..37.60 rows=1 width=144)\n  CTE pgrst_source\n    ->  Seq Scan on users  (cost=0.00..15.10 rows=510 width=132)\n  InitPlan 2 (returns $1)\n    ->  Aggregate  (cost=0.78..0.79 rows=1 width=32)\n          ->  ProjectSet  (cost=0.00..0.53 rows=100 width=32)\n                ->  Limit  (cost=0.00..0.02 rows=1 width=32)\n                      ->  CTE Scan on pgrst_source hh  (cost=0.00..11.48 rows=510 width=32)\n  ->  CTE Scan on pgrst_source  (cost=0.00..10.20 rows=510 width=132)\n",
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+text; for=\"text/csv\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-default": {
+    "body": "Aggregate  (cost=17.65..17.67 rows=1 width=144)\n  ->  Seq Scan on users  (cost=0.00..15.10 rows=510 width=132)\n",
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-delete": {
+    "body": [
+      {
+        "Execution Time": 0.06,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.025,
+          "Actual Total Time": 0.025,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.02,
+              "Actual Total Time": 0.021,
+              "Alias": "messages",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Delete",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 6,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 1,
+                  "Actual Startup Time": 0.01,
+                  "Actual Total Time": 0.01,
+                  "Alias": "messages",
+                  "Async Capable": false,
+                  "Index Cond": "(id = '1'::bigint)",
+                  "Index Name": "messages_pkey",
+                  "Node Type": "Index Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 6,
+                  "Relation Name": "messages",
+                  "Rows Removed by Index Recheck": 0,
+                  "Scan Direction": "Forward",
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.17
+                }
+              ],
+              "Relation Name": "messages",
+              "Startup Cost": 0.15,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 8.17
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.021,
+              "Actual Total Time": 0.021,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 8.19,
+          "Strategy": "Plain",
+          "Total Cost": 8.21
+        },
+        "Planning Time": 0.111,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-embed": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(channels.id, (COALESCE(((json_agg(ROW(messages_1.id)))::jsonb), '[]'::jsonb))))",
+            "COALESCE(json_agg(ROW(channels.id, (COALESCE(((json_agg(ROW(messages_1.id)))::jsonb), '[]'::jsonb)))), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Limit",
+              "Output": [
+                "channels.id",
+                "(COALESCE(((json_agg(ROW(messages_1.id)))::jsonb), '[]'::jsonb))"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 40,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Inner Unique": false,
+                  "Join Type": "Left",
+                  "Node Type": "Nested Loop",
+                  "Output": [
+                    "channels.id",
+                    "COALESCE(((json_agg(ROW(messages_1.id)))::jsonb), '[]'::jsonb)"
+                  ],
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 810,
+                  "Plan Width": 40,
+                  "Plans": [
+                    {
+                      "Alias": "channels",
+                      "Async Capable": false,
+                      "Node Type": "Seq Scan",
+                      "Output": [
+                        "channels.id",
+                        "channels.data",
+                        "channels.slug"
+                      ],
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 810,
+                      "Plan Width": 8,
+                      "Relation Name": "channels",
+                      "Schema": "public",
+                      "Startup Cost": 0.0,
+                      "Total Cost": 18.1
+                    },
+                    {
+                      "Async Capable": false,
+                      "Node Type": "Aggregate",
+                      "Output": [
+                        "(json_agg(ROW(messages_1.id)))::jsonb"
+                      ],
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Inner",
+                      "Partial Mode": "Simple",
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Plans": [
+                        {
+                          "Alias": "messages_1",
+                          "Async Capable": false,
+                          "Filter": "(messages_1.channel_id = channels.id)",
+                          "Node Type": "Seq Scan",
+                          "Output": [
+                            "messages_1.id",
+                            "messages_1.data",
+                            "messages_1.message",
+                            "messages_1.username",
+                            "messages_1.channel_id"
+                          ],
+                          "Parallel Aware": false,
+                          "Parent Relationship": "Outer",
+                          "Plan Rows": 3,
+                          "Plan Width": 8,
+                          "Relation Name": "messages",
+                          "Schema": "public",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 17.25
+                        }
+                      ],
+                      "Startup Cost": 17.26,
+                      "Strategy": "Plain",
+                      "Total Cost": 17.28
+                    }
+                  ],
+                  "Startup Cost": 17.26,
+                  "Total Cost": 14018.95
+                }
+              ],
+              "Startup Cost": 17.26,
+              "Total Cost": 34.55
+            }
+          ],
+          "Startup Cost": 34.55,
+          "Strategy": "Plain",
+          "Total Cost": 34.57
+        },
+        "Query Identifier": -1138750193643999548
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=verbose; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-insert-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.054,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.035,
+          "Actual Total Time": 0.036,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.031,
+              "Actual Total Time": 0.032,
+              "Alias": "users",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 132,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 1,
+                  "Actual Startup Time": 0.009,
+                  "Actual Total Time": 0.009,
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Name": "json_to_record",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 132,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Relation Name": "users",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.032,
+              "Actual Total Time": 0.032,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.04,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        },
+        "Planning Time": 0.043,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-insert-content-profile": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "users",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 100,
+              "Plans": [
+                {
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Name": "json_to_record",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 100,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Relation Name": "users",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.04,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        }
+      }
+    ],
+    "headers": {
+      "content-profile": "personal",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-json": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "users",
+              "Async Capable": false,
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 510,
+              "Plan Width": 132,
+              "Relation Name": "users",
+              "Startup Cost": 0.0,
+              "Total Cost": 15.1
+            }
+          ],
+          "Startup Cost": 17.65,
+          "Strategy": "Plain",
+          "Total Cost": 17.67
+        }
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-json-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.027,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.015,
+          "Actual Total Time": 0.015,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 4,
+              "Actual Startup Time": 0.002,
+              "Actual Total Time": 0.002,
+              "Alias": "users",
+              "Async Capable": false,
+              "Filter": "(status = 'ONLINE'::user_status)",
+              "Node Type": "Seq Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 3,
+              "Plan Width": 132,
+              "Relation Name": "users",
+              "Rows Removed by Filter": 1,
+              "Startup Cost": 0.0,
+              "Total Cost": 16.38
+            }
+          ],
+          "Startup Cost": 16.39,
+          "Strategy": "Plain",
+          "Total Cost": 16.41
+        },
+        "Planning Time": 0.045,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-rpc": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 140,
+          "Plans": [
+            {
+              "Async Capable": false,
+              "Node Type": "Result",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 0,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.01
+            }
+          ],
+          "Startup Cost": 0.02,
+          "Strategy": "Plain",
+          "Total Cost": 0.04
+        }
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-single": {
+    "body": "Aggregate  (cost=8.17..8.20 rows=1 width=144)\n  ->  Index Scan using users_pkey on users  (cost=0.15..8.17 rows=1 width=132)\n        Index Cond: (username = 'supabot'::text)\n",
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+text; for=\"application/vnd.pgrst.object+json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-update": {
+    "body": [
+      {
+        "Execution Time": 0.116,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.065,
+          "Actual Total Time": 0.065,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.061,
+              "Actual Total Time": 0.062,
+              "Alias": "users",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Update",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 38,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 1,
+                  "Actual Startup Time": 0.02,
+                  "Actual Total Time": 0.021,
+                  "Async Capable": false,
+                  "Inner Unique": false,
+                  "Join Type": "Inner",
+                  "Node Type": "Nested Loop",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 38,
+                  "Plans": [
+                    {
+                      "Actual Loops": 1,
+                      "Actual Rows": 1,
+                      "Actual Startup Time": 0.006,
+                      "Actual Total Time": 0.006,
+                      "Alias": "users",
+                      "Async Capable": false,
+                      "Index Cond": "(username = 'supabot'::text)",
+                      "Index Name": "users_pkey",
+                      "Node Type": "Index Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 6,
+                      "Relation Name": "users",
+                      "Rows Removed by Index Recheck": 0,
+                      "Scan Direction": "Forward",
+                      "Startup Cost": 0.15,
+                      "Total Cost": 8.17
+                    },
+                    {
+                      "Actual Loops": 1,
+                      "Actual Rows": 1,
+                      "Actual Startup Time": 0.014,
+                      "Actual Total Time": 0.014,
+                      "Alias": "_",
+                      "Async Capable": false,
+                      "Function Name": "json_to_record",
+                      "Node Type": "Function Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Inner",
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.01
+                    }
+                  ],
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.19
+                }
+              ],
+              "Relation Name": "users",
+              "Startup Cost": 0.15,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 8.19
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.062,
+              "Actual Total Time": 0.062,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 8.21,
+          "Strategy": "Plain",
+          "Total Cost": 8.23
+        },
+        "Planning Time": 0.055,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-verbose-settings-buffers": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Node Type": "Aggregate",
+          "Output": [
+            "NULL::bigint",
+            "count(ROW(users.username, users.data, users.age_range, users.status, users.catchphrase))",
+            "COALESCE(json_agg(ROW(users.username, users.data, users.age_range, users.status, users.catchphrase)), '[]'::json)",
+            "NULLIF(current_setting('response.headers'::text, true), ''::text)",
+            "NULLIF(current_setting('response.status'::text, true), ''::text)",
+            "''::text"
+          ],
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 144,
+          "Plans": [
+            {
+              "Alias": "users",
+              "Async Capable": false,
+              "Local Dirtied Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Written Blocks": 0,
+              "Node Type": "Seq Scan",
+              "Output": [
+                "users.username",
+                "users.data",
+                "users.age_range",
+                "users.status",
+                "users.catchphrase"
+              ],
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 510,
+              "Plan Width": 132,
+              "Relation Name": "users",
+              "Schema": "public",
+              "Shared Dirtied Blocks": 0,
+              "Shared Hit Blocks": 0,
+              "Shared Read Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Startup Cost": 0.0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Total Cost": 15.1
+            }
+          ],
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Startup Cost": 17.65,
+          "Strategy": "Plain",
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Total Cost": 17.67
+        },
+        "Planning": {
+          "Local Dirtied Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Written Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Query Identifier": 3447857447558518498,
+        "Settings": {
+          "search_path": "\"public\", \"public\""
+        }
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=verbose|settings|buffers; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/supabase-explain-wal-without-analyze": {
+    "body": {
+      "code": "22023",
+      "details": null,
+      "hint": null,
+      "message": "EXPLAIN option WAL requires ANALYZE"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "plan/unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"projects.name\".",
+      "message": "column projects.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "plan/unknown-table": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'test.nosuchtable' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "plan/update": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Update",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 94,
+              "Plans": [
+                {
+                  "Async Capable": false,
+                  "Inner Unique": false,
+                  "Join Type": "Inner",
+                  "Node Type": "Nested Loop",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 94,
+                  "Plans": [
+                    {
+                      "Alias": "projects",
+                      "Async Capable": false,
+                      "Index Cond": "(id = 3)",
+                      "Index Name": "projects_pkey",
+                      "Node Type": "Index Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 6,
+                      "Relation Name": "projects",
+                      "Scan Direction": "Forward",
+                      "Startup Cost": 0.15,
+                      "Total Cost": 8.17
+                    },
+                    {
+                      "Alias": "_",
+                      "Async Capable": false,
+                      "Function Name": "json_to_record",
+                      "Node Type": "Function Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Inner",
+                      "Plan Rows": 1,
+                      "Plan Width": 88,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.01
+                    }
+                  ],
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.19
+                }
+              ],
+              "Relation Name": "projects",
+              "Startup Cost": 0.15,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 8.19
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 8.21,
+          "Strategy": "Plain",
+          "Total Cost": 8.23
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/update-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.083,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.045,
+          "Actual Total Time": 0.045,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.041,
+              "Actual Total Time": 0.042,
+              "Alias": "projects",
+              "Async Capable": false,
+              "Node Type": "ModifyTable",
+              "Operation": "Update",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 94,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 1,
+                  "Actual Startup Time": 0.015,
+                  "Actual Total Time": 0.016,
+                  "Async Capable": false,
+                  "Inner Unique": false,
+                  "Join Type": "Inner",
+                  "Node Type": "Nested Loop",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 94,
+                  "Plans": [
+                    {
+                      "Actual Loops": 1,
+                      "Actual Rows": 1,
+                      "Actual Startup Time": 0.006,
+                      "Actual Total Time": 0.007,
+                      "Alias": "projects",
+                      "Async Capable": false,
+                      "Index Cond": "(id = 3)",
+                      "Index Name": "projects_pkey",
+                      "Node Type": "Index Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Outer",
+                      "Plan Rows": 1,
+                      "Plan Width": 6,
+                      "Relation Name": "projects",
+                      "Rows Removed by Index Recheck": 0,
+                      "Scan Direction": "Forward",
+                      "Startup Cost": 0.15,
+                      "Total Cost": 8.17
+                    },
+                    {
+                      "Actual Loops": 1,
+                      "Actual Rows": 1,
+                      "Actual Startup Time": 0.009,
+                      "Actual Total Time": 0.009,
+                      "Alias": "_",
+                      "Async Capable": false,
+                      "Function Name": "json_to_record",
+                      "Node Type": "Function Scan",
+                      "Parallel Aware": false,
+                      "Parent Relationship": "Inner",
+                      "Plan Rows": 1,
+                      "Plan Width": 88,
+                      "Startup Cost": 0.0,
+                      "Total Cost": 0.01
+                    }
+                  ],
+                  "Startup Cost": 0.15,
+                  "Total Cost": 8.19
+                }
+              ],
+              "Relation Name": "projects",
+              "Startup Cost": 0.15,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 8.19
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 1,
+              "Actual Startup Time": 0.042,
+              "Actual Total Time": 0.043,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 8.21,
+          "Strategy": "Plain",
+          "Total Cost": 8.23
+        },
+        "Planning Time": 0.037,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/upsert-ignore": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 200,
+          "Plans": [
+            {
+              "Alias": "tiobe_pls",
+              "Async Capable": false,
+              "Conflict Arbiter Indexes": [
+                "tiobe_pls_pkey"
+              ],
+              "Conflict Resolution": "NOTHING",
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 1,
+              "Plan Width": 34,
+              "Plans": [
+                {
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Function Name": "json_to_record",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 1,
+                  "Plan Width": 34,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 0.01
+                }
+              ],
+              "Relation Name": "tiobe_pls",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 0.01
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 1,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 0.02
+            }
+          ],
+          "Startup Cost": 0.04,
+          "Strategy": "Plain",
+          "Total Cost": 0.06
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/upsert-merge": {
+    "body": [
+      {
+        "Plan": {
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 172,
+          "Plans": [
+            {
+              "Alias": "tiobe_pls",
+              "Async Capable": false,
+              "Conflict Arbiter Indexes": [
+                "tiobe_pls_pkey"
+              ],
+              "Conflict Filter": "(set_config('pgrst.inserted'::text, ((COALESCE((NULLIF(current_setting('pgrst.inserted'::text, true), ''::text))::integer, 0) - 1))::text, true) <> '-1'::text)",
+              "Conflict Resolution": "UPDATE",
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 100,
+              "Plan Width": 34,
+              "Plans": [
+                {
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Filter": "(set_config('pgrst.inserted'::text, ((COALESCE((NULLIF(current_setting('pgrst.inserted'::text, true), ''::text))::integer, 0) + 1))::text, true) <> '0'::text)",
+                  "Function Name": "json_to_recordset",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 100,
+                  "Plan Width": 34,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 3.25
+                }
+              ],
+              "Relation Name": "tiobe_pls",
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 3.25
+            },
+            {
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 100,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 2.0
+            }
+          ],
+          "Startup Cost": 5.5,
+          "Strategy": "Plain",
+          "Total Cost": 5.53
+        }
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/upsert-merge-analyze": {
+    "body": [
+      {
+        "Execution Time": 0.096,
+        "Plan": {
+          "Actual Loops": 1,
+          "Actual Rows": 1,
+          "Actual Startup Time": 0.077,
+          "Actual Total Time": 0.077,
+          "Async Capable": false,
+          "Node Type": "Aggregate",
+          "Parallel Aware": false,
+          "Partial Mode": "Simple",
+          "Plan Rows": 1,
+          "Plan Width": 172,
+          "Plans": [
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 10,
+              "Actual Startup Time": 0.054,
+              "Actual Total Time": 0.072,
+              "Alias": "tiobe_pls",
+              "Async Capable": false,
+              "Conflict Arbiter Indexes": [
+                "tiobe_pls_pkey"
+              ],
+              "Conflict Filter": "(set_config('pgrst.inserted'::text, ((COALESCE((NULLIF(current_setting('pgrst.inserted'::text, true), ''::text))::integer, 0) - 1))::text, true) <> '-1'::text)",
+              "Conflict Resolution": "UPDATE",
+              "Conflicting Tuples": 0,
+              "Node Type": "ModifyTable",
+              "Operation": "Insert",
+              "Parallel Aware": false,
+              "Parent Relationship": "InitPlan",
+              "Plan Rows": 100,
+              "Plan Width": 34,
+              "Plans": [
+                {
+                  "Actual Loops": 1,
+                  "Actual Rows": 10,
+                  "Actual Startup Time": 0.017,
+                  "Actual Total Time": 0.02,
+                  "Alias": "_",
+                  "Async Capable": false,
+                  "Filter": "(set_config('pgrst.inserted'::text, ((COALESCE((NULLIF(current_setting('pgrst.inserted'::text, true), ''::text))::integer, 0) + 1))::text, true) <> '0'::text)",
+                  "Function Name": "json_to_recordset",
+                  "Node Type": "Function Scan",
+                  "Parallel Aware": false,
+                  "Parent Relationship": "Outer",
+                  "Plan Rows": 100,
+                  "Plan Width": 34,
+                  "Rows Removed by Filter": 0,
+                  "Startup Cost": 0.0,
+                  "Total Cost": 3.25
+                }
+              ],
+              "Relation Name": "tiobe_pls",
+              "Rows Removed by Conflict Filter": 0,
+              "Startup Cost": 0.0,
+              "Subplan Name": "CTE pgrst_source",
+              "Total Cost": 3.25,
+              "Tuples Inserted": 10
+            },
+            {
+              "Actual Loops": 1,
+              "Actual Rows": 10,
+              "Actual Startup Time": 0.055,
+              "Actual Total Time": 0.074,
+              "Alias": "pgrst_source",
+              "Async Capable": false,
+              "CTE Name": "pgrst_source",
+              "Node Type": "CTE Scan",
+              "Parallel Aware": false,
+              "Parent Relationship": "Outer",
+              "Plan Rows": 100,
+              "Plan Width": 4,
+              "Startup Cost": 0.0,
+              "Total Cost": 2.0
+            }
+          ],
+          "Startup Cost": 5.5,
+          "Strategy": "Plain",
+          "Total Cost": 5.53
+        },
+        "Planning Time": 0.052,
+        "Triggers": []
+      }
+    ],
+    "headers": {
+      "content-type": "application/vnd.pgrst.plan+json; for=\"application/json\"; options=analyze; charset=utf-8"
+    },
+    "status": 200
+  },
+  "plan/wal-without-analyze": {
+    "body": {
+      "code": "22023",
+      "details": null,
+      "hint": null,
+      "message": "EXPLAIN option WAL requires ANALYZE"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

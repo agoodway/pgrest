@@ -1,0 +1,593 @@
+{
+  "rls/alice-insert-for-bob": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "new row violates row-level security policy for table \"rls_notes\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 403
+  },
+  "rls/alice-insert-own": {
+    "body": [
+      {
+        "body": "mine",
+        "owner": "alice"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "rls/alice-notes": {
+    "body": [
+      {
+        "owner": "alice",
+        "slug": "a1"
+      },
+      {
+        "owner": "alice",
+        "slug": "a2"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=owner%2Cslug",
+      "content-profile": "public",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/alice-patch-bob": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "rls/alice-patch-own": {
+    "body": [
+      {
+        "body": "changed",
+        "slug": "a1"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "rls/anon-insert": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table rls_notes"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "rls/anon-notes": {
+    "body": [],
+    "headers": {
+      "content-location": "/rls_notes",
+      "content-profile": "public",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/banned": {
+    "body": {
+      "code": "P0001",
+      "details": null,
+      "hint": "contact support",
+      "message": "banned"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "rls/banned-rpc": {
+    "body": {
+      "code": "P0001",
+      "details": null,
+      "hint": "contact support",
+      "message": "banned"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "rls/bob-delete-alice": {
+    "body": null,
+    "headers": {
+      "content-range": "*/0",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 204
+  },
+  "rls/bob-notes": {
+    "body": [
+      {
+        "owner": "bob",
+        "slug": "b1"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=owner%2Cslug",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/jwt-alg-none": {
+    "body": {
+      "code": "PGRST301",
+      "details": "JWT is unsecured but expected 'alg' was not 'none'",
+      "hint": null,
+      "message": "Wrong or unsupported encoding algorithm"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"Wrong or unsupported encoding algorithm\""
+    },
+    "status": 401
+  },
+  "rls/jwt-aud-array-not-strings": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "The JWT 'aud' claim must be a string or an array of strings"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"The JWT 'aud' claim must be a string or an array of strings\""
+    },
+    "status": 401
+  },
+  "rls/jwt-aud-not-string": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "The JWT 'aud' claim must be a string or an array of strings"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"The JWT 'aud' claim must be a string or an array of strings\""
+    },
+    "status": 401
+  },
+  "rls/jwt-bad-path": {
+    "body": {
+      "code": "PGRST301",
+      "details": null,
+      "hint": null,
+      "message": "Expected 3 parts in JWT; got 2"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 401
+  },
+  "rls/jwt-basic-scheme": {
+    "body": {
+      "claims": {
+        "role": "anon"
+      },
+      "role": "anon"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/jwt-bearer-capitalized": {
+    "body": [
+      {
+        "slug": "b1"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=slug",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/jwt-bearer-lowercase": {
+    "body": [
+      {
+        "slug": "b1"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=slug",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/jwt-claims-not-object": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "Parsing claims failed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"Parsing claims failed\""
+    },
+    "status": 401
+  },
+  "rls/jwt-empty-bearer": {
+    "body": {
+      "code": "PGRST301",
+      "details": null,
+      "hint": null,
+      "message": "Empty JWT is sent in Authorization header"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"Empty JWT is sent in Authorization header\""
+    },
+    "status": 401
+  },
+  "rls/jwt-exp-future": {
+    "body": [
+      {
+        "slug": "b1"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=slug",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/jwt-exp-not-number": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "The JWT 'exp' claim must be a number"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"The JWT 'exp' claim must be a number\""
+    },
+    "status": 401
+  },
+  "rls/jwt-expired": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "JWT expired"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"JWT expired\""
+    },
+    "status": 401
+  },
+  "rls/jwt-garbage": {
+    "body": {
+      "code": "PGRST301",
+      "details": null,
+      "hint": null,
+      "message": "JWT cryptographic operation failed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"JWT cryptographic operation failed\""
+    },
+    "status": 401
+  },
+  "rls/jwt-iat-future": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "JWT issued at future"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"JWT issued at future\""
+    },
+    "status": 401
+  },
+  "rls/jwt-iat-not-number": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "The JWT 'iat' claim must be a number"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"The JWT 'iat' claim must be a number\""
+    },
+    "status": 401
+  },
+  "rls/jwt-nbf-future": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "JWT not yet valid"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"JWT not yet valid\""
+    },
+    "status": 401
+  },
+  "rls/jwt-nbf-not-number": {
+    "body": {
+      "code": "PGRST303",
+      "details": null,
+      "hint": null,
+      "message": "The JWT 'nbf' claim must be a number"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"The JWT 'nbf' claim must be a number\""
+    },
+    "status": 401
+  },
+  "rls/jwt-no-role-claim": {
+    "body": {
+      "claims": {
+        "role": "anon",
+        "sub": "alice"
+      },
+      "role": "anon"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/jwt-two-parts": {
+    "body": {
+      "code": "PGRST301",
+      "details": null,
+      "hint": null,
+      "message": "Expected 3 parts in JWT; got 2"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"Expected 3 parts in JWT; got 2\""
+    },
+    "status": 401
+  },
+  "rls/jwt-wrong-signature": {
+    "body": {
+      "code": "PGRST301",
+      "details": "None of the keys was able to decode the JWT",
+      "hint": null,
+      "message": "No suitable key or wrong key type"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer error=\"invalid_token\", error_description=\"No suitable key or wrong key type\""
+    },
+    "status": 401
+  },
+  "rls/nonexistent-role": {
+    "body": {
+      "code": "22023",
+      "details": null,
+      "hint": null,
+      "message": "role \"not_existing\" does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "rls/pre-request-gucs": {
+    "body": [],
+    "headers": {
+      "content-location": "/rls_notes",
+      "content-profile": "public",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "x-pre-request": "ran"
+    },
+    "status": 200
+  },
+  "rls/private-docs-anon": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table private_docs"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "rls/private-docs-authenticated": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table private_docs"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 403
+  },
+  "rls/privileged-hello-anon": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for function privileged_hello"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "rls/privileged-hello-authenticated": {
+    "body": "Privileged hello to x",
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "rls/request-info": {
+    "body": {
+      "headers": {
+        "x-custom": "custom value"
+      },
+      "method": "GET",
+      "path": "/rpc/request_info"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/request-info-post": {
+    "body": {
+      "headers": {
+        "content-type": "application/json",
+        "prefer": "tx=rollback"
+      },
+      "method": "POST",
+      "path": "/rpc/request_info"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "rls/role-not-a-string": {
+    "body": {
+      "code": "22023",
+      "details": null,
+      "hint": null,
+      "message": "role \"123\" does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "rls/role-settings-anon": {
+    "body": "3s",
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/role-settings-authenticated": {
+    "body": "8s",
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/role-settings-service-role": {
+    "body": "0",
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/service-role": {
+    "body": {
+      "claims": {
+        "role": "service_role"
+      },
+      "role": "service_role"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/whoami-alice": {
+    "body": {
+      "claims": {
+        "role": "authenticated",
+        "sub": "alice"
+      },
+      "role": "authenticated"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rls/whoami-anon": {
+    "body": {
+      "claims": {
+        "role": "anon"
+      },
+      "role": "anon"
+    },
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

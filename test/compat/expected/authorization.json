@@ -1,0 +1,189 @@
+{
+  "authorization/alice-insert-for-bob": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "new row violates row-level security policy for table \"rls_notes\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 403
+  },
+  "authorization/alice-insert-own": {
+    "body": [
+      {
+        "body": "mine",
+        "owner": "alice"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "authorization/alice-notes": {
+    "body": [
+      {
+        "owner": "alice",
+        "slug": "a1"
+      },
+      {
+        "owner": "alice",
+        "slug": "a2"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=owner%2Cslug",
+      "content-profile": "public",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "authorization/alice-patch-bob": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 204
+  },
+  "authorization/alice-patch-own": {
+    "body": [
+      {
+        "body": "changed",
+        "slug": "a1"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "authorization/anon-insert": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table rls_notes"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "authorization/anon-notes": {
+    "body": [],
+    "headers": {
+      "content-location": "/rls_notes",
+      "content-profile": "public",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "authorization/bob-delete-alice": {
+    "body": null,
+    "headers": {
+      "content-range": "*/0",
+      "preference-applied": "count=exact, tx=rollback"
+    },
+    "status": 204
+  },
+  "authorization/bob-notes": {
+    "body": [
+      {
+        "owner": "bob",
+        "slug": "b1"
+      }
+    ],
+    "headers": {
+      "content-location": "/rls_notes?order=slug&select=owner%2Cslug",
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "authorization/check-details": {
+    "body": {
+      "code": "23514",
+      "details": null,
+      "hint": null,
+      "message": "new row for relation \"rls_notes\" violates check constraint \"rls_notes_body_check\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "authorization/private-docs-anon": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table private_docs"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "authorization/private-docs-authenticated": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for table private_docs"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 403
+  },
+  "authorization/privileged-hello-anon": {
+    "body": {
+      "code": "42501",
+      "details": null,
+      "hint": null,
+      "message": "permission denied for function privileged_hello"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "www-authenticate": "Bearer"
+    },
+    "status": 401
+  },
+  "authorization/privileged-hello-authenticated": {
+    "body": "Privileged hello to x",
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "tx=rollback"
+    },
+    "status": 200
+  },
+  "authorization/unique-details": {
+    "body": {
+      "code": "23505",
+      "details": null,
+      "hint": null,
+      "message": "duplicate key value violates unique constraint \"rls_notes_slug_key\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  }
+}

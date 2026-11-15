@@ -1,0 +1,549 @@
+{
+  "ordering/asc": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=lte.2&order=id.asc",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/asc-nulls-last": {
+    "body": [
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": "2",
+        "b": "0"
+      },
+      {
+        "a": null,
+        "b": null
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?order=a.asc.nullslast",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/default-direction": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=lte.2&order=id",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/desc": {
+    "body": [
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=lte.2&order=id.desc",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/desc-nulls-first": {
+    "body": [
+      {
+        "a": null,
+        "b": null
+      },
+      {
+        "a": "2",
+        "b": "0"
+      },
+      {
+        "a": "1",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?order=a.desc.nullsfirst",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/desc-nulls-last": {
+    "body": [
+      {
+        "a": "2",
+        "b": "0"
+      },
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": null,
+        "b": null
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?order=a.desc.nullslast",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/embedded-order": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Windows 7",
+        "tasks": [
+          {
+            "id": 2,
+            "name": "Code w7"
+          },
+          {
+            "id": 1,
+            "name": "Design w7"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq.1&select=id%2Cname%2Ctasks%28id%2Cname%29&tasks.order=name.asc",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/embedded-order-alias": {
+    "body": [
+      {
+        "id": 1,
+        "name": "Windows 7",
+        "the_tasks": [
+          {
+            "id": 2,
+            "name": "Code w7"
+          },
+          {
+            "id": 1,
+            "name": "Design w7"
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?id=eq.1&select=id%2Cname%2Cthe_tasks%3Atasks%28id%2Cname%29&the_tasks.order=name.asc",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/embedded-order-desc": {
+    "body": [
+      {
+        "id": 1,
+        "projects": [
+          {
+            "id": 2
+          },
+          {
+            "id": 1
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?id=eq.1&projects.order=id.desc&select=id%2Cprojects%28id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/embedded-order-two-levels": {
+    "body": [
+      {
+        "name": "Angela Martin",
+        "tasks": [
+          {
+            "id": 4,
+            "name": "Code w10",
+            "projects": {
+              "id": 2
+            }
+          },
+          {
+            "id": 2,
+            "name": "Code w7",
+            "projects": {
+              "id": 1
+            }
+          },
+          {
+            "id": 3,
+            "name": "Design w10",
+            "projects": {
+              "id": 2
+            }
+          },
+          {
+            "id": 1,
+            "name": "Design w7",
+            "projects": {
+              "id": 1
+            }
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?id=eq.1&select=name%2Ctasks%28id%2Cname%2Cprojects%28id%29%29&tasks.order=name.asc&tasks.projects.order=id.desc",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/embedded-order-unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"projects_1.name\".",
+      "message": "column projects_1.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "ordering/json-key": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/complex_items?order=settings-%3E%3Eid.asc%2Cid&select=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/multi-column": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "Windows 10"
+      },
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": null,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=client_id.desc.nullslast%2Cid.desc&select=client_id%2Cid%2Cname",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/nulls-first": {
+    "body": [
+      {
+        "a": null,
+        "b": null
+      },
+      {
+        "a": "1",
+        "b": "0"
+      },
+      {
+        "a": "2",
+        "b": "0"
+      }
+    ],
+    "headers": {
+      "content-location": "/no_pk?order=a.nullsfirst",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/order-by-embed-not-allowed-dot": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected \"i\" expecting \"asc\", \"desc\", \"nullsfirst\" or \"nullslast\"",
+      "hint": null,
+      "message": "\"failed to parse order (projects.id)\" (line 1, column 10)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "ordering/related-order": {
+    "body": [
+      {
+        "clients": null,
+        "id": 5
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "id": 4
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=clients%28name%29.nullsfirst%2Cid&select=id%2Cclients%28name%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/related-order-alias": {
+    "body": [
+      {
+        "client": {
+          "name": "Apple"
+        },
+        "id": 3
+      },
+      {
+        "client": {
+          "name": "Apple"
+        },
+        "id": 4
+      },
+      {
+        "client": {
+          "name": "Microsoft"
+        },
+        "id": 1
+      },
+      {
+        "client": {
+          "name": "Microsoft"
+        },
+        "id": 2
+      },
+      {
+        "client": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=client%28name%29.asc%2Cid&select=id%2Cclient%3Aclients%28name%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/related-order-column-not-selected": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column projects_clients_1.name does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "ordering/related-order-desc": {
+    "body": [
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "id": 1
+      },
+      {
+        "clients": {
+          "name": "Microsoft"
+        },
+        "id": 2
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "id": 3
+      },
+      {
+        "clients": {
+          "name": "Apple"
+        },
+        "id": 4
+      },
+      {
+        "clients": null,
+        "id": 5
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=clients%28name%29.desc.nullslast%2Cid&select=id%2Cclients%28name%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/related-order-inside-embed": {
+    "body": [
+      {
+        "name": "Angela Martin",
+        "tasks": [
+          {
+            "id": 3,
+            "name": "Design w10",
+            "projects": {
+              "id": 2,
+              "name": "Windows 10"
+            }
+          },
+          {
+            "id": 4,
+            "name": "Code w10",
+            "projects": {
+              "id": 2,
+              "name": "Windows 10"
+            }
+          },
+          {
+            "id": 1,
+            "name": "Design w7",
+            "projects": {
+              "id": 1,
+              "name": "Windows 7"
+            }
+          },
+          {
+            "id": 2,
+            "name": "Code w7",
+            "projects": {
+              "id": 1,
+              "name": "Windows 7"
+            }
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?limit=1&order=name&select=name%2Ctasks%28id%2Cname%2Cprojects%28id%2Cname%29%29&tasks.order=projects%28id%29.desc",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "ordering/related-order-not-embedded": {
+    "body": {
+      "code": "PGRST108",
+      "details": null,
+      "hint": "Verify that 'clientsx' is included in the 'select' query parameter.",
+      "message": "'clientsx' is not an embedded resource in this request"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "ordering/related-order-to-many": {
+    "body": {
+      "code": "PGRST118",
+      "details": "'clients' and 'projects' do not form a many-to-one or one-to-one relationship",
+      "hint": null,
+      "message": "A related order on 'projects' is not possible"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "ordering/related-order-to-many-alias": {
+    "body": {
+      "code": "PGRST118",
+      "details": "'clients' and 'pros' do not form a many-to-one or one-to-one relationship",
+      "hint": null,
+      "message": "A related order on 'pros' is not possible"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "ordering/unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": "Perhaps you meant to reference the column \"projects.name\".",
+      "message": "column projects.nope does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

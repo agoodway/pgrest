@@ -1,0 +1,491 @@
+{
+  "embed_errors/ambiguous-direct-and-junction": {
+    "body": {
+      "code": "PGRST201",
+      "details": [
+        {
+          "cardinality": "one-to-many",
+          "embedding": "ambig_a with ambig_b",
+          "relationship": "ambig_b_a_id_fkey using ambig_a(id) and ambig_b(a_id)"
+        },
+        {
+          "cardinality": "many-to-many",
+          "embedding": "ambig_a with ambig_b",
+          "relationship": "ambig_ab using ambig_ab_a_id_fkey(a_id) and ambig_ab_b_id_fkey(b_id)"
+        }
+      ],
+      "hint": "Try changing 'ambig_b' to one of the following: 'ambig_b!ambig_b_a_id_fkey', 'ambig_b!ambig_ab'. Find the desired relationship in the 'details' key.",
+      "message": "Could not embed because more than one relationship was found for 'ambig_a' and 'ambig_b'"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "embed_errors/ambiguous-self-two-fks": {
+    "body": {
+      "code": "PGRST201",
+      "details": [
+        {
+          "cardinality": "one-to-many",
+          "embedding": "organizations with organizations",
+          "relationship": "organizations_auditor_fkey using organizations(id) and organizations(auditor)"
+        },
+        {
+          "cardinality": "one-to-many",
+          "embedding": "organizations with organizations",
+          "relationship": "organizations_referee_fkey using organizations(id) and organizations(referee)"
+        }
+      ],
+      "hint": "Try changing 'organizations' to one of the following: 'organizations!organizations_auditor_fkey', 'organizations!organizations_referee_fkey'. Find the desired relationship in the 'details' key.",
+      "message": "Could not embed because more than one relationship was found for 'organizations' and 'organizations'"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "embed_errors/ambiguous-two-fks": {
+    "body": {
+      "code": "PGRST201",
+      "details": [
+        {
+          "cardinality": "many-to-one",
+          "embedding": "orders with addresses",
+          "relationship": "billing using orders(billing_address_id) and addresses(id)"
+        },
+        {
+          "cardinality": "many-to-one",
+          "embedding": "orders with addresses",
+          "relationship": "shipping using orders(shipping_address_id) and addresses(id)"
+        }
+      ],
+      "hint": "Try changing 'addresses' to one of the following: 'addresses!billing', 'addresses!shipping'. Find the desired relationship in the 'details' key.",
+      "message": "Could not embed because more than one relationship was found for 'orders' and 'addresses'"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 300
+  },
+  "embed_errors/composite-m2o-comments-users-tasks": {
+    "body": [
+      {
+        "id": 1,
+        "users_tasks": {
+          "task_id": 6,
+          "user_id": 2
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/comments?select=id%2Cusers_tasks%28user_id%2Ctask_id%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/composite-o2m-files-touched": {
+    "body": [
+      {
+        "filename": "autoexec.bat",
+        "touched_files": [
+          {
+            "task_id": 1,
+            "user_id": 1
+          },
+          {
+            "task_id": 1,
+            "user_id": 3
+          }
+        ]
+      },
+      {
+        "filename": "command.com",
+        "touched_files": [
+          {
+            "task_id": 1,
+            "user_id": 1
+          }
+        ]
+      },
+      {
+        "filename": "io.sys",
+        "touched_files": []
+      },
+      {
+        "filename": "marketing.key",
+        "touched_files": []
+      },
+      {
+        "filename": "README.md",
+        "touched_files": [
+          {
+            "task_id": 1,
+            "user_id": 1
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/files?order=project_id%2Cfilename&select=filename%2Ctouched_files%28user_id%2Ctask_id%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/composite-partial-match-not-joined": {
+    "body": [
+      {
+        "touched_files": [
+          {
+            "filename": "autoexec.bat",
+            "project_id": 1
+          }
+        ],
+        "user_id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/users_tasks?order=user_id&select=user_id%2Ctouched_files%28filename%2Cproject_id%29&task_id=eq.1&user_id=eq.3",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/hint-column-resolves": {
+    "body": [
+      {
+        "addresses": {
+          "id": 1
+        },
+        "id": 1
+      },
+      {
+        "addresses": {
+          "id": 3
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/orders?order=id&select=id%2Caddresses%21billing_address_id%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/hint-constraint-resolves": {
+    "body": [
+      {
+        "addresses": {
+          "id": 2
+        },
+        "id": 1
+      },
+      {
+        "addresses": {
+          "id": 4
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/orders?order=id&select=id%2Caddresses%21shipping%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/hint-direct-constraint-resolves": {
+    "body": [
+      {
+        "ambig_b": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          }
+        ],
+        "id": 1
+      },
+      {
+        "ambig_b": [],
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/ambig_a?ambig_b.order=id&order=id&select=id%2Cambig_b%21ambig_b_a_id_fkey%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/hint-junction-resolves": {
+    "body": [
+      {
+        "ambig_b": [
+          {
+            "id": 1
+          },
+          {
+            "id": 3
+          }
+        ],
+        "id": 1
+      },
+      {
+        "ambig_b": [
+          {
+            "id": 2
+          }
+        ],
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/ambig_a?ambig_b.order=id&order=id&select=id%2Cambig_b%21ambig_ab%28id%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/m2m-composite-explicit": {
+    "body": [
+      {
+        "files": [
+          {
+            "filename": "autoexec.bat"
+          },
+          {
+            "filename": "command.com"
+          },
+          {
+            "filename": "README.md"
+          }
+        ],
+        "user_id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/users_tasks?files.order=filename&select=user_id%2Cfiles%21touched_files%28filename%29&task_id=eq.1&user_id=eq.1",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/m2m-users-tasks": {
+    "body": [
+      {
+        "id": 1,
+        "tasks": [
+          {
+            "id": 1
+          },
+          {
+            "id": 2
+          },
+          {
+            "id": 3
+          },
+          {
+            "id": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "tasks": [
+          {
+            "id": 5
+          },
+          {
+            "id": 6
+          },
+          {
+            "id": 7
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "tasks": [
+          {
+            "id": 1
+          },
+          {
+            "id": 5
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=id&select=id%2Ctasks%28id%29&tasks.order=id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/no-relationship": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'clients' and 'nope' in the schema 'test', but no matches were found.",
+      "hint": null,
+      "message": "Could not find a relationship between 'clients' and 'nope' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embed_errors/no-relationship-leaf-table": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'items' and 'nope' in the schema 'test', but no matches were found.",
+      "hint": "Perhaps you meant 'files' instead of 'items'.",
+      "message": "Could not find a relationship between 'items' and 'nope' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embed_errors/no-relationship-typo-both": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": "Perhaps you meant the table 'test.clients'",
+      "message": "Could not find the table 'test.client' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "embed_errors/no-relationship-typo-child": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'clients' and 'project' in the schema 'test', but no matches were found.",
+      "hint": "Perhaps you meant 'projects' instead of 'project'.",
+      "message": "Could not find a relationship between 'clients' and 'project' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embed_errors/no-relationship-unknown-hint": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'projects' and 'clients' using the hint 'nope' in the schema 'test', but no matches were found.",
+      "hint": null,
+      "message": "Could not find a relationship between 'projects' and 'clients' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embed_errors/no-relationship-unrelated-table": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'clients' and 'tasks' in the schema 'test', but no matches were found.",
+      "hint": null,
+      "message": "Could not find a relationship between 'clients' and 'tasks' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "embed_errors/o2o-capital-country": {
+    "body": [
+      {
+        "capital": {
+          "name": "Kabul"
+        },
+        "id": 1
+      },
+      {
+        "capital": {
+          "name": "Algiers"
+        },
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/country?order=id&select=id%2Ccapital%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/o2o-students-info": {
+    "body": [
+      {
+        "id": 1,
+        "students_info": {
+          "address": "Street 1"
+        }
+      },
+      {
+        "id": 2,
+        "students_info": {
+          "address": "Street 2"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/students?order=id&select=id%2Cstudents_info%28address%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "embed_errors/self-hint-parent": {
+    "body": [
+      {
+        "id": "1",
+        "kids": [
+          {
+            "id": "2"
+          },
+          {
+            "id": "3"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "kids": [
+          {
+            "id": "4"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "kids": [
+          {
+            "id": "5"
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "kids": []
+      },
+      {
+        "id": "5",
+        "kids": []
+      }
+    ],
+    "headers": {
+      "content-location": "/family_tree?order=id&select=id%2Ckids%3Afamily_tree%21parent%28id%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}

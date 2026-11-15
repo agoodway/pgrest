@@ -1,0 +1,1769 @@
+{
+  "aggregates/aggregate-alias": {
+    "body": [
+      {
+        "project_id": 4,
+        "total_charged": 4100
+      },
+      {
+        "project_id": 3,
+        "total_charged": 3200
+      },
+      {
+        "project_id": 2,
+        "total_charged": 1200
+      },
+      {
+        "project_id": 1,
+        "total_charged": 300
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?order=project_id.desc&select=total_charged%3Ainvoice_total.sum%28%29%2Cproject_id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/aggregate-cast": {
+    "body": [
+      {
+        "project_id": 4,
+        "total_charged": "4100"
+      },
+      {
+        "project_id": 3,
+        "total_charged": "3200"
+      },
+      {
+        "project_id": 2,
+        "total_charged": "1200"
+      },
+      {
+        "project_id": 1,
+        "total_charged": "300"
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?order=project_id.desc&select=total_charged%3Ainvoice_total.sum%28%29%3A%3Atext%2Cproject_id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/alias-input-cast-cast": {
+    "body": [
+      {
+        "s": "24"
+      }
+    ],
+    "headers": {
+      "content-location": "/trash_details?select=s%3Ajsonb_col-%3E%3Ekey%3A%3Ainteger.sum%28%29%3A%3Atext",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/avg": {
+    "body": [
+      {
+        "avg": 1.1e3
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?select=invoice_total.avg%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/count-alias": {
+    "body": [
+      {
+        "cnt": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?select=cnt%3Acount%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/count-all": {
+    "body": [
+      {
+        "count": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?select=count%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/count-cast": {
+    "body": [
+      {
+        "count": "4"
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?select=count%28%29%3A%3Atext",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/count-exact-legacy": {
+    "body": [
+      {
+        "count": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?select=count",
+      "content-range": "0-0/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "aggregates/count-exact-limited": {
+    "body": [
+      {
+        "project_id": 1,
+        "sum": 300
+      },
+      {
+        "project_id": 2,
+        "sum": 1200
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?limit=2&order=project_id&select=project_id%2Cinvoice_total.sum%28%29",
+      "content-range": "0-1/8",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "aggregates/count-exact-spread": {
+    "body": [
+      {
+        "c": 2,
+        "client_id": 1,
+        "cname": "Microsoft"
+      },
+      {
+        "c": 2,
+        "client_id": 2,
+        "cname": "Apple"
+      },
+      {
+        "c": 1,
+        "client_id": null,
+        "cname": null
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=client_id&select=client_id%2C...clients%28cname%3Aname%29%2Cc%3Acount%28%29",
+      "content-range": "0-2/5",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "aggregates/count-field": {
+    "body": [
+      {
+        "count": 8
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?select=invoice_total.count%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/count-grouped": {
+    "body": [
+      {
+        "c": 1,
+        "client_id": null
+      },
+      {
+        "c": 2,
+        "client_id": 2
+      },
+      {
+        "c": 2,
+        "client_id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=client_id.desc&select=c%3Acount%28%29%2Cclient_id",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/disabled": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "aggregates/disabled-embed": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "aggregates/disabled-to-many-spread": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "aggregates/disabled-to-one-spread": {
+    "body": {
+      "code": "PGRST123",
+      "details": null,
+      "hint": null,
+      "message": "Use of aggregate functions is not allowed"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "aggregates/embed-all": {
+    "body": [
+      {
+        "name": "Windows 7",
+        "project_invoices": [
+          {
+            "avg": 150.0,
+            "count": 2,
+            "max": 200,
+            "min": 100,
+            "sum": 300
+          }
+        ]
+      },
+      {
+        "name": "Windows 10",
+        "project_invoices": [
+          {
+            "avg": 600.0,
+            "count": 2,
+            "max": 700,
+            "min": 500,
+            "sum": 1200
+          }
+        ]
+      },
+      {
+        "name": "IOS",
+        "project_invoices": [
+          {
+            "avg": 1.6e3,
+            "count": 2,
+            "max": 2000,
+            "min": 1200,
+            "sum": 3200
+          }
+        ]
+      },
+      {
+        "name": "OSX",
+        "project_invoices": [
+          {
+            "avg": 2050.0,
+            "count": 2,
+            "max": 4000,
+            "min": 100,
+            "sum": 4100
+          }
+        ]
+      },
+      {
+        "name": "Orphan",
+        "project_invoices": [
+          {
+            "avg": null,
+            "count": 0,
+            "max": null,
+            "min": null,
+            "sum": null
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?select=name%2Cproject_invoices%28invoice_total.max%28%29%2Cinvoice_total.min%28%29%2Cinvoice_total.avg%28%29%2Cinvoice_total.sum%28%29%2Cinvoice_total.count%28%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/embed-avg": {
+    "body": [
+      {
+        "name": "Windows 7",
+        "project_invoices": [
+          {
+            "avg": 150.0
+          }
+        ]
+      },
+      {
+        "name": "Windows 10",
+        "project_invoices": [
+          {
+            "avg": 600.0
+          }
+        ]
+      },
+      {
+        "name": "IOS",
+        "project_invoices": [
+          {
+            "avg": 1.6e3
+          }
+        ]
+      },
+      {
+        "name": "OSX",
+        "project_invoices": [
+          {
+            "avg": 2050.0
+          }
+        ]
+      },
+      {
+        "name": "Orphan",
+        "project_invoices": [
+          {
+            "avg": null
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?select=name%2Cproject_invoices%28invoice_total.avg%28%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/embed-filtered": {
+    "body": [
+      {
+        "name": "Windows 7",
+        "project_invoices": [
+          {
+            "sum": 200
+          }
+        ]
+      },
+      {
+        "name": "Windows 10",
+        "project_invoices": [
+          {
+            "sum": 1200
+          }
+        ]
+      },
+      {
+        "name": "IOS",
+        "project_invoices": [
+          {
+            "sum": 3200
+          }
+        ]
+      },
+      {
+        "name": "OSX",
+        "project_invoices": [
+          {
+            "sum": 4000
+          }
+        ]
+      },
+      {
+        "name": "Orphan",
+        "project_invoices": [
+          {
+            "sum": null
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&project_invoices.invoice_total=gt.150&select=name%2Cproject_invoices%28invoice_total.sum%28%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/embed-max": {
+    "body": [
+      {
+        "name": "Windows 7",
+        "project_invoices": [
+          {
+            "max": 200
+          }
+        ]
+      },
+      {
+        "name": "Windows 10",
+        "project_invoices": [
+          {
+            "max": 700
+          }
+        ]
+      },
+      {
+        "name": "IOS",
+        "project_invoices": [
+          {
+            "max": 2000
+          }
+        ]
+      },
+      {
+        "name": "OSX",
+        "project_invoices": [
+          {
+            "max": 4000
+          }
+        ]
+      },
+      {
+        "name": "Orphan",
+        "project_invoices": [
+          {
+            "max": null
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?select=name%2Cproject_invoices%28invoice_total.max%28%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/embed-min": {
+    "body": [
+      {
+        "name": "Windows 7",
+        "project_invoices": [
+          {
+            "min": 100
+          }
+        ]
+      },
+      {
+        "name": "Windows 10",
+        "project_invoices": [
+          {
+            "min": 500
+          }
+        ]
+      },
+      {
+        "name": "IOS",
+        "project_invoices": [
+          {
+            "min": 1200
+          }
+        ]
+      },
+      {
+        "name": "OSX",
+        "project_invoices": [
+          {
+            "min": 100
+          }
+        ]
+      },
+      {
+        "name": "Orphan",
+        "project_invoices": [
+          {
+            "min": null
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?select=name%2Cproject_invoices%28invoice_total.min%28%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/embed-sum": {
+    "body": [
+      {
+        "name": "Windows 7",
+        "project_invoices": [
+          {
+            "sum": 300
+          }
+        ]
+      },
+      {
+        "name": "Windows 10",
+        "project_invoices": [
+          {
+            "sum": 1200
+          }
+        ]
+      },
+      {
+        "name": "IOS",
+        "project_invoices": [
+          {
+            "sum": 3200
+          }
+        ]
+      },
+      {
+        "name": "OSX",
+        "project_invoices": [
+          {
+            "sum": 4100
+          }
+        ]
+      },
+      {
+        "name": "Orphan",
+        "project_invoices": [
+          {
+            "sum": null
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?select=name%2Cproject_invoices%28invoice_total.sum%28%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/group-by-aliased-field": {
+    "body": [
+      {
+        "max": 4000,
+        "min": 100,
+        "pid": 4,
+        "sum": 4100
+      },
+      {
+        "max": 2000,
+        "min": 1200,
+        "pid": 3,
+        "sum": 3200
+      },
+      {
+        "max": 700,
+        "min": 500,
+        "pid": 2,
+        "sum": 1200
+      },
+      {
+        "max": 200,
+        "min": 100,
+        "pid": 1,
+        "sum": 300
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?order=project_id.desc&select=invoice_total.sum%28%29%2Cinvoice_total.max%28%29%2Cinvoice_total.min%28%29%2Cpid%3Aproject_id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/group-by-embed": {
+    "body": [
+      {
+        "project_id": 1,
+        "projects": {
+          "name": "Windows 7"
+        },
+        "total": 300
+      },
+      {
+        "project_id": 2,
+        "projects": {
+          "name": "Windows 10"
+        },
+        "total": 1200
+      },
+      {
+        "project_id": 3,
+        "projects": {
+          "name": "IOS"
+        },
+        "total": 3200
+      },
+      {
+        "project_id": 4,
+        "projects": {
+          "name": "OSX"
+        },
+        "total": 4100
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?order=project_id&select=project_id%2Ctotal%3Ainvoice_total.sum%28%29%2Cprojects%28name%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/group-by-field": {
+    "body": [
+      {
+        "max": 4000,
+        "min": 100,
+        "project_id": 4,
+        "sum": 4100
+      },
+      {
+        "max": 2000,
+        "min": 1200,
+        "project_id": 3,
+        "sum": 3200
+      },
+      {
+        "max": 700,
+        "min": 500,
+        "project_id": 2,
+        "sum": 1200
+      },
+      {
+        "max": 200,
+        "min": 100,
+        "project_id": 1,
+        "sum": 300
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?order=project_id.desc&select=invoice_total.sum%28%29%2Cinvoice_total.max%28%29%2Cinvoice_total.min%28%29%2Cproject_id",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/group-by-json-path": {
+    "body": [
+      {
+        "c": 1,
+        "key": "10"
+      },
+      {
+        "c": 1,
+        "key": "6"
+      },
+      {
+        "c": 1,
+        "key": "8"
+      }
+    ],
+    "headers": {
+      "content-location": "/trash_details?select=jsonb_col-%3E%3Ekey%2Cc%3Acount%28%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/head": {
+    "body": null,
+    "headers": {
+      "content-location": "/project_invoices?select=project_id%2Cinvoice_total.sum%28%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/inner-spread-filtered": {
+    "body": [
+      {
+        "name": "Windows 10",
+        "total": 1200
+      },
+      {
+        "name": "Windows 7",
+        "total": 300
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?projects.name=like.W%2A&select=...projects%21inner%28name%29%2Ctotal%3Ainvoice_total.sum%28%29",
+      "content-range": "0-1/4",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "aggregates/input-cast": {
+    "body": [
+      {
+        "sum": 24
+      }
+    ],
+    "headers": {
+      "content-location": "/trash_details?select=jsonb_col-%3E%3Ekey%3A%3Ainteger.sum%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/legacy-count": {
+    "body": [
+      {
+        "count": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?select=count",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/legacy-count-disabled": {
+    "body": [
+      {
+        "count": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/entities?select=count",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/legacy-count-embedded": {
+    "body": [
+      {
+        "name": "Microsoft",
+        "projects": [
+          {
+            "count": 2
+          }
+        ]
+      },
+      {
+        "name": "Apple",
+        "projects": [
+          {
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/clients?select=name%2Cprojects%28count%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/max": {
+    "body": [
+      {
+        "max": 4000
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?select=invoice_total.max%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/min": {
+    "body": [
+      {
+        "min": 100
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?select=invoice_total.min%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/object": {
+    "body": {
+      "count": 4
+    },
+    "headers": {
+      "content-location": "/entities?select=count%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/patch-representation": {
+    "body": [
+      {
+        "c": 2,
+        "client_id": 1
+      },
+      {
+        "c": 1,
+        "client_id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "aggregates/rpc-count-exact": {
+    "body": [
+      {
+        "client_id": 1,
+        "max": 2
+      },
+      {
+        "client_id": 2,
+        "max": 4
+      },
+      {
+        "client_id": null,
+        "max": 5
+      }
+    ],
+    "headers": {
+      "content-range": "0-2/5",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
+  "aggregates/rpc-table-result": {
+    "body": [
+      {
+        "max": 5
+      }
+    ],
+    "headers": {
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count": {
+    "body": [
+      {
+        "count": 2,
+        "supervisor_id": 1
+      },
+      {
+        "count": 2,
+        "supervisor_id": 2
+      },
+      {
+        "count": 3,
+        "supervisor_id": 3
+      },
+      {
+        "count": 1,
+        "supervisor_id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisor_id&select=supervisor_id%2C...processes%28count%28%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-aliased": {
+    "body": [
+      {
+        "processes_count": 2,
+        "supervisor_id": 1
+      },
+      {
+        "processes_count": 2,
+        "supervisor_id": 2
+      },
+      {
+        "processes_count": 3,
+        "supervisor_id": 3
+      },
+      {
+        "processes_count": 1,
+        "supervisor_id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisor_id&select=supervisor_id%2C...processes%28processes_count%3Acount%28%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-levels": {
+    "body": [
+      {
+        "factory": 1,
+        "process_costs_count": 2,
+        "processes_count": 2
+      },
+      {
+        "factory": 2,
+        "process_costs_count": 4,
+        "processes_count": 4
+      },
+      {
+        "factory": 3,
+        "process_costs_count": 2,
+        "processes_count": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=processes%28factory%29&select=...processes%28factory%3Afactory_id%2Cprocesses_count%3Acount%28%29%2C...process_costs%28process_costs_count%3Acount%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-nested": {
+    "body": [
+      {
+        "count": 2,
+        "supervisor_id": 1
+      },
+      {
+        "count": 2,
+        "supervisor_id": 2
+      },
+      {
+        "count": 3,
+        "supervisor_id": 3
+      },
+      {
+        "count": 1,
+        "supervisor_id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisor_id&select=supervisor_id%2C...processes%28...process_costs%28count%28%29%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-nested-aliased": {
+    "body": [
+      {
+        "process_costs_count": 2,
+        "supervisor": 1
+      },
+      {
+        "process_costs_count": 2,
+        "supervisor": 2
+      },
+      {
+        "process_costs_count": 3,
+        "supervisor": 3
+      },
+      {
+        "process_costs_count": 1,
+        "supervisor": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisor_id&select=supervisor%3Asupervisor_id%2C...processes%28...process_costs%28process_costs_count%3Acount%28%29%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-nested-grouped": {
+    "body": [
+      {
+        "count": 2,
+        "factory_id": 1
+      },
+      {
+        "count": 4,
+        "factory_id": 2
+      },
+      {
+        "count": 2,
+        "factory_id": 3
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=processes%28factory_id%29&select=...processes%28factory_id%2C...process_costs%28count%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-nested-grouped-aliased": {
+    "body": [
+      {
+        "factory": 1,
+        "process_costs_count": 2
+      },
+      {
+        "factory": 2,
+        "process_costs_count": 4
+      },
+      {
+        "factory": 3,
+        "process_costs_count": 2
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=processes%28factory%29&select=...processes%28factory%3Afactory_id%2C...process_costs%28process_costs_count%3Acount%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-with-columns": {
+    "body": [
+      {
+        "count": 2,
+        "id": 1
+      },
+      {
+        "count": 2,
+        "id": 2
+      },
+      {
+        "count": 3,
+        "id": 3
+      },
+      {
+        "count": 1,
+        "id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisors%28id%29&select=...supervisors%28id%2Ccount%28%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-count-with-columns-aliased": {
+    "body": [
+      {
+        "supervisor": 1,
+        "supervisor_count": 2
+      },
+      {
+        "supervisor": 2,
+        "supervisor_count": 2
+      },
+      {
+        "supervisor": 3,
+        "supervisor_count": 3
+      },
+      {
+        "supervisor": 4,
+        "supervisor_count": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisors%28supervisor%29&select=...supervisors%28supervisor%3Aid%2Csupervisor_count%3Acount%28%29%29",
+      "content-range": "0-3/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-grouped": {
+    "body": [
+      {
+        "budget_owner": "Brian Smith",
+        "total_budget": 2000.42,
+        "total_expenses": 600.52
+      },
+      {
+        "budget_owner": "Jane Clarkson",
+        "total_budget": 7000.41,
+        "total_expenses": 100.22
+      },
+      {
+        "budget_owner": "Sally Hughes",
+        "total_budget": 500.23,
+        "total_expenses": 900.27
+      }
+    ],
+    "headers": {
+      "content-location": "/budget_expenses?order=budget_categories%28budget_owner%29&select=total_expenses%3Aexpense_amount.sum%28%29%2C...budget_categories%28budget_owner%2Ctotal_budget%3Abudget_amount.sum%28%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-grouped-by-other-spread": {
+    "body": [
+      {
+        "name": "Batch",
+        "sum": 400.0
+      },
+      {
+        "name": "Mass",
+        "sum": 350.0
+      }
+    ],
+    "headers": {
+      "content-location": "/processes?select=...process_costs%28cost.sum%28%29%29%2C...process_categories%28name%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-grouped-by-other-spread-aliased": {
+    "body": [
+      {
+        "category": "Batch",
+        "cost_sum": 400.0
+      },
+      {
+        "category": "Mass",
+        "cost_sum": 350.0
+      }
+    ],
+    "headers": {
+      "content-location": "/processes?select=...process_costs%28cost_sum%3Acost.sum%28%29%29%2C...process_categories%28category%3Aname%29",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested": {
+    "body": [
+      {
+        "factory_id": 3,
+        "sum": 110.0
+      },
+      {
+        "factory_id": 2,
+        "sum": 500.0
+      },
+      {
+        "factory_id": 1,
+        "sum": 350.0
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?select=...processes%28factory_id%2C...process_costs%28cost.sum%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-aliased": {
+    "body": [
+      {
+        "cost_sum": 110.0,
+        "factory_id": 3
+      },
+      {
+        "cost_sum": 500.0,
+        "factory_id": 2
+      },
+      {
+        "cost_sum": 350.0,
+        "factory_id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?select=...processes%28factory_id%2C...process_costs%28cost_sum%3Acost.sum%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-grouped-by-embed": {
+    "body": [
+      {
+        "factories": {
+          "name": "Factory A"
+        },
+        "sum": 350.0
+      },
+      {
+        "factories": {
+          "name": "Factory B"
+        },
+        "sum": 500.0
+      },
+      {
+        "factories": {
+          "name": "Factory C"
+        },
+        "sum": 110.0
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?select=...processes%28factories%28name%29%2C...process_costs%28cost.sum%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-grouped-by-embed-aliased": {
+    "body": [
+      {
+        "cost_sum": 350.0,
+        "factory": {
+          "name": "Factory A"
+        }
+      },
+      {
+        "cost_sum": 500.0,
+        "factory": {
+          "name": "Factory B"
+        }
+      },
+      {
+        "cost_sum": 110.0,
+        "factory": {
+          "name": "Factory C"
+        }
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?select=...processes%28factory%3Afactories%28name%29%2C...process_costs%28cost_sum%3Acost.sum%28%29%29%29",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-grouped-by-spread": {
+    "body": [
+      {
+        "name": "Batch",
+        "sum": 220.0,
+        "supervisor_id": 1
+      },
+      {
+        "name": "Batch",
+        "sum": 70.0,
+        "supervisor_id": 2
+      },
+      {
+        "name": "Mass",
+        "sum": 200.0,
+        "supervisor_id": 2
+      },
+      {
+        "name": "Batch",
+        "sum": 180.0,
+        "supervisor_id": 3
+      },
+      {
+        "name": "Mass",
+        "sum": 110.0,
+        "supervisor_id": 3
+      },
+      {
+        "name": "Batch",
+        "sum": 180.0,
+        "supervisor_id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisor_id&select=supervisor_id%2C...processes%28...process_costs%28cost.sum%28%29%29%2C...process_categories%28name%29%29",
+      "content-range": "0-5/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-grouped-by-spread-aliased": {
+    "body": [
+      {
+        "category": "Batch",
+        "cost_sum": 220.0,
+        "supervisor_id": 1
+      },
+      {
+        "category": "Batch",
+        "cost_sum": 70.0,
+        "supervisor_id": 2
+      },
+      {
+        "category": "Mass",
+        "cost_sum": 200.0,
+        "supervisor_id": 2
+      },
+      {
+        "category": "Batch",
+        "cost_sum": 180.0,
+        "supervisor_id": 3
+      },
+      {
+        "category": "Mass",
+        "cost_sum": 110.0,
+        "supervisor_id": 3
+      },
+      {
+        "category": "Batch",
+        "cost_sum": 180.0,
+        "supervisor_id": 4
+      }
+    ],
+    "headers": {
+      "content-location": "/process_supervisor?order=supervisor_id&select=supervisor_id%2C...processes%28...process_costs%28cost_sum%3Acost.sum%28%29%29%2C...process_categories%28category%3Aname%29%29",
+      "content-range": "0-5/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-in-embed": {
+    "body": [
+      {
+        "name": "Mary",
+        "process_supervisor": [
+          {
+            "name": "Batch",
+            "sum": 220.0
+          }
+        ]
+      },
+      {
+        "name": "John",
+        "process_supervisor": [
+          {
+            "name": "Batch",
+            "sum": 70.0
+          },
+          {
+            "name": "Mass",
+            "sum": 200.0
+          }
+        ]
+      },
+      {
+        "name": "Peter",
+        "process_supervisor": [
+          {
+            "name": "Batch",
+            "sum": 180.0
+          },
+          {
+            "name": "Mass",
+            "sum": 110.0
+          }
+        ]
+      },
+      {
+        "name": "Sarah",
+        "process_supervisor": [
+          {
+            "name": "Batch",
+            "sum": 180.0
+          }
+        ]
+      },
+      {
+        "name": "Jane",
+        "process_supervisor": []
+      }
+    ],
+    "headers": {
+      "content-location": "/supervisors?order=id&select=name%2Cprocess_supervisor%28...processes%28...process_costs%28cost.sum%28%29%29%2C...process_categories%28name%29%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-nested-in-embed-aliased": {
+    "body": [
+      {
+        "name": "Mary",
+        "process_supervisor": [
+          {
+            "category": "Batch",
+            "cost_sum": 220.0
+          }
+        ]
+      },
+      {
+        "name": "John",
+        "process_supervisor": [
+          {
+            "category": "Batch",
+            "cost_sum": 70.0
+          },
+          {
+            "category": "Mass",
+            "cost_sum": 200.0
+          }
+        ]
+      },
+      {
+        "name": "Peter",
+        "process_supervisor": [
+          {
+            "category": "Batch",
+            "cost_sum": 180.0
+          },
+          {
+            "category": "Mass",
+            "cost_sum": 110.0
+          }
+        ]
+      },
+      {
+        "name": "Sarah",
+        "process_supervisor": [
+          {
+            "category": "Batch",
+            "cost_sum": 180.0
+          }
+        ]
+      },
+      {
+        "name": "Jane",
+        "process_supervisor": []
+      }
+    ],
+    "headers": {
+      "content-location": "/supervisors?order=id&select=name%2Cprocess_supervisor%28...processes%28...process_costs%28cost_sum%3Acost.sum%28%29%29%2C...process_categories%28category%3Aname%29%29%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/spread-only-aggregates": {
+    "body": [
+      {
+        "total_budget": 9501.06
+      }
+    ],
+    "headers": {
+      "content-location": "/budget_expenses?select=...budget_categories%28total_budget%3Abudget_amount.sum%28%29%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/star-and-aggregate": {
+    "body": [
+      {
+        "client_id": 1,
+        "count": 1,
+        "id": 1,
+        "name": "Windows 7"
+      },
+      {
+        "client_id": 1,
+        "count": 1,
+        "id": 2,
+        "name": "Windows 10"
+      },
+      {
+        "client_id": 2,
+        "count": 1,
+        "id": 3,
+        "name": "IOS"
+      },
+      {
+        "client_id": 2,
+        "count": 1,
+        "id": 4,
+        "name": "OSX"
+      },
+      {
+        "client_id": null,
+        "count": 1,
+        "id": 5,
+        "name": "Orphan"
+      }
+    ],
+    "headers": {
+      "content-location": "/projects?order=id&select=%2A%2Cid.count%28%29",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/sum": {
+    "body": [
+      {
+        "sum": 8800
+      }
+    ],
+    "headers": {
+      "content-location": "/project_invoices?select=invoice_total.sum%28%29",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/supabase-embed-count": {
+    "body": [
+      {
+        "id": 1,
+        "messages": [
+          {
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "messages": [
+          {
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "messages": [
+          {
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/channels?order=id&select=id%2Cmessages%28count%29",
+      "content-profile": "public",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/supabase-embed-count-alias": {
+    "body": [
+      {
+        "id": 1,
+        "messages": [
+          {
+            "message_count": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "messages": [
+          {
+            "message_count": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "messages": [
+          {
+            "message_count": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/channels?order=id&select=id%2Cmessages%28message_count%3Acount%28%29%29",
+      "content-profile": "public",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/supabase-embed-field-count": {
+    "body": [
+      {
+        "id": 1,
+        "messages": [
+          {
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "messages": [
+          {
+            "count": 1
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "messages": [
+          {
+            "count": 2
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/channels?order=id&select=id%2Cmessages%28id.count%28%29%29",
+      "content-profile": "public",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/supabase-embed-sum": {
+    "body": [
+      {
+        "id": 1,
+        "messages": [
+          {
+            "sum": 1
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "messages": [
+          {
+            "sum": 2
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "messages": [
+          {
+            "sum": 7
+          }
+        ]
+      }
+    ],
+    "headers": {
+      "content-location": "/channels?order=id&select=id%2Cmessages%28id.sum%28%29%29",
+      "content-profile": "public",
+      "content-range": "0-2/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/supabase-missing-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column users.missing_column does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "aggregates/supabase-nested-count": {
+    "body": [
+      {
+        "messages": [],
+        "username": "awailas"
+      },
+      {
+        "messages": [],
+        "username": "dragarcia"
+      },
+      {
+        "messages": [],
+        "username": "jsonuser"
+      },
+      {
+        "messages": [],
+        "username": "kiwicopple"
+      },
+      {
+        "messages": [
+          {
+            "channels": {
+              "count": 1
+            }
+          },
+          {
+            "channels": {
+              "count": 1
+            }
+          },
+          {
+            "channels": {
+              "count": 1
+            }
+          },
+          {
+            "channels": {
+              "count": 1
+            }
+          }
+        ],
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=username&select=username%2Cmessages%28channels%28count%29%29",
+      "content-profile": "public",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/supabase-rpc": {
+    "body": [
+      {
+        "count": 1,
+        "status": "ONLINE"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "aggregates/to-many-spread": {
+    "body": {
+      "code": "PGRST127",
+      "details": "Aggregates are not implemented for one-to-many or many-to-many spreads.",
+      "hint": null,
+      "message": "Feature not implemented"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  }
+}

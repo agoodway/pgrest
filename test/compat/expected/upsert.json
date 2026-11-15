@@ -1,0 +1,613 @@
+{
+  "upsert/ignore-all-existing": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-all-new": {
+    "body": [
+      {
+        "id": 100,
+        "name": "a"
+      },
+      {
+        "id": 101,
+        "name": "b"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-count-exact": {
+    "body": null,
+    "headers": {
+      "content-range": "*/1",
+      "preference-applied": "resolution=ignore-duplicates, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-duplicate-keys-in-payload": {
+    "body": [
+      {
+        "id": 100,
+        "name": "a"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-empty-array": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-minimal": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "resolution=ignore-duplicates, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-mixed": {
+    "body": [
+      {
+        "id": 100,
+        "name": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-on-conflict-compound": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-on-conflict-unique": {
+    "body": [
+      {
+        "email": "fresh@example.com",
+        "id": 81
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/ignore-singular-no-row": {
+    "body": {
+      "code": "PGRST116",
+      "details": "The result contains 0 rows",
+      "hint": null,
+      "message": "Cannot coerce the result to a single JSON object"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "upsert/merge-all-existing": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "A"
+      },
+      {
+        "client_id": 1,
+        "id": 2,
+        "name": "B"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-all-new": {
+    "body": [
+      {
+        "id": 100,
+        "name": "a"
+      },
+      {
+        "id": 101,
+        "name": "b"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/merge-columns-param": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "N"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-composite-pk": {
+    "body": [
+      {
+        "content": "x",
+        "filename": "fresh.txt",
+        "project_id": 1
+      },
+      {
+        "content": "NEW",
+        "filename": "io.sys",
+        "project_id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/merge-composite-pk-all-existing": {
+    "body": [
+      {
+        "content": "NEW",
+        "filename": "io.sys",
+        "project_id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-count-exact": {
+    "body": null,
+    "headers": {
+      "content-range": "*/2",
+      "preference-applied": "resolution=merge-duplicates, count=exact, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/merge-duplicate-keys-in-payload": {
+    "body": {
+      "code": "21000",
+      "details": null,
+      "hint": "Ensure that no rows proposed for insertion within the same command have duplicate constrained values.",
+      "message": "ON CONFLICT DO UPDATE command cannot affect row a second time"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 500
+  },
+  "upsert/merge-empty-array": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-empty-object-existing-pk": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (null, null, null).",
+      "hint": null,
+      "message": "null value in column \"id\" of relation \"projects\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "upsert/merge-headers-only-existing": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "location": "/projects?id=eq.1",
+      "preference-applied": "resolution=merge-duplicates, return=headers-only, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-minimal-existing": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "resolution=merge-duplicates, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-minimal-new": {
+    "body": null,
+    "headers": {
+      "content-range": "*/*",
+      "preference-applied": "resolution=merge-duplicates, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/merge-mixed": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 1,
+        "name": "Renamed"
+      },
+      {
+        "client_id": null,
+        "id": 100,
+        "name": "new"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/merge-not-null-violation": {
+    "body": {
+      "code": "23502",
+      "details": "Failing row contains (1, null, null).",
+      "hint": null,
+      "message": "null value in column \"name\" of relation \"projects\" violates not-null constraint"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "upsert/merge-partial-columns-retained": {
+    "body": [
+      {
+        "client_id": 2,
+        "id": 3,
+        "name": "Only the name"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-single-existing": {
+    "body": [
+      {
+        "client_id": 1,
+        "id": 1,
+        "name": "Solo"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-single-new": {
+    "body": [
+      {
+        "id": 100,
+        "name": "Solo"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/merge-singular-object": {
+    "body": {
+      "id": 1,
+      "name": "Solo"
+    },
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/vnd.pgrst.object+json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/merge-unknown-payload-key": {
+    "body": {
+      "code": "PGRST204",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the 'nope' column of 'projects' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "upsert/missing-default-ignore": {
+    "body": [
+      {
+        "id": 3,
+        "label": "new value"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/missing-default-merge": {
+    "body": [
+      {
+        "id": 1,
+        "label": "updated value"
+      },
+      {
+        "id": 3,
+        "label": "new value"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, missing=default, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/no-pk-ignore": {
+    "body": [
+      {
+        "a": "x",
+        "b": "y"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/no-pk-merge": {
+    "body": [
+      {
+        "a": "x",
+        "b": "y"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/no-pk-merge-empty-array": {
+    "body": [],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/on-conflict-blank": {
+    "body": {
+      "code": "PGRST100",
+      "details": "unexpected end of input expecting field name (* or [a..z0..9_$])",
+      "hint": null,
+      "message": "\"failed to parse on_conflict parameter ()\" (line 1, column 1)"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "upsert/on-conflict-compound-merge": {
+    "body": [
+      {
+        "content": "C",
+        "filename": "README.md",
+        "project_id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/on-conflict-no-matching-index": {
+    "body": {
+      "code": "42P10",
+      "details": null,
+      "hint": null,
+      "message": "there is no unique or exclusion constraint matching the ON CONFLICT specification"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "upsert/on-conflict-other-key-moves-pk": {
+    "body": [
+      {
+        "email": "alice@example.com",
+        "id": 60,
+        "role": "admin"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/on-conflict-unique-merge-existing": {
+    "body": [
+      {
+        "email": "alice@example.com",
+        "id": 1,
+        "role": "admin"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "upsert/on-conflict-unique-merge-mixed": {
+    "body": [
+      {
+        "email": "alice@example.com",
+        "id": 1,
+        "role": "admin"
+      },
+      {
+        "email": "new@example.com",
+        "id": 50,
+        "role": "user"
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/on-conflict-unique-no-pk-table": {
+    "body": [
+      {
+        "address": "changed",
+        "id": 1
+      },
+      {
+        "address": "nine",
+        "id": 9
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/on-conflict-unknown-column": {
+    "body": {
+      "code": "42703",
+      "details": null,
+      "hint": null,
+      "message": "column \"nope\" does not exist"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "upsert/on-conflict-without-resolution": {
+    "body": {
+      "code": "23505",
+      "details": "Key (country_id)=(1) already exists.",
+      "hint": null,
+      "message": "duplicate key value violates unique constraint \"capital_country_id_key\""
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 409
+  },
+  "upsert/pk-only-ignore": {
+    "body": [
+      {
+        "id": 100
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=ignore-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/pk-only-merge": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 100
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "upsert/pk-only-merge-existing": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "resolution=merge-duplicates, return=representation, tx=rollback"
+    },
+    "status": 200
+  }
+}

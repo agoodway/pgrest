@@ -1,0 +1,266 @@
+{
+  "profiles/accept-unknown-schema": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: public, personal",
+      "message": "Invalid schema: unknown"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "profiles/cross-schema-embed": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'user_notes' and 'users' using the hint 'user_notes_author_fkey' in the schema 'personal', but no matches were found.",
+      "hint": null,
+      "message": "Could not find a relationship between 'user_notes' and 'users' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "profiles/delete-content-personal": {
+    "body": [
+      {
+        "note": "No personal author"
+      }
+    ],
+    "headers": {
+      "content-profile": "personal",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "profiles/delete-content-unknown": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: public, personal",
+      "message": "Invalid schema: unknown"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "profiles/embed-into-other-schema": {
+    "body": {
+      "code": "PGRST200",
+      "details": "Searched for a foreign key relationship between 'users' and 'user_notes' in the schema 'public', but no matches were found.",
+      "hint": "Perhaps you meant 'user_profiles' instead of 'user_notes'.",
+      "message": "Could not find a relationship between 'users' and 'user_notes' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 400
+  },
+  "profiles/head-accept-personal": {
+    "body": null,
+    "headers": {
+      "content-location": "/users?select=username",
+      "content-profile": "personal",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "profiles/insert-accept-profile-ignored": {
+    "body": [
+      {
+        "username": "profiled"
+      }
+    ],
+    "headers": {
+      "content-profile": "public",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "profiles/insert-content-personal": {
+    "body": [
+      {
+        "username": "profiled"
+      }
+    ],
+    "headers": {
+      "content-profile": "personal",
+      "content-range": "*/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 201
+  },
+  "profiles/insert-content-unknown": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: public, personal",
+      "message": "Invalid schema: unknown"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "profiles/same-schema-embed": {
+    "body": [
+      {
+        "note": "Ask leroy about the raid",
+        "users": {
+          "username": "leroyjenkins"
+        }
+      },
+      {
+        "note": "No personal author",
+        "users": null
+      }
+    ],
+    "headers": {
+      "content-location": "/user_notes?order=id&select=note%2Cusers%21user_notes_personal_author_fkey%28username%29",
+      "content-profile": "personal",
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "profiles/single-schema-accept": {
+    "body": [
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-location": "/items?id=eq.1",
+      "content-profile": "test",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "profiles/single-schema-unknown": {
+    "body": {
+      "code": "PGRST106",
+      "details": null,
+      "hint": "Only the following schemas are exposed: test",
+      "message": "Invalid schema: nope"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 406
+  },
+  "profiles/table-not-in-schema": {
+    "body": {
+      "code": "PGRST205",
+      "details": null,
+      "hint": null,
+      "message": "Could not find the table 'personal.channels' in the schema cache"
+    },
+    "headers": {
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 404
+  },
+  "profiles/update-content-personal": {
+    "body": [
+      {
+        "status": "OFFLINE",
+        "username": "leroyjenkins"
+      }
+    ],
+    "headers": {
+      "content-profile": "personal",
+      "content-range": "0-0/*",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "return=representation, tx=rollback"
+    },
+    "status": 200
+  },
+  "profiles/users-accept-personal": {
+    "body": [
+      {
+        "username": "awailas"
+      },
+      {
+        "username": "dragarcia"
+      },
+      {
+        "username": "kiwicopple"
+      },
+      {
+        "username": "leroyjenkins"
+      },
+      {
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=username&select=username",
+      "content-profile": "personal",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "profiles/users-accept-public": {
+    "body": [
+      {
+        "username": "awailas"
+      },
+      {
+        "username": "dragarcia"
+      },
+      {
+        "username": "jsonuser"
+      },
+      {
+        "username": "kiwicopple"
+      },
+      {
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=username&select=username",
+      "content-profile": "public",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "profiles/users-default-schema": {
+    "body": [
+      {
+        "username": "awailas"
+      },
+      {
+        "username": "dragarcia"
+      },
+      {
+        "username": "jsonuser"
+      },
+      {
+        "username": "kiwicopple"
+      },
+      {
+        "username": "supabot"
+      }
+    ],
+    "headers": {
+      "content-location": "/users?order=username&select=username",
+      "content-profile": "public",
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  }
+}
