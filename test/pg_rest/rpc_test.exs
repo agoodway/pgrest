@@ -166,6 +166,20 @@ defmodule PgRest.RPCTest do
       assert ids(conn) == [1, 2]
     end
 
+    test "narrow projections and filters cannot admit fabricated or altered rows" do
+      for function <- ["fabricated_projects", "reowned_projects"] do
+        conn =
+          call(
+            "GET",
+            "/rpc/#{function}?select=id&id=gt.2&client_id=eq.1",
+            scoped(@scoped_registry, %{client_id: 1})
+          )
+
+        assert conn.status == 200
+        assert json(conn) == []
+      end
+    end
+
     test "an identity scope for this request emits no probe" do
       TelemetryProbe.attach([:pgrest, :query, :start])
 
