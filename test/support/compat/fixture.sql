@@ -856,6 +856,11 @@ CREATE FUNCTION fabricated_projects() RETURNS SETOF projects
       SELECT (ROW(9999, 'fake', 1)::test.projects).*;
     $$;
 
+-- Rows in a deliberately non-key order, for the row-order guarantee of a call.
+CREATE FUNCTION ranked_projects() RETURNS SETOF projects
+    LANGUAGE sql STABLE
+    AS $$ SELECT * FROM test.projects ORDER BY id DESC; $$;
+
 CREATE FUNCTION reowned_projects() RETURNS SETOF projects
     LANGUAGE sql STABLE
     AS $$ SELECT id, name, 1 AS client_id FROM test.projects; $$;

@@ -60,6 +60,16 @@ permission limits. Only row matching is skipped, without requiring a key. Intros
 through `function_opts: %{{"public", "function_name"} => [result_scope: :none]}`.
 Types without equality operators also need `:none` for scoped result matching.
 
+Scoped result rows keep the function's own output order. Without an `order`
+parameter, a call whose rows are matched against the stored rows reads the function
+`WITH ORDINALITY` and sorts by that number, so the response and every `limit`/`offset`
+page follow the order the function returned its rows in. An explicit `order` replaces
+it, and an aggregating `select` groups the rows without it. The number is never part
+of the response. Calls without row matching (`result_scope: :none`, or a scope that
+is the identity for the request) keep PostgREST's statement, which has no `ORDER BY`.
+Postgres names the number `ordinality`, so a row type with a column of that name
+needs `result_scope: :none`.
+
 Function authorization receives `%PgRest.Function{}`. Match `schema` and `name`
 (and `params` for overloads); `module` is `nil` for introspected functions.
 

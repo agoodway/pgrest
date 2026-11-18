@@ -66,6 +66,11 @@ the defaults for column exposure changed.
 
 - `PgRest.Function` declarations and filtered function introspection; RPC overloads,
   typed arguments, scoped result rows and EXECUTE authorization.
+- Scoped RPC result rows (`result_scope: :stored_rows`) keep the function's own output
+  order when the request has no `order`: the call runs `WITH ORDINALITY` and the read sorts
+  by it, so `limit`/`offset` pages follow the function's order. An explicit `order` wins, and
+  the number never appears in the response. Unscoped calls keep PostgREST's statement. A
+  scoped row type with a column named `ordinality` needs `result_scope: :none`.
 - Application query policies, per-parent permission limits, JWT/RLS role switching
   and fail-closed callback rules. RLS requires an explicit role allowlist.
 - Aggregates, CSV and null-stripped JSON, execution plans, PUT, OPTIONS,

@@ -535,6 +535,61 @@
     },
     "status": 405
   },
+  "rpc/ranked-projects-explicit-order": {
+    "body": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      }
+    ],
+    "headers": {
+      "content-range": "0-1/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rpc/ranked-projects-function-order": {
+    "body": [
+      {
+        "id": 5
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      }
+    ],
+    "headers": {
+      "content-range": "0-4/*",
+      "content-type": "application/json; charset=utf-8"
+    },
+    "status": 200
+  },
+  "rpc/ranked-projects-function-order-window": {
+    "body": [
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      }
+    ],
+    "headers": {
+      "content-range": "1-2/5",
+      "content-type": "application/json; charset=utf-8",
+      "preference-applied": "count=exact"
+    },
+    "status": 206
+  },
   "rpc/ret-void-filter": {
     "body": {
       "code": "42703",

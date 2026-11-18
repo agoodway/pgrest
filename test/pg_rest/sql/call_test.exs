@@ -129,9 +129,29 @@ defmodule PgRest.SQL.CallTest do
       assert Builder.param_count(builder) == 2
     end
 
+    test "numbers the call WITH ORDINALITY and exposes it as pgrst_ordinality" do
+      query = where(ScopedProject, [p], p.client_id == ^1)
+
+      for args <- [{:direct, %{"id" => "1"}}, {:json, ~s({"id":1}), ["id"]}] do
+        {sql, _params, _builder} = compile(getproject(), args, {ScopedProject, query})
+
+        assert sql =~ ~s|"test"."getproject"(| and sql =~ ") WITH ORDINALITY pgrst_call"
+
+        assert sql =~
+                 ~s|pgrst_call."client_id" AS "client_id", | <>
+                   "pgrst_call.ordinality AS pgrst_ordinality FROM "
+      end
+    end
+
     test "nil scope emits no probe" do
       {sql, _params, _builder} = compile(getproject(), {:direct, %{"id" => "1"}})
       refute sql =~ "EXISTS"
+    end
+
+    test "nil scope keeps the call unnumbered" do
+      {sql, _params, _builder} = compile(getproject(), {:direct, %{"id" => "1"}})
+      refute sql =~ "ORDINALITY"
+      refute sql =~ "ordinality"
     end
   end
 end

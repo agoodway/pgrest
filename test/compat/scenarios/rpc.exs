@@ -61,6 +61,17 @@ json = {"content-type", "application/json"}
     id: "rpc/getitemrange-alias",
     path: "/rpc/getitemrange?min=2&max=4&select=id,foo:id"
   },
+  # The function's own row order (id DESC) survives without `order`, in every window.
+  %{id: "rpc/ranked-projects-function-order", path: "/rpc/ranked_projects?select=id"},
+  %{
+    id: "rpc/ranked-projects-function-order-window",
+    path: "/rpc/ranked_projects?select=id&limit=2&offset=1",
+    headers: [count]
+  },
+  %{
+    id: "rpc/ranked-projects-explicit-order",
+    path: "/rpc/ranked_projects?select=id&order=id.asc&limit=2"
+  },
   %{
     id: "rpc/getproject-object",
     path: "/rpc/getproject?id=1",

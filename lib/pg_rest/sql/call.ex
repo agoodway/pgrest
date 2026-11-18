@@ -22,7 +22,10 @@ defmodule PgRest.SQL.Call do
   With a `scope` (`{resource, scoped_query}`, see `PgRest.Plan.Call`) only the rows a stored,
   in-scope row matches survive: the same key and the same value in every mapped column,
   probed with `PgRest.SQL.ScopedSource.exists_probe/4`. Fabricated rows and stored rows whose
-  attributes the function changed are both dropped.
+  attributes the function changed are both dropped. A scoped call reads the function
+  `WITH ORDINALITY` and its source adds that number as `pgrst_ordinality`, which no select
+  item reads; without a requested order the read sorts by it (`row_order/2`), so the probe
+  cannot reorder the function's rows.
 
   Function, parameter and column names come from the registry and are quoted with
   `PgRest.SQL.Builder.ident/1`; parameter and column types are catalog (or declared) text.
@@ -31,20 +34,32 @@ defmodule PgRest.SQL.Call do
   alias PgRest.{Function, Plan}
   alias PgRest.SQL.{Builder, ScopedSource}
 
+  @ordinality "pgrst_ordinality"
+
   @doc """
   The `FROM` item of the call, `{sql, builder}`. `scope` is `nil` or `{resource, scoped_query}`.
   """
   @spec source(Plan.Call.t(), nil | {module(), Ecto.Query.t()}, Builder.t()) ::
           {iodata(), Builder.t()}
   def source(%Plan.Call{function: function, args: args}, scope, builder) do
-    {from, builder} = from(function, args, builder)
+    {from, builder} = from(function, args, call_alias(scope), builder)
     {from, builder} = scoped(from, scope, builder)
-    {["(SELECT ", columns(function.returns), " FROM ", from, ")"], builder}
+    {["(SELECT ", columns(function.returns), ordinality(scope), " FROM ", from, ")"], builder}
   end
+
+  @doc """
+  The `ORDER BY` that keeps a scoped call's rows in the function's own output order, read
+  under `alias_name`; `[]` for an unscoped call, which keeps PostgREST's statement shape.
+  """
+  @spec row_order(Plan.Call.t(), String.t()) :: iodata()
+  def row_order(%Plan.Call{scope: nil}, _alias_name), do: []
+
+  def row_order(%Plan.Call{}, alias_name),
+    do: [" ORDER BY ", Builder.ident(alias_name), ".", Builder.ident(@ordinality)]
 
   # --- the call ------------------------------------------------------------------------
 
-  defp from(function, {:direct, args}, builder) do
+  defp from(function, {:direct, args}, call_alias, builder) do
     {arguments, builder} =
       function.params
       |> Enum.filter(&Map.has_key?(args, &1.name))
@@ -52,12 +67,13 @@ defmodule PgRest.SQL.Call do
         direct_arg(param, Map.fetch!(args, param.name), b)
       end)
 
-    {call_item(function, Enum.intersperse(arguments, ", ")), builder}
+    {call_item(function, Enum.intersperse(arguments, ", "), call_alias), builder}
   end
 
-  defp from(function, {:json, _body, []}, builder), do: {call_item(function, []), builder}
+  defp from(function, {:json, _body, []}, call_alias, builder),
+    do: {call_item(function, [], call_alias), builder}
 
-  defp from(function, {:json, body, keys}, builder) do
+  defp from(function, {:json, body, keys}, call_alias, builder) do
     params = Enum.filter(function.params, &(&1.name in keys))
     {payload, builder} = Builder.param(builder, body, "json", :text)
 
@@ -77,20 +93,20 @@ defmodule PgRest.SQL.Call do
       "ELSE json_build_array(pgrst_payload.json_data) END) AS _(",
       definitions,
       ") LIMIT 1) pgrst_body, LATERAL ",
-      call_item(function, arguments)
+      call_item(function, arguments, call_alias)
     ]
 
     {sql, builder}
   end
 
-  defp from(%Function{params: [%{type: "bytea"}]} = function, {:single, body}, builder) do
-    {arg, builder} = Builder.param(builder, body, "bytea", :native)
-    {call_item(function, arg), builder}
+  defp from(%Function{params: [%{type: "bytea"}]} = function, {:single, body}, call_alias, b) do
+    {arg, b} = Builder.param(b, body, "bytea", :native)
+    {call_item(function, arg, call_alias), b}
   end
 
-  defp from(%Function{params: [%{type: type}]} = function, {:single, body}, builder) do
-    {arg, builder} = Builder.param(builder, body, type, :text)
-    {call_item(function, arg), builder}
+  defp from(%Function{params: [%{type: type}]} = function, {:single, body}, call_alias, b) do
+    {arg, b} = Builder.param(b, body, type, :text)
+    {call_item(function, arg, call_alias), b}
   end
 
   defp direct_arg(%{variadic?: true} = param, values, builder) do
@@ -108,11 +124,21 @@ defmodule PgRest.SQL.Call do
   defp variadic(%{variadic?: true}), do: "VARIADIC "
   defp variadic(_param), do: []
 
-  defp call_item(%Function{returns: %{kind: kind}} = function, arguments)
+  defp call_item(%Function{returns: %{kind: kind}} = function, arguments, _call_alias)
        when kind in [:scalar, :void],
        do: ["(SELECT ", invocation(function, arguments), " pgrst_scalar) pgrst_call"]
 
-  defp call_item(function, arguments), do: [invocation(function, arguments), " pgrst_call"]
+  defp call_item(function, arguments, call_alias),
+    do: [invocation(function, arguments), call_alias]
+
+  # A scoped call is numbered in the function's output order, which `row_order/2` restores
+  # after the scope probe. Postgres names the number `ordinality`; the source exposes it as
+  # `pgrst_ordinality`, which no select item reads.
+  defp call_alias(nil), do: " pgrst_call"
+  defp call_alias(_scope), do: " WITH ORDINALITY pgrst_call"
+
+  defp ordinality(nil), do: []
+  defp ordinality(_scope), do: [", pgrst_call.ordinality AS ", @ordinality]
 
   defp invocation(function, arguments),
     do: [Builder.qualified(function.schema, function.name), "(", arguments, ")"]

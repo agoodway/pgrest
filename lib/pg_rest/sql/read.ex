@@ -457,6 +457,15 @@ defmodule PgRest.SQL.Read do
   # --- order, limit --------------------------------------------------------------
 
   defp node_order(_plan, _embed, builder, %{count?: true}, _inputs), do: {[], builder}
+
+  # Without a requested order, a scoped call's rows keep the function's own order; an
+  # aggregating read groups them, so there is no row order to keep.
+  defp node_order(%Plan.Read{order: [], source: {:call, call}} = plan, nil, builder, _o, nil) do
+    if Aggregate.aggregating?(plan),
+      do: {[], builder},
+      else: {Call.row_order(call, plan.alias), builder}
+  end
+
   defp node_order(%Plan.Read{order: []}, _embed, builder, _opts, _inputs), do: {[], builder}
   defp node_order(plan, embed, builder, opts, nil), do: order_clause(plan, embed, builder, opts)
   defp node_order(plan, _embed, builder, _opts, _inputs), do: plain_order(plan, builder)

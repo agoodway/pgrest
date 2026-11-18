@@ -28,7 +28,7 @@ defmodule PgRest.Compat.Functions do
     ~w(getallprojects getproject setprojects getitemrange add_them sayhello noparamsproc
        unnamed_json_param named_json_param overloaded_same_args overloaded_enum_arg
        variadic_param single_out_param single_inout_param many_out_params ret_void callcounter
-       make_project scoped_projects fabricated_projects reowned_projects sleep_for
+       make_project scoped_projects fabricated_projects reowned_projects ranked_projects sleep_for
        get_projects_and_guc_headers get_int_and_guc_headers bad_guc_headers_1 bad_guc_headers_2
        bad_guc_headers_3 set_cookie_twice send_body_status_403 send_bad_status guc_status
        status_then_raise guc_headers_raw guc_both_bad delete_items_returns_setof delete_items_returns_table

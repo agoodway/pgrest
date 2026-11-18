@@ -71,7 +71,8 @@ defmodule PgRest.RPCTest do
   @supabase_registry __MODULE__.Supabase
 
   setup do
-    scoped_functions = ~w(scoped_projects fabricated_projects reowned_projects make_project)
+    scoped_functions =
+      ~w(scoped_projects fabricated_projects reowned_projects ranked_projects make_project)
 
     capture_log(fn ->
       start_supervised!(
@@ -144,7 +145,9 @@ defmodule PgRest.RPCTest do
   defp scoped(registry, context),
     do: [registry: registry, context_builder: fn _conn, _opts -> context end]
 
-  defp ids(conn), do: conn |> json() |> Enum.map(& &1["id"]) |> Enum.sort()
+  defp ids(conn), do: conn |> unsorted_ids() |> Enum.sort()
+
+  defp unsorted_ids(conn), do: conn |> json() |> Enum.map(& &1["id"])
 
   defp statements, do: for({_e, _m, %{sql: sql}} <- TelemetryProbe.drain(), do: sql)
 
@@ -196,6 +199,91 @@ defmodule PgRest.RPCTest do
       conn = call("GET", "/rpc/scoped_projects", scoped(@admin_registry, %{client_id: 1}))
       assert ids(conn) == [1, 2]
       assert Enum.any?(statements(), &(&1 =~ "EXISTS (SELECT 1 FROM ("))
+    end
+
+    test "without order the rows and their pages follow the function's own order" do
+      opts = scoped(@scoped_registry, %{client_id: 1})
+
+      assert unsorted_ids(call("GET", "/rpc/ranked_projects", opts)) == [2, 1]
+      assert unsorted_ids(call("GET", "/rpc/ranked_projects?limit=1", opts)) == [2]
+      assert unsorted_ids(call("GET", "/rpc/ranked_projects?offset=1", opts)) == [1]
+
+      post = call("POST", "/rpc/ranked_projects?limit=1&offset=1", opts, %{})
+      assert unsorted_ids(post) == [1]
+    end
+
+    test "an explicit order wins over the function's own order" do
+      opts = scoped(@scoped_registry, %{client_id: 1})
+
+      assert unsorted_ids(call("GET", "/rpc/ranked_projects?order=id.asc", opts)) == [1, 2]
+      assert unsorted_ids(call("GET", "/rpc/ranked_projects?order=id.asc&limit=1", opts)) == [1]
+    end
+
+    test "the call is numbered WITH ORDINALITY and ordered by it only without an order" do
+      TelemetryProbe.attach([:pgrest, :query, :start])
+      opts = scoped(@scoped_registry, %{client_id: 1})
+
+      call("GET", "/rpc/ranked_projects", opts)
+      [unordered] = Enum.filter(statements(), &(&1 =~ "ranked_projects"))
+      assert unordered =~ ~s|"test"."ranked_projects"() WITH ORDINALITY pgrst_call|
+      assert unordered =~ ~s|FROM pgrst_rpc AS "pgrst_t0" ORDER BY "pgrst_t0"."pgrst_ordinality")|
+
+      call("GET", "/rpc/ranked_projects?order=id.asc", opts)
+      [ordered] = Enum.filter(statements(), &(&1 =~ "ranked_projects"))
+      assert ordered =~ ~s|ORDER BY "pgrst_t0"."id" ASC|
+      refute ordered =~ ~s|."pgrst_ordinality"|
+    end
+
+    test "the ordinality never reaches the response" do
+      opts = scoped(@scoped_registry, %{client_id: 1})
+      count = {"prefer", "count=exact"}
+
+      for path <- [
+            "/rpc/ranked_projects",
+            "/rpc/ranked_projects?select=*",
+            "/rpc/ranked_projects?select=id,name",
+            "/rpc/ranked_projects?limit=1&id=eq.2"
+          ] do
+        conn = call("GET", path, opts, nil, [count])
+        assert conn.status in [200, 206], path
+        refute conn.resp_body =~ "ordinality", path
+
+        assert conn
+               |> json()
+               |> hd()
+               |> Map.keys()
+               |> Enum.all?(&(&1 in ~w(id name client_id clients)))
+      end
+
+      object =
+        call("GET", "/rpc/ranked_projects?id=eq.1", opts, nil, [
+          {"accept", "application/vnd.pgrst.object+json"}
+        ])
+
+      assert json(object) == %{"id" => 1, "name" => "Windows 7", "client_id" => 1}
+
+      csv = call("GET", "/rpc/ranked_projects", opts, nil, [{"accept", "text/csv"}])
+      assert csv.resp_body == ~s(id,name,client_id\n2,"Windows 10",1\n1,"Windows 7",1)
+    end
+
+    test "the planner reads the ordinality order from the function scan, without a sort" do
+      opts = [plan_enabled: true] ++ scoped(@scoped_registry, %{client_id: 1})
+
+      plan =
+        call("GET", "/rpc/ranked_projects?limit=1", opts, nil, [
+          {"accept", "application/vnd.pgrst.plan+json"}
+        ])
+
+      assert plan.status == 200, plan.resp_body
+      assert plan.resp_body =~ ~s("Function Name":"ranked_projects")
+      refute plan.resp_body =~ ~s("Node Type":"Sort")
+    end
+
+    test "aggregates over a scoped call are unaffected by the function's order" do
+      opts = [aggregates: true] ++ scoped(@scoped_registry, %{client_id: 1})
+      conn = call("GET", "/rpc/ranked_projects?select=client_id,count()", opts)
+      assert conn.status == 200
+      assert json(conn) == [%{"client_id" => 1, "count" => 2}]
     end
 
     test "result_scope: :none returns the function's row unfiltered" do
