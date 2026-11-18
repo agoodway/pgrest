@@ -62,8 +62,8 @@ defmodule Demo.MixProject do
       {:jason, "~> 1.4"},
       {:dns_cluster, "~> 0.3.1"},
       {:bandit, "~> 1.14"},
-      {:pgrest, "~> 0.1.0"},
-      # {:pgrest, path: ".."},
+      # {:pgrest, "~> 0.1.0"},
+      {:pgrest, path: ".."},
       {:tidewave, "~> 0.9", only: :dev},
 
       # Dev/Test + code quality

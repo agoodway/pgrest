@@ -11,7 +11,15 @@ defmodule DemoWeb.Plugs.ReadOnlyApi do
   def call(conn, _opts) do
     conn
     |> put_resp_content_type("application/json")
-    |> send_resp(405, Jason.encode!(%{error: "Method not allowed. This demo API is read-only."}))
+    |> send_resp(
+      405,
+      Jason.encode!(%{
+        code: "42501",
+        message: "Method not allowed. This demo API is read-only.",
+        details: nil,
+        hint: nil
+      })
+    )
     |> halt()
   end
 end

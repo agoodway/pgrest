@@ -20,6 +20,21 @@ defmodule PgRest.ErrorTest do
     %Postgrex.Error{postgres: postgres}
   end
 
+  describe "invalid_input/2" do
+    test "is a 400 22P02 naming the column and the rejected value" do
+      assert %Error{
+               status: 400,
+               code: "22P02",
+               message: ~s|invalid input syntax for column "qty": "abc"|
+             } = Error.invalid_input("qty", "abc")
+    end
+
+    test "shows a non-text value with inspect" do
+      assert %Error{message: ~s|invalid input syntax for column "ids": ["a", 1]|} =
+               Error.invalid_input("ids", ["a", 1])
+    end
+  end
+
   describe "parse_error/2" do
     test "is a 400 PGRST100 with optional details" do
       assert %Error{status: 400, code: "PGRST100", message: "bad", details: nil, hint: nil} =

@@ -185,6 +185,28 @@ defmodule PgRest.Grammar.Filter do
     end
   end
 
+  @doc """
+  Whether `value` starts with an operator prefix, `[not.]op[(modifier)].`, whatever
+  follows it. A value that has one but fails `parse_condition/2` is a malformed filter
+  (`is.maybe`, `in.abc`); one without is not a filter at all (`hello`).
+  """
+  @spec operator_prefix?(String.t()) :: boolean()
+  def operator_prefix?(value) when is_binary(value),
+    do: match?({:ok, _parts, _rest}, value |> op_prefix() |> Common.unwrap(value))
+
+  @doc """
+  Splits a PostgreSQL array literal (`{a,"b,c"}`) into its elements, unquoting quoted
+  elements and trimming blanks around unquoted ones. Anything else (a range, JSON, text
+  after the closing brace) is `:error`.
+  """
+  @spec parse_array_literal(String.t()) :: {:ok, [String.t()]} | :error
+  def parse_array_literal(value) when is_binary(value) do
+    case value |> array_literal() |> Common.unwrap(value) do
+      {:ok, elements, ""} -> {:ok, elements}
+      _ -> :error
+    end
+  end
+
   defp logic_tree(input, value) do
     case logic_expr(input, 1) do
       {:ok, tree, _rest} -> {:ok, tree}
@@ -277,9 +299,9 @@ defmodule PgRest.Grammar.Filter do
   defp quantified(value, nil), do: value
 
   defp quantified(value, _modifier) do
-    case value |> array_literal() |> Common.unwrap(value) do
-      {:ok, elements, ""} -> elements
-      _ -> value
+    case parse_array_literal(value) do
+      {:ok, elements} -> elements
+      :error -> value
     end
   end
 

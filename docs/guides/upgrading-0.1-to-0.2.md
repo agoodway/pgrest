@@ -205,4 +205,10 @@ turns off with `log: false`) and `[:pgrest, :scope_cache]`. Update any handlers.
 
 `PgRest.Parser`, `PgRest.TypeCaster`, `PgRest.Filter`, `PgRest.Order`, `PgRest.Select`,
 `PgRest.QueryPipeline` and `PgRest.Utils` are gone. If you called them directly, drive
-`PgRest.Plug` instead.
+`PgRest.Plug` instead, or, to keep filtering your own Ecto queries, replace
+`PgRest.Parser.parse_operator_value/1` with `PgRest.Grammar.Filter.parse_condition/2` and
+`PgRest.Filter.apply_all/2` plus `PgRest.TypeCaster.cast_filters/2` with
+`PgRest.Ecto.Filter.where/3` (see [Filtering Ecto queries](ecto-filter.md)). The AST
+differs: `is.null` is `op: :is, value: :null` (0.1 had `:is_null`), `in` values arrive
+split, negation is the `negate` flag, and an uncastable value is a `22P02` error instead
+of being passed through as text.

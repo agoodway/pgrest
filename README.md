@@ -129,6 +129,7 @@ Or without Hivemind: `cd demo && mix setup && mix phx.server`.
 - [Configuration](docs/guides/configuration.md): plug options, registry, body parsing, statement timeout, repo logging
 - [Resources](docs/guides/resources.md): resource options, `allow:`, schema prefixes, column exposure, security notes
 - [Functions and RPC](docs/guides/rpc.md): declarations, introspection, scoped results and response overrides
+- [Filtering Ecto queries](docs/guides/ecto-filter.md): PostgREST filters on your own Ecto queries with `PgRest.Ecto.Filter`
 - [Authorization and RLS](docs/guides/authorization-and-rls.md): policies, roles and security boundaries
 - [Compatibility](docs/guides/compatibility.md): supported operations, request pipeline, known differences from PostgREST
 - [Telemetry](docs/guides/telemetry.md): events and metadata

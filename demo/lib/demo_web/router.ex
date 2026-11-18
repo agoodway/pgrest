@@ -35,6 +35,12 @@ defmodule DemoWeb.Router do
     live "/", HomeLive
   end
 
+  scope "/ecto", DemoWeb do
+    pipe_through :api
+
+    get "/tasks", TaskFilterController, :index
+  end
+
   scope "/api" do
     pipe_through :api
 

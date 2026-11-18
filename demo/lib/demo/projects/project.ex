@@ -1,7 +1,6 @@
 defmodule Demo.Projects.Project do
   use Ecto.Schema
-  use PgRest.Resource
-  import Ecto.Changeset
+  use PgRest.Resource, allow: [:read], custom_params: ["search"]
   import Ecto.Query
 
   schema "projects" do
@@ -15,13 +14,6 @@ defmodule Demo.Projects.Project do
     has_many :tasks, Demo.Tasks.Task
 
     timestamps(type: :utc_datetime)
-  end
-
-  @impl PgRest.Resource
-  def changeset(project, attrs, _context) do
-    project
-    |> cast(attrs, [:name, :description, :status, :archived, :deadline, :budget])
-    |> validate_required([:name])
   end
 
   @impl PgRest.Resource

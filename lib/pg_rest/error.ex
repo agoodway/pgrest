@@ -94,6 +94,22 @@ defmodule PgRest.Error do
     }
   end
 
+  @doc """
+  `22P02` for a filter value the column's type rejects, raised before the query reaches
+  Postgres (`PgRest.Ecto.Filter` casts values with the Ecto field type).
+  """
+  @spec invalid_input(String.t(), term()) :: t()
+  def invalid_input(column, value) do
+    %__MODULE__{
+      status: 400,
+      code: "22P02",
+      message: ~s|invalid input syntax for column "#{column}": #{shown_value(value)}|
+    }
+  end
+
+  defp shown_value(value) when is_binary(value), do: ~s|"#{value}"|
+  defp shown_value(value), do: inspect(value)
+
   @doc "Postgres' own `42703` for a bare column name (an `on_conflict=` target)."
   @spec undefined_column(String.t()) :: t()
   def undefined_column(column),

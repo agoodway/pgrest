@@ -1,7 +1,7 @@
 defmodule PgRest.MixProject do
   use Mix.Project
 
-  @version "0.1.0"
+  @version "0.2.0"
   @source_url "https://github.com/agoodway/pgrest"
 
   def project do
@@ -101,6 +101,7 @@ defmodule PgRest.MixProject do
         "docs/guides/configuration.md",
         "docs/guides/resources.md",
         "docs/guides/rpc.md",
+        "docs/guides/ecto-filter.md",
         "docs/guides/authorization-and-rls.md",
         "docs/guides/compatibility.md",
         "docs/guides/telemetry.md",

@@ -406,6 +406,36 @@ defmodule PgRest.Grammar.FilterTest do
     end
   end
 
+  describe "parse_array_literal/1" do
+    test "splits a PostgreSQL array literal, unquoting and trimming elements" do
+      assert {:ok, ["a", "b c", "d,e"]} = Filter.parse_array_literal(~s|{a, b c ,"d,e"}|)
+    end
+
+    test "an empty literal is the empty list" do
+      assert {:ok, []} = Filter.parse_array_literal("{}")
+    end
+
+    test "anything else is not an array literal" do
+      assert :error = Filter.parse_array_literal("[1,5)")
+      assert :error = Filter.parse_array_literal(~s|{"a":1}|)
+      assert :error = Filter.parse_array_literal("{a}{b}")
+    end
+  end
+
+  describe "operator_prefix?/1" do
+    test "true when the value starts with [not.]op[(modifier)]., whatever follows" do
+      for value <- ~w[eq.1 not.gt.5 is.maybe in.abc eq(any).x fts(english).cats cs.] do
+        assert Filter.operator_prefix?(value), value
+      end
+    end
+
+    test "false when there is no operator prefix" do
+      for value <- ~w[hello john.smith not.hello ilikefoo gt not. (any).x] ++ [""] do
+        refute Filter.operator_prefix?(value), value
+      end
+    end
+  end
+
   defp nested(1), do: "(a.eq.1)"
   defp nested(depth), do: "(and" <> nested(depth - 1) <> ")"
 end

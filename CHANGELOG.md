@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 (unreleased)
+## 0.2.0 (2026-11-18)
 
 PostgREST v14 compatibility pipeline. Read `docs/guides/upgrading-0.1-to-0.2.md` before upgrading:
 the defaults for column exposure changed.
@@ -98,6 +98,21 @@ the defaults for column exposure changed.
 - `PgRest.BodyReader` keeps the raw JSON body for the fast write path.
 - `PgRest.Catalog` reads column types and defaults of registered tables only.
 - Differential test harness against a pinned PostgREST (`docker compose`, test harness only).
+- `PgRest.Ecto.Filter`: compiles filter and logic-tree AST nodes into `Ecto.Query.dynamic/2`
+  expressions (`to_dynamic/2`) or `where` clauses (`where/3`) for your own Ecto queries.
+  Fields resolve against `schema:` / `fields:` allowlists (`42703` otherwise), values cast
+  with the Ecto field type (`22P02` on failure; `:binary_id` and `{:array, :binary_id}` values must be
+  valid UUIDs, normalised to lowercase), and JSON paths, `any`/`all` and range
+  operators are refused with `PGRST100`, as is a hand-built node whose value has the wrong
+  shape for its operator (an `is` value other than `null`, `not_null`, `true`, `false` or
+  `unknown`, an `in` value that is not a list, `nil` with a comparison operator); it never
+  raises on a malformed node. It
+  replaces 0.1's `PgRest.Filter.apply_all/2` and
+  `PgRest.TypeCaster.cast_filters/2`. See `docs/guides/ecto-filter.md`.
+- `PgRest.Grammar.Filter.parse_array_literal/1` splits a PostgreSQL array literal.
+- `PgRest.Grammar.Filter.operator_prefix?/1` tells a malformed filter (`is.maybe`) from a
+  value that is not a filter at all (`hello`).
+- `PgRest.Error.invalid_input/2` (`22P02`) for a value the column type rejects.
 
 ### Telemetry
 

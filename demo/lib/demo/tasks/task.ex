@@ -1,7 +1,6 @@
 defmodule Demo.Tasks.Task do
   use Ecto.Schema
-  use PgRest.Resource
-  import Ecto.Changeset
+  use PgRest.Resource, allow: [:read], custom_params: ["search"]
   import Ecto.Query
 
   schema "tasks" do
@@ -21,33 +20,6 @@ defmodule Demo.Tasks.Task do
     belongs_to :project, Demo.Projects.Project
 
     timestamps(type: :utc_datetime)
-  end
-
-  @impl PgRest.Resource
-  def changeset(task, attrs, _context) do
-    task
-    |> cast(attrs, [
-      :title,
-      :description,
-      :status,
-      :priority,
-      :assignee_name,
-      :tags,
-      :due_date,
-      :estimated_hours,
-      :completed,
-      :urgent,
-      :complexity,
-      :deleted_at,
-      :project_id
-    ])
-    |> validate_required([:title, :status])
-    |> validate_inclusion(:status, ~w(pending in_progress completed cancelled))
-    |> then(fn cs ->
-      if get_change(cs, :priority),
-        do: validate_inclusion(cs, :priority, ~w(low medium high critical)),
-        else: cs
-    end)
   end
 
   # Exclude soft-deleted tasks by default
